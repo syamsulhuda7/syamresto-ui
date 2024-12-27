@@ -1,62 +1,109 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/swiper-bundle.css";
-
 import "./styles.css";
+import { Autoplay, EffectCreative, Pagination } from "swiper/modules";
+import { useEffect, useState, useRef } from "react";
+import api from "../../../utils/axios/instance";
 
-// import required modules
-import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
+type ImageType = {
+  id: number;
+  title: string;
+  image_url: string;
+  status: string;
+};
+type ResponseType = {
+  data: {
+    data: ImageType[];
+  };
+};
 
-export default function App() {
+// Lazy loading image component
+function LazyImage({ src, alt }: { src: string; alt: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute("src", src);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => {
+      if (imgRef.current) {
+        observer.disconnect();
+      }
+    };
+  }, [src]);
+
+  return (
+    <img
+      ref={imgRef}
+      alt={alt}
+      onLoad={() => setLoaded(true)}
+      style={{
+        content: loaded ? "" : "Loading..."
+      }}
+    />
+  );
+}
+
+export default function Carousel() {
+  const [images, setImages] = useState<ImageType[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response: ResponseType = await api.get("/carousels");
+        setImages(response?.data?.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Swiper
         loop={true}
-        autoplay={{ delay: 2500, disableOnInteraction: false }}
-        effect={"coverflow"}
+        autoplay={{ delay: 1000, disableOnInteraction: false }}
+        effect={"creative"}
+        creativeEffect={{
+          prev: {
+            shadow: true,
+            translate: [0, 0, -400],
+          },
+          next: {
+            translate: ["100%", 0, 0],
+          },
+        }}
+        speed={700}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: -30,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
+        pagination={{
+          clickable: true,
         }}
-        pagination={false}
-        modules={[EffectCoverflow, Pagination, Autoplay]}
-        // className="mySwiper"
+        modules={[EffectCreative, Pagination, Autoplay]}
+        className="mySwiper"
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </SwiperSlide>
+        {images.map((image, index) => (
+          <SwiperSlide key={index}>
+            <LazyImage
+              src={`https://apisyamresto.syamdev.my.id/storage/${image.image_url}`}
+              alt={image.title}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );
