@@ -1,6 +1,3 @@
-import KeyboardDoubleArrowRightSharpIcon from "@mui/icons-material/KeyboardDoubleArrowRightSharp";
-import { HomeCard } from "../../ui/homeCard";
-
 export const ExploreCategory = () => {
   return (
     <div className="w-full h-fit flex items-center justify-center bg-drk">

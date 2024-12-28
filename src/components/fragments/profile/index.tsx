@@ -1,5 +1,3 @@
-import React from "react";
-
 export const Profile = () => {
   return (
     <div className="w-full h-fit flex items-center justify-center">
@@ -8,7 +6,7 @@ export const Profile = () => {
           <div className="relative max-h-[550px] aspect-[2/3] rounded-full overflow-hidden">
             <img
               className="object-cover w-full h-full"
-              src="/public/syamprofile.jpg"
+              src="/syamprofile.jpg"
               alt=""
             />
             <div className="absolute inset-0 max-h-[550px] aspect-[2/3] rounded-full shadow-inner shadow-drk"></div>

@@ -68,7 +68,7 @@ export default function Carousel() {
         slidesPerView={1}
         slidesPerGroup={1}
         ref={swiperRef}
-        loop={true}
+        loop={false}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         effect={"creative"}
         creativeEffect={{
