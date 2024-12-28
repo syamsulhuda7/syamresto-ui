@@ -1,10 +1,11 @@
-import React from 'react'
-import Carousel from '../../components/fragments/carousel'
+import Carousel from "../../components/fragments/carousel";
+import { Navbar } from "../../components/fragments/navbar";
 
 export const Home = () => {
   return (
     <>
-        <Carousel />
+      <Navbar />
+      <Carousel />
     </>
-  )
-}
+  );
+};
