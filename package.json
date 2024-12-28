@@ -7,14 +7,20 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docker": "docker-compose up --build"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@mui/base": "^5.0.0-beta.68",
+    "@mui/icons-material": "^6.3.0",
+    "@mui/material": "^6.3.0",
     "axios": "^1.7.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^7.1.1",
+    "rollup": "^4.29.1",
     "swiper": "^11.1.15"
   },
   "devDependencies": {

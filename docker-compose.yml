@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  react-app:
+    build: .
+    ports:
+      - "5173:5173" # Port untuk Vite (default 5173)
+    volumes:
+      - .:/app # Menyinkronkan direktori kerja dari host ke container
+      - /app/node_modules # Menghindari masalah file node_modules yang tumpang tindih
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Menangani perubahan file dengan polling jika diperlukan
+    container_name: react-app
+    working_dir: /app

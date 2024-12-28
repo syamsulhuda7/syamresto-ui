@@ -1,39 +1,36 @@
-#app {
-  height: 100%;
-}
-html,
-body {
-  position: relative;
-  height: 100%;
-}
-
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
 .swiper {
-  width: 100vw;
-  aspect-ratio: 20/9;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background-color: black;
 }
 
 .swiper-slide {
+  position: relative;
   background-position: center;
   overflow: hidden;
   width: 1440px;
   object-fit: cover;
 }
 
+.swiper-slide::before {
+  content: ""; /* Wajib untuk pseudo-element */
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, black, transparent); /* Gradasi dari hitam ke transparan */
+  z-index: 5; /* Pastikan berada di atas gambar */
+  pointer-events: none; /* Agar tidak menghalangi interaksi pengguna dengan slide */
+}
+
 .swiper-slide img {
   display: block;
   width: 100%;
   object-fit: cover;
+  
 }
 
 .image-container {
@@ -65,22 +62,6 @@ img.loaded {
   width: 100%;
   height: auto;
 }
-
-/* .image-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.loading-spinner {
-  display: block;
-  width: 100%;
-  height: auto;
-  background-color: black;
-  color: white;
-  font-size: 20px;
-  text-align: center;
-} */
 
 /* Mengubah warna titik pagination */
 .swiper-pagination-bullet {
