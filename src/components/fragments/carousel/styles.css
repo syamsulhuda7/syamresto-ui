@@ -21,7 +21,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, black, transparent); /* Gradasi dari hitam ke transparan */
+  background: linear-gradient(
+    to right,
+    black,
+    transparent
+  ); /* Gradasi dari hitam ke transparan */
   z-index: 5; /* Pastikan berada di atas gambar */
   pointer-events: none; /* Agar tidak menghalangi interaksi pengguna dengan slide */
 }
@@ -30,7 +34,6 @@
   display: block;
   width: 100%;
   object-fit: cover;
-  
 }
 
 .image-container {

@@ -8,3 +8,59 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+/* 3d timer start */
+.parent-card {
+  @apply font-adlamDisplay relative w-12 flex flex-col gap-[2px] items-center rounded-md overflow-hidden shadow-sm shadow-black;
+}
+
+.top-card {
+  @apply shadow-sm shadow-black;
+}
+
+.top-card,
+.top-flip {
+  @apply bg-[#1E1E1E] items-start;
+}
+
+.bottom-card,
+.bottom-flip {
+  @apply bg-[#3a3a3a] items-end;
+}
+
+.top-card,
+.bottom-card,
+.top-flip,
+.bottom-flip {
+  @apply w-full h-[.75em] overflow-hidden flex justify-center text-white text-[40px] pb-[2px] font-normal;
+}
+
+.top-flip {
+  @apply origin-bottom absolute;
+  animation: topFlip 300ms ease-in forwards;
+}
+@keyframes topFlip {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+.bottom-flip {
+  @apply origin-top absolute bottom-0;
+  animation: bottomFlip 300ms ease-out 300ms backwards;
+}
+@keyframes bottomFlip {
+  0% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.dot-separator {
+  @apply w-[8px] aspect-square bg-black rounded-full shadow-sm shadow-black;
+}
+/* 3d timer end */

@@ -65,6 +65,8 @@ export default function Carousel() {
     <div className="w-full aspect-[20/9] relative flex items-center justify-center">
       {/* <div className="border border-org absolute top-0 left-0 w-1/2 h-[85%] md:h-[95%] z-10"></div> */}
       <Swiper
+        slidesPerView={1}
+        slidesPerGroup={1}
         ref={swiperRef}
         loop={true}
         autoplay={{ delay: 3000, disableOnInteraction: false }}

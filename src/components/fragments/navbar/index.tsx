@@ -4,7 +4,7 @@ import { Tab } from "@mui/base/Tab";
 
 export const Navbar = () => {
   return (
-    <div className="w-full h-fit flex items-center justify-center bg-black sticky top-0 z-50">
+    <div className="w-full h-fit flex items-center justify-center bg-drk sticky top-0 z-50">
       <Tabs
         className="font-albertSans max-w-[1440px] w-full h-fit flex items-center justify-between px-[130px] py-3"
         defaultValue={2}
