@@ -1,8 +1,14 @@
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "./styles.css";
-import { Autoplay, EffectCreative, Pagination } from "swiper/modules";
-import { useEffect, useState, useRef, LegacyRef } from "react";
+import {
+  Autoplay,
+  EffectCreative,
+  Navigation,
+  Pagination,
+} from "swiper/modules";
+import { useEffect, useState } from "react";
+// import { useEffect, useState, useRef, LegacyRef } from "react";
 import api from "../../../utils/axios/instance";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
 
@@ -22,7 +28,7 @@ type ResponseType = {
 export default function Carousel() {
   const [images, setImages] = useState<ImageType[]>([]);
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
-  const swiperRef: LegacyRef<SwiperRef> = useRef(null);
+  // const swiperRef: LegacyRef<SwiperRef> = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,14 +49,14 @@ export default function Carousel() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      const swiperInstance = swiperRef.current.swiper;
-      swiperInstance.update();
-      swiperInstance.autoplay.start();
-      swiperInstance.slideTo(0); // Memaksa untuk memulai dari slide pertama
-    }
-  }, [images]);
+  // useEffect(() => {
+  //   if (swiperRef.current && swiperRef.current.swiper) {
+  //     const swiperInstance = swiperRef.current.swiper;
+  //     swiperInstance.update();
+  //     swiperInstance.autoplay.start();
+  //     swiperInstance.slideTo(0); // Memaksa untuk memulai dari slide pertama
+  //   }
+  // }, [images]);
 
   const handleImageLoad = (index: number) => {
     setLoadedImages((prevLoadedImages) => {
@@ -66,8 +72,8 @@ export default function Carousel() {
       {/* <div className="border border-org absolute top-0 left-0 w-1/2 h-[85%] md:h-[95%] z-10"></div> */}
       <Swiper
         slidesPerView={1}
-        slidesPerGroup={1}
-        ref={swiperRef}
+        // slidesPerGroup={2}
+        // ref={swiperRef}
         loop={false}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         effect={"creative"}
@@ -86,11 +92,12 @@ export default function Carousel() {
         pagination={{
           clickable: true,
         }}
-        modules={[EffectCreative, Pagination, Autoplay]}
-        className="mySwiper"
+        navigation={true}
+        modules={[EffectCreative, Pagination, Autoplay, Navigation]}
+        className="carousel-swiper"
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide className="carousel-swiper-slide" key={index}>
             <div className="image-container">
               {!loadedImages[index] && <div className="placeholder"></div>}
               <img
@@ -102,6 +109,15 @@ export default function Carousel() {
             </div>
           </SwiperSlide>
         ))}
+        {/* <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide>Slide 6</SwiperSlide>
+        <SwiperSlide>Slide 7</SwiperSlide>
+        <SwiperSlide>Slide 8</SwiperSlide>
+        <SwiperSlide>Slide 9</SwiperSlide> */}
       </Swiper>
     </div>
   );

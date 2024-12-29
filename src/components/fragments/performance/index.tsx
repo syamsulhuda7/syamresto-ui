@@ -1,12 +1,6 @@
-import CountUp, { useCountUp } from "react-countup";
+import CountUp from "react-countup";
 
 export const Performance = () => {
-  useCountUp({
-    ref: "counter",
-    end: 1234567,
-    enableScrollSpy: true,
-    scrollSpyDelay: 1000,
-  });
   return (
     <div className="w-full h-fit flex items-center justify-center bg-org">
       <div className="w-full max-w-[1440px] h-fit flex items-center justify-between px-[130px] py-[100px]">
