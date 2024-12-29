@@ -57,7 +57,7 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-/* .profile-cards-swiper-slide::before {
+.profile-cards-swiper-slide::before {
   content: "";
   color: white;
   position: absolute;
@@ -71,7 +71,7 @@ body {
   pointer-events: none;
 }
 
-.swiper-slide-active::before {
+.profile-cards-swiper .swiper-slide-active::before {
   content: "";
   color: white;
   position: absolute;
@@ -83,4 +83,4 @@ body {
   opacity: 0;
   z-index: 5;
   pointer-events: none;
-} */
+}

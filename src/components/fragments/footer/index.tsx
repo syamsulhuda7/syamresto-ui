@@ -1,0 +1,83 @@
+import { FrameFragment } from "../../layouts/frameFragment";
+
+export const Footer = () => {
+  return (
+    <FrameFragment
+      className="bg-drk"
+      innerClass="py-[100px] w-fit flex items-start justify-between gap-10"
+    >
+      <div className="w-full flex flex-col gap-6">
+        <h1 className="text-center font-adlamDisplay pb-5 text-[24px] text-org">
+          Top Menu
+        </h1>
+        <p className="font-poppins text-white">Chicken Crispy</p>
+        <p className="font-poppins text-white">Tomato Soup</p>
+        <p className="font-poppins text-white">Potato Roll</p>
+        <p className="font-poppins text-white">Zucchini fries</p>
+        <p className="font-poppins text-white">Americano</p>
+      </div>
+      <div className="w-full flex flex-col gap-6">
+        <h1 className="text-center font-adlamDisplay pb-5 text-[24px] text-org">
+          Categories
+        </h1>
+        <p className="font-poppins text-white">Appetizers</p>
+        <p className="font-poppins text-white">Main Courses</p>
+        <p className="font-poppins text-white">Desserts</p>
+        <p className="font-poppins text-white">Beverages</p>
+        <p className="font-poppins text-white">Sides</p>
+      </div>
+      <div className="w-full flex flex-col gap-6">
+        <h1 className="text-center font-adlamDisplay pb-5 text-[24px] text-org">
+          Social Media
+        </h1>
+        <p className="font-poppins text-white">Chicken Crispy</p>
+        <p className="font-poppins text-white">Tomato Soup</p>
+        <p className="font-poppins text-white">Potato Roll</p>
+        <p className="font-poppins text-white">Zucchini fries</p>
+        <p className="font-poppins text-white">Americano</p>
+      </div>
+      <div className="w-full flex flex-col gap-3">
+        <h1 className="text-center font-adlamDisplay pb-5 text-[24px] text-org">
+          Payment Support
+        </h1>
+        <div className="w-full flex items-center justify-center flex-wrap gap-3">
+          <img
+            className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
+            src="/assets/gopay.svg"
+            alt=""
+          />
+          <img
+            className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
+            src="/assets/bca.svg"
+            alt=""
+          />
+          <img
+            className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
+            src="/assets/bri.svg"
+            alt=""
+          />
+          <img
+            className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
+            src="/assets/mandiri.svg"
+            alt=""
+          />
+          <img
+            className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
+            src="/assets/ovo.svg"
+            alt=""
+          />
+          <img
+            className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
+            src="/assets/qris.svg"
+            alt=""
+          />
+          <img
+            className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
+            src="/assets/spay.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </FrameFragment>
+  );
+};

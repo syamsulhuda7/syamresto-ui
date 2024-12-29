@@ -1,5 +1,7 @@
+import { Booking } from "../../components/fragments/booking";
 import Carousel from "../../components/fragments/carousel";
 import { ExploreCategory } from "../../components/fragments/exploreCategory";
+import { Footer } from "../../components/fragments/footer";
 import { Navbar } from "../../components/fragments/navbar";
 import { Performance } from "../../components/fragments/performance";
 import { Profile } from "../../components/fragments/profile";
@@ -15,7 +17,9 @@ export const Home = () => {
       <TopMenu />
       <ExploreCategory />
       <Profile />
+      <Booking />
       <Performance />
+      <Footer />
     </>
   );
 };

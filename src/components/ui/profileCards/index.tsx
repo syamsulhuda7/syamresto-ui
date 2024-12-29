@@ -43,6 +43,7 @@ export default function ProfileCards() {
       <Swiper
         effect={"cards"}
         grabCursor={true}
+        loop={true}
         modules={[EffectCards]}
         className="profile-cards-swiper"
       >
