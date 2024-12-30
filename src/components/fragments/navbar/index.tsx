@@ -11,9 +11,12 @@ export const Navbar = () => {
       <Tabs
         className="font-albertSans max-w-[1440px] w-full h-fit flex items-center justify-between px-[130px] py-3"
         defaultValue={"Home"}
-        onChange={(e, value) => navigate(`/${value}`)}
+        onChange={(_, value) => navigate(`/${value}`)}
       >
-        <p className="text-white text-[32px] font-adlamDisplay font-bold">
+        <p
+          onClick={() => navigate("/")}
+          className="cursor-pointer text-white text-[32px] font-adlamDisplay font-bold"
+        >
           SYAM<span className="text-org">STORE</span>
         </p>
         <TabsList className="w-fit flex items-center justify-center content-between gap-4 min-w-tabs-list">
