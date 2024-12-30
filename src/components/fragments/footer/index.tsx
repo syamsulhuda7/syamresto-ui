@@ -4,7 +4,7 @@ export const Footer = () => {
   return (
     <FrameFragment
       className="bg-drk"
-      innerClass="py-[100px] w-fit flex items-start justify-between gap-10"
+      innerClass="relative py-[100px] w-fit flex flex-col md:flex-row items-start justify-between gap-10"
     >
       <div className="w-full flex flex-col gap-6">
         <h1 className="text-center font-adlamDisplay pb-5 text-[24px] text-org">
@@ -77,6 +77,10 @@ export const Footer = () => {
             alt=""
           />
         </div>
+      </div>
+      <div className="absolute bottom-0 left-0 px-2 py-2 w-full text-center font-poppins text-gry text-xs md:text-base">
+        SYAMSTORE © 2024. Developed by Syamsul Huda Harisul Muslimin All Rights
+        Reserved
       </div>
     </FrameFragment>
   );

@@ -31,10 +31,14 @@ export const HomeCard = ({
       <div
         className={`absolute bottom-0 left-0 w-full h-full flex flex-col items-start justify-end p-6 bg-gradient-to-tr from-black via-transparent to-transparent ${container}`}
       >
-        <h3 className={`text-org text-sm font-semibold ${categoryStyle}`}>
+        <h3
+          className={`text-org text-[10px] md:text-[12px] xl:text-sm font-semibold ${categoryStyle}`}
+        >
           {category}
         </h3>
-        <h3 className={`text-white text-xl font-semibold ${titleStyle}`}>
+        <h3
+          className={`text-white text-sm md:text-base xl:text-xl font-semibold ${titleStyle}`}
+        >
           {title}
         </h3>
       </div>

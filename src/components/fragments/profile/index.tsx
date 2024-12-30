@@ -5,13 +5,16 @@ export const Profile = () => {
   return (
     <FrameFragment
       className="bg-white"
-      innerClass="pt-[100px] pb-[50px] flex items-center justify-center"
+      innerClass="pt-[100px] pb-[50px] flex flex-col xl:flex-row items-center justify-center"
     >
-      <div className="w-full h-fit flex items-center justify-center">
+      <p className="xl:hidden w-full text-left font-albertSans font-bold text-2xl md:text-3xl xl:text-[40px] text-drk">
+        ABOUT SYAMRESTO
+      </p>
+      <div className="w-full h-fit flex items-center justify-center pb-[30px] xl:pb-0">
         <ProfileCards />
       </div>
-      <div className="w-full h-fit">
-        <p className="font-albertSans font-bold text-[40px] text-drk pb-[30px]">
+      <div className="w-full h-fit xl:pl-5">
+        <p className="hidden xl:block font-albertSans font-bold text-2xl md:text-3xl xl:text-[40px] text-drk pb-[30px]">
           ABOUT SYAMRESTO
         </p>
         <p className="text-justify text-xl font-albertSans indent-16">

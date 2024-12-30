@@ -38,7 +38,7 @@ export default function BasicFormControl({
           onChange={(e) => console.log(e.target.value)}
           slotProps={{
             input: {
-              className: `${className} w-80 text-sm font-sans font-normal leading-5 px-3 py-2 rounded-lg shadow-inner shadow-black border border-solid border-slate-300 bg-white text-slate-900 focus-visible:outline-0`,
+              className: `${className} w-full min-w-60 md:w-80 text-sm font-sans font-normal leading-5 px-3 py-2 rounded-lg shadow-inner shadow-black border border-solid border-slate-300 bg-white text-slate-900 focus-visible:outline-0`,
             },
           }}
         />

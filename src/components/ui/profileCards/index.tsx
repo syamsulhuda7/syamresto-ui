@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "./styles.css";
-import { EffectCards } from "swiper/modules";
+import { EffectCards, Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
 import api from "../../../utils/axios/instance";
 
@@ -24,7 +24,7 @@ export default function ProfileCards() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response: ResponseType = await api.get("/carousels");
+        const response: ResponseType = await api.get("/profiles");
         response.data.data.forEach((item: ImageType) => {
           item.image_url = `https://apisyamresto.syamdev.my.id/storage/${item.image_url}`;
           return item;
@@ -39,25 +39,24 @@ export default function ProfileCards() {
   }, []);
 
   return (
-    <>
-      <Swiper
-        effect={"cards"}
-        grabCursor={true}
-        loop={true}
-        modules={[EffectCards]}
-        className="profile-cards-swiper"
-      >
-        {images.map((image) => (
-          <SwiperSlide key={image.id} className="profile-cards-swiper-slide">
-            <img
-              className="absolute object-cover w-full h-full"
-              src={image.image_url}
-              alt={image.title}
-            />
-            {image.title}
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </>
+    <Swiper
+      effect={"cards"}
+      grabCursor={true}
+      loop={false}
+      pagination={{ clickable: true }}
+      modules={[EffectCards, Pagination]}
+      className="profile-cards-swiper"
+    >
+      {images.map((image) => (
+        <SwiperSlide key={image.id} className="profile-cards-swiper-slide">
+          <img
+            className="absolute object-cover w-full h-full"
+            src={image.image_url}
+            alt={image.title}
+          />
+          {image.title}
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }
