@@ -78,12 +78,38 @@ img.loaded {
   opacity: 1; /* Transparansi penuh */
 }
 
-.swiper-pagination {
-  margin-bottom: 20px;
+@media (min-width: 0px) {
+  .swiper-pagination {
+    margin-bottom: 0px;
+    scale: 0.6;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    scale: 0.3;
+    color: #f49b33;
+    margin: -20px -5px 10px -5px;
+  }
 }
-
-.swiper-button-prev,
-.swiper-button-next {
-  color: #f49b33;
-  margin: 0px 10px;
+/* md */
+@media (min-width: 768px) {
+  .swiper-pagination {
+    margin-bottom: 7px;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    scale: 0.7;
+    color: #f49b33;
+    margin: -15px 5px 10px 5px;
+  }
+}
+/* xl */
+@media (min-width: 1280px) {
+  .swiper-pagination {
+    margin-bottom: 20px;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #f49b33;
+    margin: -15px 10px 10px 10px;
+  }
 }

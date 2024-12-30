@@ -53,6 +53,7 @@ export default function ProfileCards() {
             className="absolute object-cover w-full h-full"
             src={image.image_url}
             alt={image.title}
+            loading="lazy"
           />
           {image.title}
         </SwiperSlide>

@@ -16,7 +16,7 @@ export const FrameFragment = ({
       className={`w-full h-full flex items-center justify-center ${className}`}
     >
       <div
-        className={`w-full max-w-[1440px] h-fit px-[30px] md:px-[50px] lg:px-[130px] ${innerClass}`}
+        className={`w-full max-w-[1440px] h-fit px-[30px] md:px-[50px] xl:px-[130px] ${innerClass}`}
       >
         {children}
       </div>

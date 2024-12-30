@@ -18,7 +18,7 @@ export const TabNav = ({ title, separator }: TabNavProps) => {
                 : "text-white bg-transparent focus:text-white hover:text-org"
             } ${
               disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-            } text-lg font-medium w-fit py-1 border-0 flex justify-center`,
+            } text-sm md:text-lg font-medium w-fit py-1 border-0 flex justify-center`,
           }),
         }}
         value={slug}
