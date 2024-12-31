@@ -30,11 +30,12 @@ export const Footer = () => {
         <h1 className="text-center font-adlamDisplay pb-5 text-[24px] text-org">
           Social Media
         </h1>
-        <p className="font-poppins text-white">Chicken Crispy</p>
-        <p className="font-poppins text-white">Tomato Soup</p>
-        <p className="font-poppins text-white">Potato Roll</p>
-        <p className="font-poppins text-white">Zucchini fries</p>
-        <p className="font-poppins text-white">Americano</p>
+        <p className="font-poppins text-white">Gmail : syamresto@gmail.com</p>
+        <p className="font-poppins text-white">Instagram : @syamresto_id</p>
+        <p className="font-poppins text-white">tiktok : syamresto_id</p>
+        <p className="font-poppins text-white">
+          facebook : syamresto_indonesia
+        </p>
       </div>
       <div className="w-full flex flex-col gap-3">
         <h1 className="text-center font-adlamDisplay pb-5 text-[24px] text-org">

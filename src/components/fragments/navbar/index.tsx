@@ -2,7 +2,7 @@ import { Tabs } from "@mui/base/Tabs";
 import { TabsList } from "@mui/base/TabsList";
 import { TabNav } from "../../ui/tabNav";
 import { useNavigate } from "react-router";
-import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import { MiniMenu } from "../../ui/miniMenu";
 export const Navbar = () => {
   const navigate = useNavigate();
 
@@ -29,7 +29,9 @@ export const Navbar = () => {
             Login
           </div>
         </TabsList>
-        <DragIndicatorIcon className="md:hidden scale-1 text-white cursor-pointer" />
+        <span className="md:hidden">
+          <MiniMenu />
+        </span>
       </Tabs>
     </div>
   );

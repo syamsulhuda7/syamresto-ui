@@ -5,18 +5,28 @@ import { HomeCard } from "../../ui/homeCard";
 import Timer from "../timer-3d";
 import ArrowRightSharpIcon from "@mui/icons-material/ArrowRightSharp";
 
-const data = [
-  {
-    category: "Main Course",
-  },
-  {
-    category: "Main Course",
-  },
-  {
-    category: "Main Course",
-  },
-];
-export const Promo = () => {
+type MenuData = {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  image_url: string;
+  price: number;
+  status: string;
+  sold: number | null;
+  category: {
+    id: number;
+    name: string;
+    slug: string;
+    icon: string;
+  };
+};
+
+type PromoProps = {
+  menuData: MenuData[];
+};
+
+export const Promo = ({ menuData }: PromoProps) => {
   return (
     <FrameFragment className="bg-white">
       <div className="w-full h-fit flex flex-col md:flex-row items-center justify-between pb-[30px]">
@@ -28,14 +38,14 @@ export const Promo = () => {
         </div>
       </div>
       <div className="w-full h-fit flex flex-wrap items-center justify-center gap-5 xl:gap-10">
-        {data.map((_, index) => (
+        {menuData.map((data) => (
           <HomeCard
-            key={index}
-            category="Main Course"
-            title="Seafood Pasta"
+            key={data.id}
+            category={data.category.name}
+            title={data.name}
             discount="57%"
             className="w-[300px] xl:w-[350px] aspect-[9/7] rounded-xl"
-            src="https://apisyamresto.syamdev.my.id/storage/product-images/01JG30241PTGJEEP9KP62GCM4V.jpg"
+            src={data.image_url}
           />
         ))}
       </div>

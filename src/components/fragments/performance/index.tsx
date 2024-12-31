@@ -26,7 +26,7 @@ export const Performance = () => {
         {data.map((item, index) => (
           <>
             <div
-              key={index}
+              key={index + "div"}
               className="w-[40%] md:w-[20%] font-adlamDisplay font-bold text-[20px] md:text-[28px] xl:text-[40px] text-drk flex flex-col items-center justify-center"
             >
               <div className="text-[50px] md:text-[70px] xl:text-[96px] w-full flex items-center justify-center">
@@ -43,7 +43,7 @@ export const Performance = () => {
             </div>
             {index !== data.length - 1 && (
               <span
-                key={index}
+                key={index + "span"}
                 className={`${
                   index === 1 && "hidden md:block"
                 } w-1 md:w-[6px] xl:w-2 h-[100px] md:h-[145px] xl:h-[200px] bg-drk`}
