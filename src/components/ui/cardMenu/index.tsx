@@ -21,11 +21,13 @@ type CardMenuProps = {
 };
 
 export const CardMenu = ({ menuData }: CardMenuProps) => {
-  console.log(menuData);
   return (
     <>
       {menuData.map((item) => (
-        <div className="w-fit h-fit bg-gry/30 p-[10px] rounded-md flex flex-col gap-1 items-center">
+        <div
+          key={item.id}
+          className="w-fit h-fit bg-gry/20 p-[10px] rounded-md flex flex-col gap-1 items-center shadow-lg shadow-slate-300"
+        >
           <img
             className="h-[120px] aspect-[6/4] object-cover rounded-sm"
             src={item.image_url}

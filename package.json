@@ -22,7 +22,8 @@
     "react-dom": "^18.3.1",
     "react-router": "^7.1.1",
     "rollup": "^4.29.1",
-    "swiper": "^11.1.15"
+    "swiper": "^11.1.15",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

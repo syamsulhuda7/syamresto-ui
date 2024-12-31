@@ -3,10 +3,12 @@ import { Tab } from "@mui/base/Tab";
 type TabNavProps = {
   title: string;
   separator?: boolean;
+  sendNavigation: (slug: string) => void;
 };
 
-export const TabNav = ({ title, separator }: TabNavProps) => {
-  const slug = title.toLowerCase().replace(" ", "-");
+export const TabNav = ({ title, separator, sendNavigation }: TabNavProps) => {
+  const slug = title.toLowerCase().replace(" ", "-") || "";
+
   return (
     <>
       <Tab
@@ -19,6 +21,11 @@ export const TabNav = ({ title, separator }: TabNavProps) => {
             } ${
               disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
             } text-sm md:text-lg font-medium w-fit py-1 border-0 flex justify-center`,
+            onClick: () => {
+              if (!disabled) {
+                sendNavigation(slug); // Pastikan slug diakses dengan benar
+              }
+            },
           }),
         }}
         value={slug}

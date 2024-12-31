@@ -1,4 +1,5 @@
 import { CardMenu } from "../../ui/cardMenu";
+import { Pagination } from "../pagination";
 
 type ListMenuProps = {
   menuData: {
@@ -32,9 +33,10 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
           </p>
         </div>
         {/* MENU */}
-        <div className="pt-[30px] flex flex-wrap gap-10 justify-center">
+        <div className="pt-[30px] pb-[50px] flex flex-wrap gap-10 justify-center">
           <CardMenu menuData={menuData || []} />
         </div>
+        <Pagination />
       </div>
     </div>
   );
