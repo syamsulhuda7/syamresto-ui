@@ -9,13 +9,8 @@ export const Navbar = () => {
   // const [navValue, setNavValue] = useState("");
   const navigate = useNavigate();
   const navigationValue = navigationStore((state) => state.navigation);
-  console.log({ navigationValue });
   const setNavigation = navigationStore((state) => state.setNavigation);
 
-  // useEffect(() => {
-  //   console.log({ navValue });
-  //   setNavigation(navValue);
-  // }, [navValue]);
   return (
     <div className="w-full h-fit flex items-center justify-center bg-drk sticky top-0 z-50">
       <Tabs

@@ -1,4 +1,5 @@
 import api from "../axios/instance";
+import { categoriesState } from "../zustand/categoriesState";
 
 type MenuData = {
   id: number;
@@ -46,12 +47,15 @@ export const productsData = async () => {
 export const categoriesData = async () => {
   try {
     const response = await api.get("/categories");
-    response.data.data.forEach((item: CategoryData) => {
-      item.icon = `https://apisyamresto.syamdev.my.id/storage/${item.icon}`;
-      return item;
+    const updatedCategories = response.data.data.map((item: CategoryData) => {
+      return {
+        ...item,
+        icon: `https://apisyamresto.syamdev.my.id/storage/${item.icon}`,
+      };
     });
-    return response.data.data;
+    return updatedCategories;
   } catch (error) {
     console.log(error);
+    return [];
   }
 };

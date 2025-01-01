@@ -46,6 +46,7 @@ export const Menu = () => {
             menuData={menuData?.map((item) => item.name) || []}
           />
         </div>
+        <span id="view-target" className="absolute bottom-10" />
       </div>
       <div className="w-full h-full flex flex-col md:flex-row items-start justify-center">
         <FilterMenu />

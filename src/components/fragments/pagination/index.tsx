@@ -5,21 +5,25 @@ type PaginationProps = {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   totalPages: number;
+  onTop: () => void;
 };
 
 export const Pagination = ({
   currentPage,
   setCurrentPage,
   totalPages,
+  onTop,
 }: PaginationProps) => {
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+      onTop();
     }
   };
   const nextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
+      onTop();
     }
   };
   return (

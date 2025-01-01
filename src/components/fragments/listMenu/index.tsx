@@ -41,6 +41,11 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
     return showMenu.slice(startIndex, endIndex);
   }, [currentPage, showMenu, itemsPerPage]);
 
+  const onTop = () => {
+    const targetElement = document.getElementById("view-target");
+    targetElement?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="w-full md:w-[70%] h-full bg-white">
       <div className="w-full px-[30px] md:pr-[50px] xl:pr-[130px] md:pl-[50px] py-[50px]">
@@ -61,6 +66,7 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           totalPages={totalPages}
+          onTop={onTop}
         />
       </div>
     </div>

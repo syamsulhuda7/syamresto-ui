@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FrameFragment } from "../../layouts/frameFragment";
 import { categoriesData } from "../../../utils/api";
+import { categoriesState } from "../../../utils/zustand/categoriesState";
 type CategoryData = {
   id: number;
   name: string;
@@ -9,11 +10,24 @@ type CategoryData = {
 };
 export const ExploreCategory = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
+  const setCategoryState = categoriesState((state) => state.setCategories);
+  const categoryState = categoriesState((state) => state.categories);
 
   useEffect(() => {
     const fetchCategory = async () => {
-      const data: CategoryData[] = await categoriesData();
-      setCategory(data);
+      try {
+        if (categoryState.length > 0) {
+          setCategory(categoryState);
+          return;
+        }
+        const data: CategoryData[] = await categoriesData();
+        if (data.length > 0) {
+          setCategory(data);
+          setCategoryState(data);
+        }
+      } catch (error) {
+        console.log("Error fetching categories:", error);
+      }
     };
     fetchCategory();
   }, []);
