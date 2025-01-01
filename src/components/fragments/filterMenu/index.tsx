@@ -9,26 +9,28 @@ interface CategoryData {
   slug: string;
   icon: string;
 }
-interface FilterState {
-  category: string;
-  search: string;
-  priceMin: number;
-  priceMax: number;
-  ratingMin: number;
-  ratingMax: number;
-  promo: string;
-}
+// interface FilterState {
+//   category: string;
+//   search: string;
+//   priceMin: number;
+//   priceMax: number;
+//   ratingMin: number;
+//   ratingMax: number;
+//   promo: string;
+// }
 export const FilterMenu = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
-  const [filter, setFilter] = useState<FilterState>({
-    category: "",
-    search: "",
-    priceMin: 0,
-    priceMax: 0,
-    ratingMin: 0,
-    ratingMax: 0,
-    promo: "false",
-  });
+  // const [filter, setFilter] = useState<FilterState>({
+  //   category: "",
+  //   search: "",
+  //   priceMin: 0,
+  //   priceMax: 0,
+  //   ratingMin: 0,
+  //   ratingMax: 0,
+  //   promo: "false",
+  // });
+
+  // console.log(filter)
 
   const setCategoryState = categoriesState((state) => state.setCategories);
   const categoryState = categoriesState((state) => state.categories);

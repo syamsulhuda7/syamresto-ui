@@ -1,5 +1,5 @@
 import api from "../axios/instance";
-import { categoriesState } from "../zustand/categoriesState";
+// import { categoriesState } from "../zustand/categoriesState";
 
 type MenuData = {
   id: number;
