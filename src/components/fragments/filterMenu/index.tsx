@@ -9,26 +9,32 @@ interface CategoryData {
   slug: string;
   icon: string;
 }
-// interface FilterState {
-//   category: string;
-//   search: string;
-//   priceMin: number;
-//   priceMax: number;
-//   ratingMin: number;
-//   ratingMax: number;
-//   promo: string;
-// }
+interface FilterState {
+  category: string;
+  // search: string;
+  // priceMin: number;
+  // priceMax: number;
+  // ratingMin: number;
+  // ratingMax: number;
+  // promo: string;
+}
+
+const promoOptions = [
+  { name: "Promo", value: "true" },
+  { name: "Non Promo", value: "false" },
+];
+
 export const FilterMenu = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
-  // const [filter, setFilter] = useState<FilterState>({
-  //   category: "",
-  //   search: "",
-  //   priceMin: 0,
-  //   priceMax: 0,
-  //   ratingMin: 0,
-  //   ratingMax: 0,
-  //   promo: "false",
-  // });
+  const [filter, setFilter] = useState<FilterState>({
+    category: "",
+    // search: "",
+    // priceMin: 0,
+    // priceMax: 0,
+    // ratingMin: 0,
+    // ratingMax: 0,
+    // promo: "",
+  });
 
   // console.log(filter)
 
@@ -69,19 +75,13 @@ export const FilterMenu = () => {
           <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
             Category
           </p>
-          <SelectBaseUI
-            optionData={category.map((data) => {
-              return { name: data.name, slug: data.slug };
-            })}
-          />
-          {/* <select className="ml-[30px] mt-4 px-3 py-2 rounded-md" name="" id="">
-            <option value="">All</option>
-            {category.map((data) => (
-              <option key={data.id} value="Appetizers">
-                {data.name}
-              </option>
-            ))}
-          </select> */}
+          <div className="pl-[30px] pt-2 w-full">
+            <SelectBaseUI
+              optionData={category.map((data) => {
+                return { name: data.name, value: data.slug };
+              })}
+            />
+          </div>
         </div>
         {/* Price */}
         <div className="w-full h-fit flex flex-col gap-[5px]">
@@ -136,10 +136,9 @@ export const FilterMenu = () => {
           <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
             Promo
           </p>
-          <select className="ml-[30px] mt-4 px-3 py-2 rounded-md" name="" id="">
-            <option value="true">Active</option>
-            <option value="false">Inactive</option>
-          </select>
+          <div className="pl-[30px] pt-2 w-full">
+            <SelectBaseUI optionData={promoOptions} />
+          </div>
         </div>
       </div>
     </div>

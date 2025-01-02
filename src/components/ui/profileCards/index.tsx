@@ -73,20 +73,18 @@ export default function ProfileCards() {
     >
       {images.map((image, index) => (
         <SwiperSlide key={image.id} className="coverflow-swiper-slide">
-          {!loadedImages[index] && (
-            <div className="absolute object-cover w-full h-full bg-black"></div>
-          )}
-          <img
-            onLoad={() => handleImageLoad(index)}
-            className={`${
-              loadedImages[index]
-                ? "absolute object-cover w-full h-full block"
-                : "hidden"
-            }`}
-            src={image.image_url}
-            alt={image.title}
-            loading="lazy"
-          />
+          <div className="object-cover w-full h-full">
+            {!loadedImages[index] && <div className="placeholder"></div>}
+            <img
+              onLoad={() => handleImageLoad(index)}
+              className={`${
+                loadedImages[index] ? "w-full h-full object-cover" : "loading"
+              }`}
+              src={image.image_url}
+              alt={image.title}
+              loading="lazy"
+            />
+          </div>
         </SwiperSlide>
       ))}
     </Swiper>

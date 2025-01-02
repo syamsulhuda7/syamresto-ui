@@ -22,6 +22,9 @@ export const MyOrder = () => {
         {bearsData}
       </div>
       <Button onClick={increaseBears}>MyOrder</Button>
+      <div className="h-[300px] aspect-square">
+        <div className="placeholder"></div>
+      </div>
     </FramePage>
   );
 };
