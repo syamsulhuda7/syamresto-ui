@@ -4,26 +4,9 @@ import { FrameFragment } from "../../layouts/frameFragment";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
 import { useEffect, useState } from "react";
 
-type MenuData = {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  image_url: string;
-  price: number;
-  status: string;
-  sold: number | null;
-  category: {
-    id: number;
-    name: string;
-    slug: string;
-    icon: string;
-  };
-};
-
-type TopMenuProps = {
+interface TopMenuProps {
   menuData: MenuData[];
-};
+}
 
 export const TopMenu = ({ menuData }: TopMenuProps) => {
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);

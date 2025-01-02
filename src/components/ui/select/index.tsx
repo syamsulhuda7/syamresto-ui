@@ -17,6 +17,7 @@ interface SelectBaseUIProps {
     name: string;
     value: string;
   }[];
+  optionValue: (value: {}) => void;
 }
 
 const getOptionColorClasses = ({
@@ -79,20 +80,24 @@ const Button = React.forwardRef(function Button<
 //   return theme.palette.mode === "dark";
 // }
 
-export default function SelectBaseUI({ optionData }: SelectBaseUIProps) {
+export default function SelectBaseUI({
+  optionData,
+  optionValue,
+}: SelectBaseUIProps) {
   const handleChange = (
     event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null,
-    value: { value: string } | null
+    value: {} | null
   ) => {
+    event?.preventDefault();
     if (value) {
-      console.log(value.value); // Menampilkan nilai yang dipilih
+      optionValue(value); // Menampilkan nilai yang dipilih
     }
   };
 
   return (
     <div>
-      <Select defaultValue="" onChange={handleChange}>
-        <Option value="">All</Option>
+      <Select defaultValue="all" onChange={handleChange}>
+        <Option value="all">All</Option>
         {optionData.map((option) => (
           <Option key={option.value} value={option.value}>
             {option.name}

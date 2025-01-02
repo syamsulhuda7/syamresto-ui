@@ -2,9 +2,9 @@ import * as React from "react";
 import { useAutocomplete } from "@mui/base/useAutocomplete";
 import { styled } from "@mui/system";
 
-type AutoCompleteProps = {
+interface AutoCompleteProps {
   menuData: string[];
-};
+}
 export default function UseAutocomplete({ menuData }: AutoCompleteProps) {
   const [value, setValue] = React.useState<string | null>(null);
 

@@ -2,33 +2,20 @@ import { useEffect, useMemo, useState } from "react";
 import { CardMenu } from "../../ui/cardMenu";
 import { Pagination } from "../pagination";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
+import { filterStorage } from "../../../utils/zustand/filterMenu";
 
-interface DetailMenu {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  image_url: string;
-  price: number;
-  status: string;
-  sold: number | null;
-  category: {
-    id: number;
-    name: string;
-    slug: string;
-    icon: string;
-  };
+interface ListMenuProps {
+  menuData: MenuData[];
 }
-type ListMenuProps = {
-  menuData: DetailMenu[];
-};
 
 export const ListMenu = ({ menuData }: ListMenuProps) => {
   const itemsPerPage = 15;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
-  const [allMenu, setAllMenu] = useState<DetailMenu[]>([]);
-  const [showMenu, setShowMenu] = useState<DetailMenu[]>([]);
+  const [allMenu, setAllMenu] = useState<MenuData[]>([]);
+  const [showMenu, setShowMenu] = useState<MenuData[]>([]);
+
+  const filterValue = filterStorage((state) => state.filter);
 
   useEffect(() => {
     const loadedFromCookies = JSON.parse(
@@ -39,15 +26,38 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
 
   useEffect(() => {
     setAllMenu(menuData);
-    setShowMenu(menuData);
+    setShowMenu(allMenu);
   }, [menuData]);
+
+  useEffect(() => {
+    console.log(
+      "filterValue",
+      typeof filterValue.category,
+      filterValue.category
+    );
+    if (
+      filterValue.category !== "all" &&
+      typeof filterValue.category === "string"
+    ) {
+      console.log("masuk sini");
+      const filteredMenu = allMenu.filter((item) => {
+        return item.category.slug === filterValue.category;
+      });
+      if (filteredMenu.length > 0) {
+        setShowMenu(filteredMenu);
+        console.log("filtered");
+        return;
+      }
+    }
+    setShowMenu(allMenu);
+  }, [filterValue]);
 
   useEffect(() => {
     setCookie("loadedListMenuImages", JSON.stringify([]), 1);
     setLoadedImages([]);
   }, [currentPage]);
 
-  const totalPages = Math.ceil(allMenu?.length / itemsPerPage);
+  const totalPages = Math.ceil(showMenu?.length / itemsPerPage);
 
   const currentItems = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;

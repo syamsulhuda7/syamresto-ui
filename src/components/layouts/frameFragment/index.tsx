@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-type FrameFragmentProps = {
+interface FrameFragmentProps {
   children?: ReactNode;
   className?: string;
   innerClass?: string;
-};
+}
 
 export const FrameFragment = ({
   children,

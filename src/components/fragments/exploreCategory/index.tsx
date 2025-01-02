@@ -3,12 +3,7 @@ import { FrameFragment } from "../../layouts/frameFragment";
 import { categoriesData } from "../../../utils/api";
 import { categoriesState } from "../../../utils/zustand/categoriesState";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
-type CategoryData = {
-  id: number;
-  name: string;
-  slug: string;
-  icon: string;
-};
+
 export const ExploreCategory = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);

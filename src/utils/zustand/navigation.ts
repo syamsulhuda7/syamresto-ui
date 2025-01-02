@@ -1,17 +1,15 @@
 import { create } from "zustand";
 
 // Define state and actions
-type Set = {
+interface Set {
   navigation: string;
-};
+}
 
-type Actions = {
+interface Actions {
   setNavigation: (navigation: string) => void;
-};
+}
 
 const pathname = window.location.pathname.split("/")[1];
-console.log({ pathname });
-
 // Create Zustand store
 export const navigationStore = create<Set & Actions>((set) => ({
   navigation: pathname ? pathname : "home", // Set the initial navigation value

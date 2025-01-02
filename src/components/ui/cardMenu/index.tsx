@@ -1,26 +1,11 @@
 import StarIcon from "@mui/icons-material/Star";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-type CardMenuProps = {
-  menuData: {
-    id: number;
-    name: string;
-    slug: string;
-    description: string;
-    image_url: string;
-    price: number;
-    status: string;
-    sold: number | null;
-    category: {
-      id: number;
-      name: string;
-      slug: string;
-      icon: string;
-    };
-  }[];
+interface CardMenuProps {
+  menuData: MenuData[];
   handleImageLoad: (index: number) => void;
   loadedImages: boolean[];
-};
+}
 
 export const CardMenu = ({
   menuData,

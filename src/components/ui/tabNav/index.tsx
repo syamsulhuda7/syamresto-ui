@@ -1,10 +1,10 @@
 import { Tab } from "@mui/base/Tab";
 
-type TabNavProps = {
+interface TabNavProps {
   title: string;
   separator?: boolean;
   sendNavigation: (slug: string) => void;
-};
+}
 
 export const TabNav = ({ title, separator, sendNavigation }: TabNavProps) => {
   const slug = title.toLowerCase().replace(" ", "-") || "";

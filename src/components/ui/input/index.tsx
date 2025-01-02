@@ -4,13 +4,13 @@ import { Input } from "@mui/base/Input";
 import { useTheme } from "@mui/system";
 import clsx from "clsx";
 
-type BasicFormControlProps = {
+interface BasicFormControlProps {
   title: string;
   placeholder?: string;
   required: boolean;
   className?: string;
   type: string;
-};
+}
 
 function useIsDarkMode() {
   const theme = useTheme();

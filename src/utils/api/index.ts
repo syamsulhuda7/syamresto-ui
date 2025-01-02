@@ -1,35 +1,10 @@
 import api from "../axios/instance";
-// import { categoriesState } from "../zustand/categoriesState";
 
-type MenuData = {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  image_url: string;
-  price: number;
-  status: string;
-  sold: number | null;
-  category: {
-    id: number;
-    name: string;
-    slug: string;
-    icon: string;
-  };
-};
-
-type CategoryData = {
-  id: number;
-  name: string;
-  slug: string;
-  icon: string;
-};
-
-type ResponseType = {
+interface ResponseType {
   data: {
     data: MenuData[];
   };
-};
+}
 
 export const productsData = async () => {
   try {

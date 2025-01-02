@@ -1,12 +1,5 @@
 import { create } from "zustand";
 
-interface CategoryData {
-  id: number;
-  name: string;
-  slug: string;
-  icon: string;
-}
-
 interface Set {
   categories: CategoryData[];
 }

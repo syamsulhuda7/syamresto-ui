@@ -1,7 +1,7 @@
 import { Tabs } from "@mui/base/Tabs";
 import { TabsList } from "@mui/base/TabsList";
 import { TabNav } from "../../ui/tabNav";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { MiniMenu } from "../../ui/miniMenu";
 import { navigationStore } from "../../../utils/zustand/navigation";
 import { useEffect } from "react";
@@ -9,12 +9,18 @@ import { useEffect } from "react";
 export const Navbar = () => {
   // const [navValue, setNavValue] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const navigationValue = navigationStore((state) => state.navigation);
   const setNavigation = navigationStore((state) => state.setNavigation);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [navigationValue]);
+
+  useEffect(() => {
+    const pathname = location.pathname.split("/")[1];
+    setNavigation(pathname);
+  }, []);
 
   return (
     <div className="w-full h-fit flex items-center justify-center bg-drk sticky top-0 z-50">

@@ -7,26 +7,9 @@ import Timer from "../timer-3d";
 import ArrowRightSharpIcon from "@mui/icons-material/ArrowRightSharp";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
 
-type MenuData = {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  image_url: string;
-  price: number;
-  status: string;
-  sold: number | null;
-  category: {
-    id: number;
-    name: string;
-    slug: string;
-    icon: string;
-  };
-};
-
-type PromoProps = {
+interface PromoProps {
   menuData: MenuData[];
-};
+}
 
 export const Promo = ({ menuData }: PromoProps) => {
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);

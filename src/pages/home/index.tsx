@@ -10,23 +10,6 @@ import { Promo } from "../../components/fragments/promo";
 import { TopMenu } from "../../components/fragments/topMenu";
 import { productsData } from "../../utils/api";
 
-type MenuData = {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  image_url: string;
-  price: number;
-  status: string;
-  sold: number | null;
-  category: {
-    id: number;
-    name: string;
-    slug: string;
-    icon: string;
-  };
-};
-
 export const Home = () => {
   const [menuData, setMenuData] = useState<MenuData[]>([]);
 

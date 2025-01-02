@@ -6,28 +6,21 @@ import { useEffect, useState } from "react";
 import api from "../../../utils/axios/instance";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
 
-type ImageType = {
-  id: number;
-  title: string;
-  image_url: string;
-  status: string;
-};
-
-type ResponseType = {
+interface ResponseType {
   data: {
-    data: ImageType[];
+    data: ImageProfileType[];
   };
-};
+}
 
 export default function ProfileCards() {
-  const [images, setImages] = useState<ImageType[]>([]);
+  const [images, setImages] = useState<ImageProfileType[]>([]);
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response: ResponseType = await api.get("/profiles");
-        response.data.data.forEach((item: ImageType) => {
+        response.data.data.forEach((item: ImageProfileType) => {
           item.image_url = `https://apisyamresto.syamdev.my.id/storage/${item.image_url}`;
           return item;
         });

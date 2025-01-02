@@ -8,33 +8,24 @@ import {
   Pagination,
 } from "swiper/modules";
 import { useEffect, useState } from "react";
-// import { useEffect, useState, useRef, LegacyRef } from "react";
 import api from "../../../utils/axios/instance";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
 
-type ImageType = {
-  id: number;
-  title: string;
-  image_url: string;
-  status: string;
-};
-
-type ResponseType = {
+interface ResponseType {
   data: {
-    data: ImageType[];
+    data: ImageCarouselType[];
   };
-};
+}
 
 export default function Carousel() {
-  const [images, setImages] = useState<ImageType[]>([]);
+  const [images, setImages] = useState<ImageCarouselType[]>([]);
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
-  // const swiperRef: LegacyRef<SwiperRef> = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response: ResponseType = await api.get("/carousels");
-        response.data.data.forEach((item: ImageType) => {
+        response.data.data.forEach((item: ImageCarouselType) => {
           item.image_url = `https://apisyamresto.syamdev.my.id/storage/${item.image_url}`;
           return item;
         });

@@ -1,4 +1,4 @@
-type HomeCardProps = {
+interface HomeCardProps {
   category: string;
   title: string;
   src: string;
@@ -10,7 +10,7 @@ type HomeCardProps = {
   index: number;
   handleImageLoad: (index: number) => void;
   loadedImages: boolean[];
-};
+}
 export const HomeCard = ({
   category,
   title,

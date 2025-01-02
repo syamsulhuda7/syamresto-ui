@@ -2,22 +2,7 @@ import { useEffect, useState } from "react";
 import { categoriesState } from "../../../utils/zustand/categoriesState";
 import { categoriesData } from "../../../utils/api";
 import SelectBaseUI from "../../ui/select";
-
-interface CategoryData {
-  id: number;
-  name: string;
-  slug: string;
-  icon: string;
-}
-interface FilterState {
-  category: string;
-  // search: string;
-  // priceMin: number;
-  // priceMax: number;
-  // ratingMin: number;
-  // ratingMax: number;
-  // promo: string;
-}
+import { filterStorage } from "../../../utils/zustand/filterMenu";
 
 const promoOptions = [
   { name: "Promo", value: "true" },
@@ -27,16 +12,20 @@ const promoOptions = [
 export const FilterMenu = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
   const [filter, setFilter] = useState<FilterState>({
-    category: "",
-    // search: "",
-    // priceMin: 0,
-    // priceMax: 0,
-    // ratingMin: 0,
-    // ratingMax: 0,
-    // promo: "",
+    category: {},
+    promo: {},
   });
+  // search: "",
+  // priceMin: 0,
+  // priceMax: 0,
+  // ratingMin: 0,
+  // ratingMax: 0,
 
-  // console.log(filter)
+  const setFilterValue = filterStorage((state) => state.setFilter);
+
+  useEffect(() => {
+    setFilterValue(filter);
+  }, [filter]);
 
   const setCategoryState = categoriesState((state) => state.setCategories);
   const categoryState = categoriesState((state) => state.categories);
@@ -60,6 +49,10 @@ export const FilterMenu = () => {
     fetchCategory();
   }, []);
 
+  const handleSendFilter = (data: {}, type: string) => {
+    setFilter((prevState) => ({ ...prevState, [type]: data }));
+  };
+
   return (
     <div className="sticky top-10 w-full md:w-[30%] h-full min-h-screen bg-org">
       <div className="w-full flex flex-col gap-[30px] px-[30px] md:pl-[50px] xl:pl-[130px] md:pr-[50px] py-[50px]">
@@ -80,6 +73,7 @@ export const FilterMenu = () => {
               optionData={category.map((data) => {
                 return { name: data.name, value: data.slug };
               })}
+              optionValue={(value) => handleSendFilter(value, "category")}
             />
           </div>
         </div>
@@ -137,7 +131,10 @@ export const FilterMenu = () => {
             Promo
           </p>
           <div className="pl-[30px] pt-2 w-full">
-            <SelectBaseUI optionData={promoOptions} />
+            <SelectBaseUI
+              optionData={promoOptions}
+              optionValue={(value) => handleSendFilter(value, "promo")}
+            />
           </div>
         </div>
       </div>

@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
-type ButtonProps = {
+interface ButtonProps {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
-};
+}
 
 export const Button: React.FC<ButtonProps> = ({
   children,

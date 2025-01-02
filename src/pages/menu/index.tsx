@@ -5,23 +5,6 @@ import { FilterMenu } from "../../components/fragments/filterMenu";
 import { ListMenu } from "../../components/fragments/listMenu";
 import { productsData } from "../../utils/api";
 
-type MenuData = {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  image_url: string;
-  price: number;
-  status: string;
-  sold: number | null;
-  category: {
-    id: number;
-    name: string;
-    slug: string;
-    icon: string;
-  };
-};
-
 export const Menu = () => {
   const [menuData, setMenuData] = useState<MenuData[]>();
 

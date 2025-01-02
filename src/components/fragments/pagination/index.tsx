@@ -1,12 +1,12 @@
 import ArrowRightRoundedIcon from "@mui/icons-material/ArrowRightRounded";
 import ArrowLeftRoundedIcon from "@mui/icons-material/ArrowLeftRounded";
 
-type PaginationProps = {
+interface PaginationProps {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   totalPages: number;
   onTop: () => void;
-};
+}
 
 export const Pagination = ({
   currentPage,

@@ -6,10 +6,10 @@ import useMiddleware from "./utils/middleware/index.tsx";
 import { NotFound } from "./pages/notFound/index.tsx";
 import { Menu } from "./pages/menu/index.tsx";
 
-type PageWithMiddlewareProps<P> = {
+interface PageWithMiddlewareProps<P> {
   component: ComponentType<P>;
   componentProps: P;
-};
+}
 
 export const App = () => {
   const navigate = useNavigate();
