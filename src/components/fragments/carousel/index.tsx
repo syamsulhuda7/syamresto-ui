@@ -51,15 +51,6 @@ export default function Carousel() {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   if (swiperRef.current && swiperRef.current.swiper) {
-  //     const swiperInstance = swiperRef.current.swiper;
-  //     swiperInstance.update();
-  //     swiperInstance.autoplay.start();
-  //     swiperInstance.slideTo(0); // Memaksa untuk memulai dari slide pertama
-  //   }
-  // }, [images]);
-
   const handleImageLoad = (index: number) => {
     setLoadedImages((prevLoadedImages) => {
       const newLoadedImages = [...prevLoadedImages];
@@ -71,11 +62,8 @@ export default function Carousel() {
 
   return (
     <div className="w-full aspect-[20/9] relative flex items-center justify-center">
-      {/* <div className="border border-org absolute top-0 left-0 w-1/2 h-[85%] md:h-[95%] z-10"></div> */}
       <Swiper
         slidesPerView={1}
-        // slidesPerGroup={2}
-        // ref={swiperRef}
         loop={false}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         effect={"creative"}
@@ -111,15 +99,6 @@ export default function Carousel() {
             </div>
           </SwiperSlide>
         ))}
-        {/* <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide> */}
       </Swiper>
     </div>
   );

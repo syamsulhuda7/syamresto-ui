@@ -4,12 +4,17 @@ import { TabNav } from "../../ui/tabNav";
 import { useNavigate } from "react-router";
 import { MiniMenu } from "../../ui/miniMenu";
 import { navigationStore } from "../../../utils/zustand/navigation";
+import { useEffect } from "react";
 // import { useEffect, useState } from "react";
 export const Navbar = () => {
   // const [navValue, setNavValue] = useState("");
   const navigate = useNavigate();
   const navigationValue = navigationStore((state) => state.navigation);
   const setNavigation = navigationStore((state) => state.setNavigation);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [navigationValue]);
 
   return (
     <div className="w-full h-fit flex items-center justify-center bg-drk sticky top-0 z-50">

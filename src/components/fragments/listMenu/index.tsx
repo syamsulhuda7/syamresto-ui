@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { CardMenu } from "../../ui/cardMenu";
 import { Pagination } from "../pagination";
+import { getCookie, setCookie } from "../../../utils/cookies/instance";
 
 interface DetailMenu {
   id: number;
@@ -25,13 +26,26 @@ type ListMenuProps = {
 export const ListMenu = ({ menuData }: ListMenuProps) => {
   const itemsPerPage = 15;
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
   const [allMenu, setAllMenu] = useState<DetailMenu[]>([]);
   const [showMenu, setShowMenu] = useState<DetailMenu[]>([]);
+
+  useEffect(() => {
+    const loadedFromCookies = JSON.parse(
+      getCookie("loadedListMenuImages") || "[]"
+    );
+    setLoadedImages(loadedFromCookies);
+  }, []);
 
   useEffect(() => {
     setAllMenu(menuData);
     setShowMenu(menuData);
   }, [menuData]);
+
+  useEffect(() => {
+    setCookie("loadedListMenuImages", JSON.stringify([]), 1);
+    setLoadedImages([]);
+  }, [currentPage]);
 
   const totalPages = Math.ceil(allMenu?.length / itemsPerPage);
 
@@ -44,6 +58,15 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
   const onTop = () => {
     const targetElement = document.getElementById("view-target");
     targetElement?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleImageLoad = (index: number) => {
+    setLoadedImages((prevLoadedImages) => {
+      const newLoadedImages = [...prevLoadedImages];
+      newLoadedImages[index] = true;
+      setCookie("loadedListMenuImages", JSON.stringify(newLoadedImages), 1);
+      return newLoadedImages;
+    });
   };
 
   return (
@@ -60,7 +83,11 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
         </div>
         {/* MENU */}
         <div className="pt-[30px] pb-[50px] flex flex-wrap gap-10 justify-center">
-          <CardMenu menuData={currentItems || []} />
+          <CardMenu
+            menuData={currentItems || []}
+            handleImageLoad={handleImageLoad}
+            loadedImages={loadedImages}
+          />
         </div>
         <Pagination
           currentPage={currentPage}

@@ -58,18 +58,16 @@ export const ExploreCategory = () => {
             className="flex flex-col items-center hover:scale-[1.05] transition-all ease-in-out duration-[200ms] cursor-pointer"
             key={index}
           >
-            {!loadedImages[index] && (
-              <div className="w-[70px] md:w-[100px] xl:w-[150px] aspect-[1/1] rounded-full bg-black"></div>
-            )}
-            <img
-              onLoad={() => handleImageLoad(index)}
-              className={`${
-                loadedImages[index]
-                  ? "w-[70px] md:w-[100px] xl:w-[150px] aspect-[1/1] rounded-full object-cover"
-                  : "loading"
-              }`}
-              src={data.icon}
-            />
+            <div className="w-[70px] md:w-[100px] xl:w-[150px] overflow-hidden aspect-[1/1] rounded-full">
+              {!loadedImages[index] && <div className="placeholder"></div>}
+              <img
+                onLoad={() => handleImageLoad(index)}
+                className={`${
+                  loadedImages[index] ? "w-full h-full object-cover" : "loading"
+                }`}
+                src={data.icon}
+              />
+            </div>
             <p className="font-albertSans font-semibold text-sm md:text-[20px] text-white text-center pt-3">
               {data.name}
             </p>

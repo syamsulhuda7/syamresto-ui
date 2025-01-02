@@ -18,21 +18,33 @@ type CardMenuProps = {
       icon: string;
     };
   }[];
+  handleImageLoad: (index: number) => void;
+  loadedImages: boolean[];
 };
 
-export const CardMenu = ({ menuData }: CardMenuProps) => {
+export const CardMenu = ({
+  menuData,
+  handleImageLoad,
+  loadedImages,
+}: CardMenuProps) => {
   return (
     <>
-      {menuData.map((item) => (
+      {menuData.map((item, index) => (
         <div
           key={item.id}
           className="w-fit h-fit bg-gry/20 p-[10px] rounded-md flex flex-col gap-1 items-center shadow-lg shadow-slate-300"
         >
-          <img
-            className="h-[120px] aspect-[6/4] object-cover rounded-sm"
-            src={item.image_url}
-            alt={item.name}
-          />
+          <div className="h-[120px] aspect-[6/4] rounded-sm">
+            {!loadedImages[index] && <div className="placeholder"></div>}
+            <img
+              onLoad={() => handleImageLoad(index)}
+              className={`${
+                loadedImages[index] ? "w-full h-full object-cover" : "loading"
+              }`}
+              src={item.image_url}
+              alt={item.name}
+            />
+          </div>
           <div className="w-[180px] h-[50px] text-center flex justify-center items-center font-poppins font-semibold text-base">
             {item.name}
           </div>
