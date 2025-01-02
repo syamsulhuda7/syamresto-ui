@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FrameFragment } from "../../layouts/frameFragment";
 import { categoriesData } from "../../../utils/api";
 import { categoriesState } from "../../../utils/zustand/categoriesState";
+import { getCookie, setCookie } from "../../../utils/cookies/instance";
 type CategoryData = {
   id: number;
   name: string;
@@ -10,6 +11,7 @@ type CategoryData = {
 };
 export const ExploreCategory = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
+  const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
   const setCategoryState = categoriesState((state) => state.setCategories);
   const categoryState = categoriesState((state) => state.categories);
 
@@ -24,13 +26,26 @@ export const ExploreCategory = () => {
         if (data.length > 0) {
           setCategory(data);
           setCategoryState(data);
+          const loadedFromCookies = JSON.parse(
+            getCookie("loadedCarouselImages") || "[]"
+          );
+          setLoadedImages(loadedFromCookies);
         }
       } catch (error) {
         console.log("Error fetching categories:", error);
       }
     };
     fetchCategory();
-  }, []);
+  }, [categoryState, setCategoryState]);
+
+  const handleImageLoad = (index: number) => {
+    setLoadedImages((prevLoadedImages) => {
+      const newLoadedImages = [...prevLoadedImages];
+      newLoadedImages[index] = true;
+      setCookie("loadedImages", JSON.stringify(newLoadedImages), 1);
+      return newLoadedImages;
+    });
+  };
 
   return (
     <FrameFragment className="bg-drk" innerClass="pb-[100px] pt-[50px]">
@@ -43,8 +58,16 @@ export const ExploreCategory = () => {
             className="flex flex-col items-center hover:scale-[1.05] transition-all ease-in-out duration-[200ms] cursor-pointer"
             key={index}
           >
+            {!loadedImages[index] && (
+              <div className="w-[70px] md:w-[100px] xl:w-[150px] aspect-[1/1] rounded-full bg-black"></div>
+            )}
             <img
-              className="w-[70px] md:w-[100px] xl:w-[150px] aspect-[1/1] rounded-full object-cover"
+              onLoad={() => handleImageLoad(index)}
+              className={`${
+                loadedImages[index]
+                  ? "w-[70px] md:w-[100px] xl:w-[150px] aspect-[1/1] rounded-full object-cover"
+                  : "loading"
+              }`}
               src={data.icon}
             />
             <p className="font-albertSans font-semibold text-sm md:text-[20px] text-white text-center pt-3">

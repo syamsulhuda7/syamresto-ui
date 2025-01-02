@@ -39,7 +39,9 @@ export default function Carousel() {
           return item;
         });
         setImages(response?.data?.data);
-        const loadedFromCookies = JSON.parse(getCookie("loadedImages") || "[]");
+        const loadedFromCookies = JSON.parse(
+          getCookie("loadedCarouselImages") || "[]"
+        );
         setLoadedImages(loadedFromCookies);
       } catch (error) {
         console.error(error);
@@ -62,7 +64,7 @@ export default function Carousel() {
     setLoadedImages((prevLoadedImages) => {
       const newLoadedImages = [...prevLoadedImages];
       newLoadedImages[index] = true;
-      setCookie("loadedImages", JSON.stringify(newLoadedImages), 1);
+      setCookie("loadedCarouselImages", JSON.stringify(newLoadedImages), 1);
       return newLoadedImages;
     });
   };

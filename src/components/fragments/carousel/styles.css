@@ -42,30 +42,6 @@
   height: 100%;
 }
 
-.placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-}
-
-img.loading {
-  display: none;
-}
-
-img.loaded {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 /* Mengubah warna titik pagination */
 .swiper-pagination-bullet {
   background-color: #fff; /* Warna default */

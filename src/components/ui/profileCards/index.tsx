@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import "./styles.css";
-import { EffectCards, Pagination } from "swiper/modules";
+import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
 import api from "../../../utils/axios/instance";
+import { getCookie, setCookie } from "../../../utils/cookies/instance";
 
 type ImageType = {
   id: number;
@@ -20,6 +21,7 @@ type ResponseType = {
 
 export default function ProfileCards() {
   const [images, setImages] = useState<ImageType[]>([]);
+  const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +32,10 @@ export default function ProfileCards() {
           return item;
         });
         setImages(response?.data?.data);
+        const loadedFromCookies = JSON.parse(
+          getCookie("loadedProfileImages") || "[]"
+        );
+        setLoadedImages(loadedFromCookies);
       } catch (error) {
         console.error(error);
       }
@@ -38,24 +44,49 @@ export default function ProfileCards() {
     fetchData();
   }, []);
 
+  const handleImageLoad = (index: number) => {
+    setLoadedImages((prevLoadedImages) => {
+      const newLoadedImages = [...prevLoadedImages];
+      newLoadedImages[index] = true;
+      setCookie("loadedProfileImages", JSON.stringify(newLoadedImages), 1);
+      return newLoadedImages;
+    });
+  };
+
   return (
     <Swiper
-      effect={"cards"}
+      effect={"coverflow"}
       grabCursor={true}
-      loop={false}
-      pagination={{ clickable: true }}
-      modules={[EffectCards, Pagination]}
-      className="profile-cards-swiper"
+      centeredSlides={true}
+      slidesPerView={"auto"}
+      autoplay={{ delay: 3000, disableOnInteraction: false }}
+      coverflowEffect={{
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      }}
+      speed={700}
+      pagination={true}
+      modules={[EffectCoverflow, Pagination, Autoplay]}
+      className="container-coverflow-swiper"
     >
-      {images.map((image) => (
-        <SwiperSlide key={image.id} className="profile-cards-swiper-slide">
+      {images.map((image, index) => (
+        <SwiperSlide key={image.id} className="coverflow-swiper-slide">
+          {!loadedImages[index] && (
+            <div className="absolute object-cover w-full h-full bg-black"></div>
+          )}
           <img
-            className="absolute object-cover w-full h-full"
+            onLoad={() => handleImageLoad(index)}
+            className={`${
+              loadedImages[index]
+                ? "absolute object-cover w-full h-full block"
+                : "hidden"
+            }`}
             src={image.image_url}
             alt={image.title}
             loading="lazy"
           />
-          {image.title}
         </SwiperSlide>
       ))}
     </Swiper>

@@ -1,135 +1,19 @@
-/* #app {
-  height: 100%;
-}
-html,
-body {
-  position: relative;
-  height: 100%;
+.container-coverflow-swiper {
+  width: 350px;
+  aspect-ratio: 3 / 4;
+  /* padding-top: 50px;
+  padding-bottom: 50px; */
 }
 
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background: #fff;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  position: relative;
-  height: 100%;
-}
-
-#app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
-/* .profile-cards-swiper {
-  width: 150px;
-  aspect-ratio: 3/5;
-  padding-top: 50px;
-} */
-@media (min-width: 0px) {
-  .profile-cards-swiper {
-    width: 200px;
-    aspect-ratio: 3/5;
-    padding-top: 50px;
-  }
-}
-/* md */
-@media (min-width: 768px) {
-  .profile-cards-swiper {
-    width: 280px;
-  }
-}
-/* xl */
-@media (min-width: 1280px) {
-  .profile-cards-swiper {
-    width: 350px;
-  }
-}
-
-.profile-cards-swiper-slide {
-  width: 100%;
-  /* aspect-ratio: 7/5; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
-  transition: all 0.3s ease-in-out;
-}
-
-.profile-cards-swiper-slide::before {
-  content: "";
-  color: white;
-  position: absolute;
-  top: 0;
-  left: 0;
+.coverflow-swiper-slide {
+  background-position: center;
+  background-size: cover;
   width: 100%;
   height: 100%;
-  background: black;
-  opacity: 0.5;
-  z-index: 5;
-  pointer-events: none;
 }
 
-.profile-cards-swiper .swiper-slide-active::before {
-  content: "";
-  color: white;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+.coverflow-swiper-slide img {
+  display: block;
   height: 100%;
-  background: black;
-  opacity: 0;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.autoplay-progress {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  z-index: 10;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: var(--swiper-theme-color);
-}
-
-.autoplay-progress svg {
-  --progress: 0;
-  position: absolute;
-  left: 0;
-  top: 0px;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  stroke-width: 4px;
-  stroke: var(--swiper-theme-color);
-  fill: none;
-  stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
-  stroke-dasharray: 125.6;
-  transform: rotate(-90deg);
+  object-fit: cover;
 }
