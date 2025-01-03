@@ -37,16 +37,17 @@ Input.propTypes = {
 export default function NumberInput() {
   const [values, setValues] = React.useState({
     amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false,
   });
 
-  //   const handleChange = (prop) => (event) => {
-  //     setValues({ ...values, [prop]: event.target.value });
-  //   };
+  const handleChange =
+    (prop: keyof typeof values) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
 
+  React.useEffect(() => {
+    console.log(values);
+  }, [values]);
   //   const handleClickShowPassword = () => {
   //     setValues({
   //       ...values,
@@ -70,6 +71,8 @@ export default function NumberInput() {
       <Input
         id="outlined-start-adornment"
         type="number"
+        value={values.amount}
+        onChange={handleChange("amount")}
         startAdornment={<InputAdornment>Rp</InputAdornment>}
       />
       {/* <Input
