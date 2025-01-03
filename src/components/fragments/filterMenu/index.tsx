@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { useEffect, useState } from "react";
 import { categoriesState } from "../../../utils/zustand/categoriesState";
 import { categoriesData } from "../../../utils/api";
