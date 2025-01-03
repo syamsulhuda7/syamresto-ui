@@ -9,7 +9,7 @@ interface ListMenuProps {
 }
 
 export const ListMenu = ({ menuData }: ListMenuProps) => {
-  const itemsPerPage = 15;
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
   const [allMenu, setAllMenu] = useState<MenuData[]>([]);
@@ -30,11 +30,6 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
   }, [menuData]);
 
   useEffect(() => {
-    console.log(
-      "filterValue",
-      typeof filterValue.category,
-      filterValue.category
-    );
     if (
       filterValue.category !== "all" &&
       typeof filterValue.category === "string"
@@ -45,17 +40,18 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
       });
       if (filteredMenu.length > 0) {
         setShowMenu(filteredMenu);
+        setCurrentPage(1);
         console.log("filtered");
         return;
       }
     }
     setShowMenu(allMenu);
-  }, [filterValue]);
+  }, [filterValue, allMenu]);
 
   useEffect(() => {
     setCookie("loadedListMenuImages", JSON.stringify([]), 1);
     setLoadedImages([]);
-  }, [currentPage]);
+  }, [currentPage, filterValue]);
 
   const totalPages = Math.ceil(showMenu?.length / itemsPerPage);
 
@@ -82,11 +78,11 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
   return (
     <div className="w-full md:w-[70%] h-full bg-white">
       <div className="w-full px-[30px] md:pr-[50px] xl:pr-[130px] md:pl-[50px] py-[50px]">
-        <div className="w-full h-fit flex justify-between border-b border-drk pb-[20px]">
-          <p className="font-albertSans font-bold text-2xl md:text-3xl xl:text-[35px] text-drk">
+        <div className="w-full h-fit flex justify-between border-b border-drk pb-[15px]">
+          <p className="py-1 font-albertSans font-bold text-2xl md:text-3xl xl:text-[35px] text-drk">
             Menu
           </p>
-          <p className="font-albertSans font-bold text-2xl md:text-3xl xl:text-[30px] text-gry">
+          <p className="py-1 font-albertSans font-bold text-2xl md:text-3xl xl:text-[30px] text-gry">
             <span className="text-org">{currentItems?.length}</span> /{" "}
             {showMenu?.length}
           </p>

@@ -4,6 +4,8 @@ import { categoriesState } from "../../../utils/zustand/categoriesState";
 import { categoriesData } from "../../../utils/api";
 import SelectBaseUI from "../../ui/select";
 import { filterStorage } from "../../../utils/zustand/filterMenu";
+import NumberInput from "../../ui/inputNumber";
+import RangeSlider from "../../ui/slider";
 
 const promoOptions = [
   { name: "Promo", value: "true" },
@@ -14,17 +16,16 @@ export const FilterMenu = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
   const [filter, setFilter] = useState<FilterState>({
     category: {},
+    priceMin: 0,
+    priceMax: 0,
+    rating: [1.5, 3.7],
     promo: {},
   });
-  // search: "",
-  // priceMin: 0,
-  // priceMax: 0,
-  // ratingMin: 0,
-  // ratingMax: 0,
 
   const setFilterValue = filterStorage((state) => state.setFilter);
 
   useEffect(() => {
+    console.log(filter);
     setFilterValue(filter);
   }, [filter]);
 
@@ -57,13 +58,13 @@ export const FilterMenu = () => {
   return (
     <div className="sticky top-10 w-full md:w-[30%] h-full min-h-screen bg-org">
       <div className="w-full flex flex-col gap-[30px] px-[30px] md:pl-[50px] xl:pl-[130px] md:pr-[50px] py-[50px]">
-        <div className="w-full h-fit flex justify-between border-b border-drk pb-[20px]">
-          <p className="font-albertSans font-bold text-2xl md:text-3xl xl:text-[35px] text-drk">
+        <div className="w-full h-fit flex justify-between border-b border-drk pb-[15px]">
+          <p className="py-1 font-albertSans font-bold text-2xl md:text-3xl xl:text-[35px] text-drk">
             Filter
           </p>
-          <p className="font-albertSans font-bold text-2xl md:text-3xl xl:text-[30px] text-drk">
-            0
-          </p>
+          <button className="px-[15px] py-1 bg-drk rounded-md font-poppins font-semibold text-2xl md:text-3xl xl:text-[20px] text-gry">
+            Apply
+          </button>
         </div>
         <div className="w-full h-fit">
           <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
@@ -87,19 +88,15 @@ export const FilterMenu = () => {
             <p className="col-span-4 font-poppins text-2xl md:text-3xl xl:text-[20px] text-drk">
               Min
             </p>
-
-            <input
-              type="number"
-              className="col-span-8 font-poppins text-2xl md:text-3xl xl:text-[20px] text-drk"
-            />
+            <div className="col-span-8">
+              <NumberInput />
+            </div>
             <p className="col-span-4 font-poppins text-2xl md:text-3xl xl:text-[20px] text-drk">
               Max
             </p>
-
-            <input
-              type="number"
-              className="col-span-8 font-poppins text-2xl md:text-3xl xl:text-[24px] text-drk"
-            />
+            <div className="col-span-8">
+              <NumberInput />
+            </div>
           </div>
         </div>
         {/* rating */}
@@ -107,23 +104,25 @@ export const FilterMenu = () => {
           <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
             Rating
           </p>
-          <div className="grid grid-cols-12 gap-2 ml-[30px]">
-            <p className="col-span-4 font-poppins text-2xl md:text-3xl xl:text-[20px] text-drk">
-              Min
+          <div className="flex items-center justify-between gap-5 ml-[30px]">
+            <p className="w-12 text-[#6B7A90] rounded-md border-[1px] border-slate-50 shadow-inner shadow-slate-500 aspect-square flex items-center justify-center bg-white col-span-2 font-poppins text-xs md:text-sm xl:text-base">
+              {Array.isArray(filter.rating) && filter.rating[0]}
             </p>
-
-            <input
-              type="range"
-              className="col-span-8 font-poppins text-2xl md:text-3xl xl:text-[24px] text-drk"
-            />
-            <p className="col-span-4 font-poppins text-2xl md:text-3xl xl:text-[20px] text-drk">
-              Max
+            <div className="w-full mr-2 mt-1">
+              <RangeSlider
+                sliderValue={(value) =>
+                  setFilter((prevState) => ({
+                    ...prevState,
+                    rating: Array.isArray(value)
+                      ? value.map((x) => x / 10)
+                      : value,
+                  }))
+                }
+              />
+            </div>
+            <p className="w-12 text-[#6B7A90] rounded-md border-[1px] border-slate-50 shadow-inner shadow-slate-500 aspect-square flex items-center justify-center bg-white col-span-2 font-poppins text-xs md:text-sm xl:text-base">
+              {Array.isArray(filter.rating) && filter.rating[1]}
             </p>
-
-            <input
-              type="range"
-              className="col-span-8 font-poppins text-2xl md:text-3xl xl:text-[24px] text-drk"
-            />
           </div>
         </div>
         {/* Promo */}

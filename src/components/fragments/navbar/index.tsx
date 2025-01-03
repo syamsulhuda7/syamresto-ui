@@ -1,26 +1,20 @@
 import { Tabs } from "@mui/base/Tabs";
 import { TabsList } from "@mui/base/TabsList";
 import { TabNav } from "../../ui/tabNav";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { MiniMenu } from "../../ui/miniMenu";
 import { navigationStore } from "../../../utils/zustand/navigation";
 import { useEffect } from "react";
-// import { useEffect, useState } from "react";
+
 export const Navbar = () => {
-  // const [navValue, setNavValue] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const navigationValue = navigationStore((state) => state.navigation);
   const setNavigation = navigationStore((state) => state.setNavigation);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [navigationValue]);
-
-  useEffect(() => {
-    const pathname = location.pathname.split("/")[1];
-    setNavigation(pathname);
-  }, []);
 
   return (
     <div className="w-full h-fit flex items-center justify-center bg-drk sticky top-0 z-50">
@@ -30,7 +24,10 @@ export const Navbar = () => {
         onChange={(_, value) => navigate(`/${value}`)}
       >
         <p
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            setNavigation("home");
+          }}
           className="cursor-pointer text-white text-[20px] md:text-[26px] xl:text-[32px] font-adlamDisplay font-bold"
         >
           SYAM<span className="text-org">STORE</span>

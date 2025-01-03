@@ -20,8 +20,6 @@ export const App = () => {
       navigate("/");
     } else if (!allowedPaths.includes(location.pathname)) {
       navigate("/not-found");
-    } else {
-      navigate(location.pathname);
     }
   }, [navigate, location]);
 

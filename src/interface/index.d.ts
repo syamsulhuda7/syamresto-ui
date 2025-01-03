@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 declare global {
   interface CategoryData {
     id: number;
@@ -39,11 +40,9 @@ declare global {
 
   interface FilterState {
     category: {};
-    // search: string;
-    // priceMin: number;
-    // priceMax: number;
-    // ratingMin: number;
-    // ratingMax: number;
+    priceMin: number;
+    priceMax: number;
+    rating: number | number[];
     promo: {};
   }
 }
