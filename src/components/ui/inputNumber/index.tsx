@@ -1,10 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { Box, styled } from "@mui/system";
-// import { Button } from "@mui/base/Button";
-import { Input as BaseInput, inputClasses } from "@mui/base/Input";
-// import Visibility from "@mui/icons-material/Visibility";
-// import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Input as BaseInput } from "@mui/base/Input";
 
 const Input = React.forwardRef(function CustomInput(props, ref) {
   const { slots, ...other } = props;
@@ -22,11 +19,6 @@ const Input = React.forwardRef(function CustomInput(props, ref) {
 });
 
 Input.propTypes = {
-  /**
-   * The components used for each slot inside the InputBase.
-   * Either a string to use a HTML element or a component.
-   * @default {}
-   */
   slots: PropTypes.shape({
     input: PropTypes.elementType,
     root: PropTypes.elementType,
@@ -48,16 +40,6 @@ export default function NumberInput() {
   React.useEffect(() => {
     console.log(values);
   }, [values]);
-  //   const handleClickShowPassword = () => {
-  //     setValues({
-  //       ...values,
-  //       showPassword: !values.showPassword,
-  //     });
-  //   };
-
-  //   const handleMouseDownPassword = (event) => {
-  //     event.preventDefault();
-  //   };
 
   return (
     <Box
@@ -69,34 +51,12 @@ export default function NumberInput() {
       }}
     >
       <Input
-        id="outlined-start-adornment"
-        type="number"
-        value={values.amount}
-        onChange={handleChange("amount")}
-        startAdornment={<InputAdornment>Rp</InputAdornment>}
+      // id="outlined-start-adornment"
+      // type="number"
+      // value={values.amount}
+      // onChange={handleChange("amount")}
+      // startAdornment={<InputAdornment>Rp</InputAdornment>}
       />
-      {/* <Input
-        id="outlined-adornment-password"
-        type={values.showPassword ? "text" : "password"}
-        value={values.password}
-        onChange={handleChange("password")}
-        endAdornment={
-          <InputAdornment>
-            <IconButton
-              size="small"
-              aria-label="toggle password visibility"
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-            >
-              {values.showPassword ? (
-                <VisibilityOff fontSize="small" />
-              ) : (
-                <Visibility fontSize="small" />
-              )}
-            </IconButton>
-          </InputAdornment>
-        }
-      /> */}
     </Box>
   );
 }
@@ -128,12 +88,6 @@ const InputRoot = styled("div")(
   align-items: center;
   justify-content: center;
 
-
-//   &.${inputClasses.focused} {
-//     border-color: #f1f1f1;
-//     box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
-//   }
-
   &:hover {
     border-color: #f1f1f1;
   }
@@ -161,18 +115,6 @@ const InputElement = styled("input")(
   outline: 0;
 `
 );
-
-// const IconButton = styled(Button)(
-//   ({ theme }) => `
-//   display: inline-flex;
-//   align-items: center;
-//   justify-content: center;
-//   border: none;
-//   background: inherit;
-//   cursor: pointer;
-//   color: ${theme.palette.mode === "dark" ? grey[300] : grey[700]};
-//   `
-// );
 
 const InputAdornment = styled("div")`
   margin: 8px;
