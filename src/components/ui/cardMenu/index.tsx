@@ -1,5 +1,6 @@
 import StarIcon from "@mui/icons-material/Star";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Modal from "../../fragments/modal";
 
 interface CardMenuProps {
   menuData: MenuData[];
@@ -34,6 +35,9 @@ export const CardMenu = ({
             {item.name}
           </div>
           <div className="font-poppins text-slate-400 text-[12px]">
+            {item.category.name}
+          </div>
+          <div className="font-poppins text-slate-400 text-[12px]">
             43 sold / month
           </div>
           <div className="w-full font-poppins text-slate-700 text-sm flex justify-between items-center">
@@ -44,9 +48,9 @@ export const CardMenu = ({
             <p>Rp {item.price}</p>
           </div>
           <div className="w-full flex justify-between items-center gap-2">
-            <button className="w-full h-full font-poppins font-semibold text-[14px] py-[6px] rounded-md text-white bg-org">
-              Detail
-            </button>
+            <div className="w-full">
+              <Modal item={item} />
+            </div>
             <button className="bg-org p-1 rounded-md text-white">
               <ShoppingCartIcon className="scale-[.9]" />
             </button>

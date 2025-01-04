@@ -1,6 +1,7 @@
 import * as React from "react";
 import clsx from "clsx";
 import { Badge as BaseBadge, BadgeProps } from "@mui/base/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function BadgeComponent() {
   const [position, setPosition] = React.useState({ x: 30, y: 100 }); // Default posisi dengan jarak 30px
@@ -102,7 +103,9 @@ export default function BadgeComponent() {
         onMouseDown={handleMouseDown}
       >
         <Badge badgeContent={5}>
-          <span className="w-10 h-10 rounded-xl bg-slate-300 inline-block align-middle" />
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-org shadow-sm shadow-black/50">
+            <ShoppingCartIcon className="text-drk" />
+          </div>
         </Badge>
       </div>
 
@@ -159,7 +162,7 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>((props, ref) => {
           return {
             ...resolvedSlotProps,
             className: clsx(
-              "z-auto absolute top-0 right-0 min-w-badge min-h-badge font-sans p-0 text-white font-semibold font-xs rounded-xl bg-purple-500 leading-5.5 whitespace-nowrap text-center translate-x-1/2 -translate-y-1/2 drop-shadow-lg origin-right",
+              "w-5 h-5 flex items-center justify-center z-auto absolute top-0 right-0 min-w-badge min-h-badge font-sans p-0 text-white font-semibold font-xs rounded-xl bg-drk leading-5.5 whitespace-nowrap text-center translate-x-1/2 -translate-y-1/2 drop-shadow-lg origin-right",
               resolvedSlotProps?.className
             ),
           };

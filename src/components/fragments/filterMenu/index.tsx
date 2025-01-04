@@ -52,7 +52,7 @@ export const FilterMenu = () => {
             onClick={() => {
               setFilterValue({ ...filterValue, apply: true });
             }}
-            className="px-[15px] py-1 bg-drk rounded-md font-poppins font-semibold text-2xl md:text-3xl xl:text-[20px] text-gry"
+            className="px-[15px] py-1 bg-drk rounded-md font-poppins font-semibold text-[16px] md:text-[18px] xl:text-[20px] text-white"
           >
             Apply
           </button>
