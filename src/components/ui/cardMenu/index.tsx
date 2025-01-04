@@ -3,7 +3,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 interface CardMenuProps {
   menuData: MenuData[];
-  handleImageLoad: (index: number) => void;
+  handleImageLoad: (itemId: number) => void;
   loadedImages: boolean[];
 }
 
@@ -14,17 +14,17 @@ export const CardMenu = ({
 }: CardMenuProps) => {
   return (
     <>
-      {menuData.map((item, index) => (
+      {menuData.map((item) => (
         <div
           key={item.id}
           className="w-fit h-fit bg-gry/20 p-[10px] rounded-md flex flex-col gap-1 items-center shadow-lg shadow-slate-300"
         >
           <div className="h-[120px] aspect-[6/4] rounded-md overflow-hidden">
-            {!loadedImages[index] && <div className="placeholder"></div>}
+            {!loadedImages[item.id] && <div className="placeholder"></div>}
             <img
-              onLoad={() => handleImageLoad(index)}
+              onLoad={() => handleImageLoad(item.id)}
               className={`${
-                loadedImages[index] ? "w-full h-full object-cover" : "loading"
+                loadedImages[item.id] ? "w-full h-full object-cover" : "loading"
               }`}
               src={item.image_url}
               alt={item.name}

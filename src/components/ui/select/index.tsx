@@ -14,6 +14,7 @@ import {
 } from "@mui/base/Option";
 import clsx from "clsx";
 import UnfoldMoreRoundedIcon from "@mui/icons-material/UnfoldMoreRounded";
+import { filterStorage } from "../../../utils/zustand/filterMenu";
 
 interface SelectBaseUIProps {
   optionData: {
@@ -21,6 +22,7 @@ interface SelectBaseUIProps {
     value: string;
   }[];
   optionValue: (value: {}) => void;
+  title: keyof FilterState;
 }
 
 const getOptionColorClasses = ({
@@ -86,6 +88,7 @@ const Button = React.forwardRef(function Button<
 export default function SelectBaseUI({
   optionData,
   optionValue,
+  title,
 }: SelectBaseUIProps) {
   const handleChange = (
     event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null,
@@ -97,9 +100,18 @@ export default function SelectBaseUI({
     }
   };
 
+  const filterValue = filterStorage((state) => state.filter);
   return (
     <div>
-      <Select defaultValue="all" onChange={handleChange}>
+      <Select
+        defaultValue={"all"}
+        value={
+          Object.keys(filterValue[title]).length > 0
+            ? filterValue[title]
+            : "all"
+        }
+        onChange={handleChange}
+      >
         <Option value="all">All</Option>
         {optionData.map((option) => (
           <Option key={option.value} value={option.value}>

@@ -4,12 +4,9 @@ import { Pagination } from "../pagination";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
 import { filterStorage } from "../../../utils/zustand/filterMenu";
 import { searchMenuStorage } from "../../../utils/zustand/searchMenu";
+import { menuDataStorage } from "../../../utils/zustand/menuData";
 
-interface ListMenuProps {
-  menuData: MenuData[];
-}
-
-export const ListMenu = ({ menuData }: ListMenuProps) => {
+export const ListMenu = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
@@ -19,6 +16,7 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
   const filterValue = filterStorage((state) => state.filter);
   const setFilterValue = filterStorage((state) => state.setFilter);
   const searchMenuValue = searchMenuStorage((state) => state.search);
+  const menuDataValue = menuDataStorage((state) => state.menuData);
 
   useEffect(() => {
     const loadedFromCookies = JSON.parse(
@@ -28,13 +26,13 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
   }, []);
 
   useEffect(() => {
-    setAllMenu(menuData);
-    setShowMenu(allMenu);
-  }, [menuData]);
+    setAllMenu(menuDataValue);
+    setShowMenu(menuDataValue);
+  }, [menuDataValue]);
 
   useEffect(() => {
     if (!searchMenuValue) return;
-    const filteredMenu = allMenu.filter((item) =>
+    const filteredMenu = menuDataValue.filter((item) =>
       item.name.includes(searchMenuValue)
     );
     setShowMenu(filteredMenu);
@@ -42,7 +40,8 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
   }, [searchMenuValue]);
 
   useEffect(() => {
-    // console.log(filterValue);
+    console.log({ allMenu, showMenu, menuDataValue });
+    console.log(filterValue);
     if (!filterValue.apply) return;
     const categoryFilter =
       filterValue.category !== "all" &&
@@ -62,7 +61,7 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
       // || ratingFilter ||
       // promoFilter
     ) {
-      const filteredMenu = allMenu.filter((item) => {
+      const filteredMenu = menuDataValue.filter((item) => {
         const categoryMatch = categoryFilter
           ? item.category.slug === filterValue.category
           : true;
@@ -79,11 +78,13 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
         return categoryMatch && priceMinMatch && priceMaxMatch;
       });
       if (filteredMenu.length > 0) {
+        console.log(filteredMenu);
         setShowMenu(filteredMenu);
         setCurrentPage(1);
         setFilterValue({ ...filterValue, apply: false });
         return;
       } else {
+        console.log(filteredMenu);
         setShowMenu([]);
         setCurrentPage(1);
         setFilterValue({ ...filterValue, apply: false });
@@ -93,12 +94,12 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
     setFilterValue({ ...filterValue, apply: false });
     setShowMenu(allMenu);
     setCurrentPage(1);
-  }, [filterValue, allMenu, setFilterValue]);
+  }, [filterValue, allMenu, setFilterValue, menuDataValue, showMenu]);
 
   useEffect(() => {
-    setCookie("loadedListMenuImages", JSON.stringify([]), 1);
-    setLoadedImages([]);
-  }, [currentPage, filterValue.apply]);
+    // setCookie("loadedListMenuImages", JSON.stringify([]), 1);
+    // setLoadedImages([]);
+  }, [currentPage, showMenu]);
 
   const totalPages = Math.ceil(showMenu?.length / itemsPerPage);
 
@@ -113,10 +114,10 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
     targetElement?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const handleImageLoad = (index: number) => {
+  const handleImageLoad = (itemId: number) => {
     setLoadedImages((prevLoadedImages) => {
       const newLoadedImages = [...prevLoadedImages];
-      newLoadedImages[index] = true;
+      newLoadedImages[itemId] = true;
       setCookie("loadedListMenuImages", JSON.stringify(newLoadedImages), 1);
       return newLoadedImages;
     });

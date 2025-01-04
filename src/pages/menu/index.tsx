@@ -33,7 +33,7 @@ export const Menu = () => {
       </div>
       <div className="w-full h-full flex flex-col md:flex-row items-start justify-center">
         <FilterMenu />
-        <ListMenu menuData={menuData || []} />
+        <ListMenu />
       </div>
     </FramePage>
   );

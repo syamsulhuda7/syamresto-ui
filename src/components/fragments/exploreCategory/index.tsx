@@ -3,12 +3,19 @@ import { FrameFragment } from "../../layouts/frameFragment";
 import { categoriesData } from "../../../utils/api";
 import { categoriesState } from "../../../utils/zustand/categoriesState";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
+import { filterStorage } from "../../../utils/zustand/filterMenu";
+import { useNavigate } from "react-router";
+import { navigationStore } from "../../../utils/zustand/navigation";
 
 export const ExploreCategory = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
   const setCategoryState = categoriesState((state) => state.setCategories);
   const categoryState = categoriesState((state) => state.categories);
+  const setNavigation = navigationStore((state) => state.setNavigation);
+  const setFilterValue = filterStorage((state) => state.setFilter);
+  const filterValue = filterStorage((state) => state.filter);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -42,6 +49,12 @@ export const ExploreCategory = () => {
     });
   };
 
+  const handleCategoryFilter = (slug: string) => () => {
+    navigate("/menu");
+    setNavigation("menu");
+    setFilterValue({ ...filterValue, category: slug, apply: true });
+  };
+
   return (
     <FrameFragment className="bg-drk" innerClass="pb-[100px] pt-[50px]">
       <p className="font-albertSans font-bold text-2xl md:text-3xl xl:text-[40px] text-white pb-[30px] text-center">
@@ -52,6 +65,7 @@ export const ExploreCategory = () => {
           <div
             className="flex flex-col items-center hover:scale-[1.05] transition-all ease-in-out duration-[200ms] cursor-pointer"
             key={index}
+            onClick={handleCategoryFilter(data.slug)}
           >
             <div className="w-[70px] md:w-[100px] xl:w-[150px] overflow-hidden aspect-[1/1] rounded-full">
               {!loadedImages[index] && <div className="placeholder"></div>}

@@ -21,6 +21,7 @@ export const Navbar = () => {
       <Tabs
         className="font-albertSans max-w-[1440px] w-full h-fit flex items-center justify-between px-[30px] md:px-[50px] xl:px-[130px] py-3"
         defaultValue={navigationValue}
+        value={navigationValue}
         onChange={(_, value) => navigate(`/${value}`)}
       >
         <p

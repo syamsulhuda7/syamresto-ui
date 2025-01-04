@@ -11,6 +11,7 @@ const promoOptions = [
   { name: "Promo", value: "true" },
   { name: "Non Promo", value: "false" },
 ];
+const topMenuOptions = [{ name: "Top Menu", value: "true" }];
 
 export const FilterMenu = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
@@ -62,6 +63,7 @@ export const FilterMenu = () => {
           </p>
           <div className="pl-[30px] pt-2 w-full">
             <SelectBaseUI
+              title="category"
               optionData={category.map((data) => {
                 return { name: data.name, value: data.slug };
               })}
@@ -132,9 +134,25 @@ export const FilterMenu = () => {
           </p>
           <div className="pl-[30px] pt-2 w-full">
             <SelectBaseUI
+              title="promo"
               optionData={promoOptions}
               optionValue={(value) =>
                 setFilterValue({ ...filterValue, promo: value })
+              }
+            />
+          </div>
+        </div>
+        {/* Top Menu */}
+        <div className="w-full h-fit flex flex-col gap-[5px]">
+          <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
+            Top Menu
+          </p>
+          <div className="pl-[30px] pt-2 w-full">
+            <SelectBaseUI
+              title="topMenu"
+              optionData={topMenuOptions}
+              optionValue={(value) =>
+                setFilterValue({ ...filterValue, topMenu: value })
               }
             />
           </div>
