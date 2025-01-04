@@ -3,6 +3,7 @@ import { CardMenu } from "../../ui/cardMenu";
 import { Pagination } from "../pagination";
 import { getCookie, setCookie } from "../../../utils/cookies/instance";
 import { filterStorage } from "../../../utils/zustand/filterMenu";
+import { searchMenuStorage } from "../../../utils/zustand/searchMenu";
 
 interface ListMenuProps {
   menuData: MenuData[];
@@ -17,6 +18,7 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
 
   const filterValue = filterStorage((state) => state.filter);
   const setFilterValue = filterStorage((state) => state.setFilter);
+  const searchMenuValue = searchMenuStorage((state) => state.search);
 
   useEffect(() => {
     const loadedFromCookies = JSON.parse(
@@ -29,6 +31,15 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
     setAllMenu(menuData);
     setShowMenu(allMenu);
   }, [menuData]);
+
+  useEffect(() => {
+    if (!searchMenuValue) return;
+    const filteredMenu = allMenu.filter((item) =>
+      item.name.includes(searchMenuValue)
+    );
+    setShowMenu(filteredMenu);
+    setCurrentPage(1);
+  }, [searchMenuValue]);
 
   useEffect(() => {
     // console.log(filterValue);

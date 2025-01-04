@@ -1,12 +1,19 @@
 import * as React from "react";
 import { useAutocomplete } from "@mui/base/useAutocomplete";
 import { styled } from "@mui/system";
+import { searchMenuStorage } from "../../../utils/zustand/searchMenu";
 
 interface AutoCompleteProps {
   menuData: string[];
 }
 export default function UseAutocomplete({ menuData }: AutoCompleteProps) {
   const [value, setValue] = React.useState<string | null>(null);
+
+  const setSearch = searchMenuStorage((state) => state.setSearch);
+
+  if (value) {
+    setSearch(value);
+  }
 
   const {
     getRootProps,
