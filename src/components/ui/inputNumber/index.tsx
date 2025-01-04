@@ -1,9 +1,24 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import { Box, styled } from "@mui/system";
 import { Input as BaseInput } from "@mui/base/Input";
 
-const Input = React.forwardRef(function CustomInput(props, ref) {
+interface InputProps {
+  slots?: {
+    input?: React.ElementType;
+    root?: React.ElementType;
+    textarea?: React.ElementType;
+  };
+  id: string;
+  type: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  startAdornment?: React.ReactNode;
+}
+
+const Input = React.forwardRef(function CustomInput(
+  props: InputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) {
   const { slots, ...other } = props;
   return (
     <BaseInput
@@ -18,15 +33,18 @@ const Input = React.forwardRef(function CustomInput(props, ref) {
   );
 });
 
-Input.propTypes = {
-  slots: PropTypes.shape({
-    input: PropTypes.elementType,
-    root: PropTypes.elementType,
-    textarea: PropTypes.elementType,
-  }),
-};
+// Input.propTypes = {
+//   slots: PropTypes.shape({
+//     input: PropTypes.elementType,
+//     root: PropTypes.elementType,
+//     textarea: PropTypes.elementType,
+//   }),
+// };
 
-export default function NumberInput() {
+interface NumberInputProps {
+  sendValue: (value: string) => void;
+}
+export default function NumberInput({ sendValue }: NumberInputProps) {
   const [values, setValues] = React.useState({
     amount: "",
   });
@@ -35,11 +53,12 @@ export default function NumberInput() {
     (prop: keyof typeof values) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
+      sendValue(event.target.value);
     };
 
-  React.useEffect(() => {
-    console.log(values);
-  }, [values]);
+  // React.useEffect(() => {
+  //   console.log(values);
+  // }, [values]);
 
   return (
     <Box
@@ -51,11 +70,11 @@ export default function NumberInput() {
       }}
     >
       <Input
-      // id="outlined-start-adornment"
-      // type="number"
-      // value={values.amount}
-      // onChange={handleChange("amount")}
-      // startAdornment={<InputAdornment>Rp</InputAdornment>}
+        id="outlined-start-adornment"
+        type="number"
+        value={values.amount}
+        onChange={handleChange("amount")}
+        startAdornment={<InputAdornment>Rp</InputAdornment>}
       />
     </Box>
   );

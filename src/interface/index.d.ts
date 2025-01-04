@@ -44,6 +44,7 @@ declare global {
     priceMax: number;
     rating: number | number[];
     promo: {};
+    apply: boolean;
   }
 }
 

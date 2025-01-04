@@ -16,6 +16,7 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
   const [showMenu, setShowMenu] = useState<MenuData[]>([]);
 
   const filterValue = filterStorage((state) => state.filter);
+  const setFilterValue = filterStorage((state) => state.setFilter);
 
   useEffect(() => {
     const loadedFromCookies = JSON.parse(
@@ -30,28 +31,52 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
   }, [menuData]);
 
   useEffect(() => {
-    if (
+    console.log(filterValue);
+    if (!filterValue.apply) return;
+    const categoryFilter =
       filterValue.category !== "all" &&
-      typeof filterValue.category === "string"
+      typeof filterValue.category === "string";
+    const priceMinFilter = filterValue.priceMin !== 0;
+    const priceMaxFilter = filterValue.priceMax !== 0;
+    const ratingFilter =
+      (Array.isArray(filterValue.rating) && filterValue.rating[0] !== 0) ||
+      (Array.isArray(filterValue.rating) && filterValue.rating[1] !== 0);
+    const promoFilter =
+      filterValue.promo !== "all" && typeof filterValue.promo === "string";
+
+    if (
+      categoryFilter ||
+      priceMinFilter ||
+      priceMaxFilter ||
+      ratingFilter ||
+      promoFilter
     ) {
-      console.log("masuk sini");
+      // const filteredMenu = allMenu.filter(
+      //   (item) =>
+      //     categoryFilter &&
+      //     item.category.slug === filterValue.category &&
+      //     priceMinFilter &&
+      //     item.price > filterValue.priceMin
+      // );
+      // console.log("masuk sini");
       const filteredMenu = allMenu.filter((item) => {
         return item.category.slug === filterValue.category;
       });
       if (filteredMenu.length > 0) {
         setShowMenu(filteredMenu);
         setCurrentPage(1);
-        console.log("filtered");
+        console.log({ filteredMenu });
         return;
       }
     }
+    setFilterValue({ ...filterValue, apply: false });
     setShowMenu(allMenu);
-  }, [filterValue, allMenu]);
+  }, [filterValue.apply]);
 
   useEffect(() => {
     setCookie("loadedListMenuImages", JSON.stringify([]), 1);
     setLoadedImages([]);
-  }, [currentPage, filterValue]);
+  }, [currentPage, filterValue.apply]);
 
   const totalPages = Math.ceil(showMenu?.length / itemsPerPage);
 

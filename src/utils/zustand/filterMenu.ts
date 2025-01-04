@@ -13,8 +13,9 @@ export const filterStorage = create<Set & Actions>((set) => ({
     category: {},
     priceMin: 0,
     priceMax: 0,
-    rating: [1.5, 3.7],
+    rating: [0, 0],
     promo: {},
+    apply: false,
   },
   setFilter: (filter) => set(() => ({ filter })),
 }));

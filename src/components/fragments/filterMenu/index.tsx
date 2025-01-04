@@ -18,14 +18,15 @@ export const FilterMenu = () => {
     category: {},
     priceMin: 0,
     priceMax: 0,
-    rating: [1.5, 3.7],
+    rating: [0, 0],
     promo: {},
+    apply: false,
   });
 
   const setFilterValue = filterStorage((state) => state.setFilter);
 
   useEffect(() => {
-    console.log(filter);
+    // console.log(filter);
     setFilterValue(filter);
   }, [filter]);
 
@@ -51,10 +52,6 @@ export const FilterMenu = () => {
     fetchCategory();
   }, []);
 
-  const handleSendFilter = (data: {}, type: string) => {
-    setFilter((prevState) => ({ ...prevState, [type]: data }));
-  };
-
   return (
     <div className="sticky top-10 w-full md:w-[30%] h-full min-h-screen bg-org">
       <div className="w-full flex flex-col gap-[30px] px-[30px] md:pl-[50px] xl:pl-[130px] md:pr-[50px] py-[50px]">
@@ -62,7 +59,10 @@ export const FilterMenu = () => {
           <p className="py-1 font-albertSans font-bold text-2xl md:text-3xl xl:text-[35px] text-drk">
             Filter
           </p>
-          <button className="px-[15px] py-1 bg-drk rounded-md font-poppins font-semibold text-2xl md:text-3xl xl:text-[20px] text-gry">
+          <button
+            onClick={() => setFilter({ ...filter, apply: true })}
+            className="px-[15px] py-1 bg-drk rounded-md font-poppins font-semibold text-2xl md:text-3xl xl:text-[20px] text-gry"
+          >
             Apply
           </button>
         </div>
@@ -75,7 +75,7 @@ export const FilterMenu = () => {
               optionData={category.map((data) => {
                 return { name: data.name, value: data.slug };
               })}
-              optionValue={(value) => handleSendFilter(value, "category")}
+              optionValue={(value) => setFilter({ ...filter, category: value })}
             />
           </div>
         </div>
@@ -89,13 +89,21 @@ export const FilterMenu = () => {
               Min
             </p>
             <div className="col-span-8">
-              <NumberInput />
+              <NumberInput
+                sendValue={(value) =>
+                  setFilter({ ...filter, priceMin: Number(value) })
+                }
+              />
             </div>
             <p className="col-span-4 font-poppins text-2xl md:text-3xl xl:text-[20px] text-drk">
               Max
             </p>
             <div className="col-span-8">
-              <NumberInput />
+              <NumberInput
+                sendValue={(value) =>
+                  setFilter({ ...filter, priceMax: Number(value) })
+                }
+              />
             </div>
           </div>
         </div>
@@ -133,7 +141,7 @@ export const FilterMenu = () => {
           <div className="pl-[30px] pt-2 w-full">
             <SelectBaseUI
               optionData={promoOptions}
-              optionValue={(value) => handleSendFilter(value, "promo")}
+              optionValue={(value) => setFilter({ ...filter, promo: value })}
             />
           </div>
         </div>
