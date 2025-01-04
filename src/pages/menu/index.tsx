@@ -4,6 +4,7 @@ import UseAutocomplete from "../../components/ui/searchMenu";
 import { FilterMenu } from "../../components/fragments/filterMenu";
 import { ListMenu } from "../../components/fragments/listMenu";
 import { productsData } from "../../utils/api";
+import BadgeComponent from "../../components/ui/badge";
 
 export const Menu = () => {
   const [menuData, setMenuData] = useState<MenuData[]>();
@@ -18,6 +19,8 @@ export const Menu = () => {
 
   return (
     <FramePage>
+      <BadgeComponent />
+
       <div className="relative w-full aspect-[2/1] md:aspect-[4/1]">
         <img
           src="https://apisyamresto.syamdev.my.id/storage/product-images/01JG30241PTGJEEP9KP62GCM4V.jpg"
