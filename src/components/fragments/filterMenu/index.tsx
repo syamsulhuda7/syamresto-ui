@@ -14,21 +14,9 @@ const promoOptions = [
 
 export const FilterMenu = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
-  const [filter, setFilter] = useState<FilterState>({
-    category: {},
-    priceMin: 0,
-    priceMax: 0,
-    rating: [0, 0],
-    promo: {},
-    apply: false,
-  });
 
   const setFilterValue = filterStorage((state) => state.setFilter);
-
-  useEffect(() => {
-    // console.log(filter);
-    setFilterValue(filter);
-  }, [filter]);
+  const filterValue = filterStorage((state) => state.filter);
 
   const setCategoryState = categoriesState((state) => state.setCategories);
   const categoryState = categoriesState((state) => state.categories);
@@ -60,7 +48,9 @@ export const FilterMenu = () => {
             Filter
           </p>
           <button
-            onClick={() => setFilter({ ...filter, apply: true })}
+            onClick={() => {
+              setFilterValue({ ...filterValue, apply: true });
+            }}
             className="px-[15px] py-1 bg-drk rounded-md font-poppins font-semibold text-2xl md:text-3xl xl:text-[20px] text-gry"
           >
             Apply
@@ -75,7 +65,9 @@ export const FilterMenu = () => {
               optionData={category.map((data) => {
                 return { name: data.name, value: data.slug };
               })}
-              optionValue={(value) => setFilter({ ...filter, category: value })}
+              optionValue={(value) =>
+                setFilterValue({ ...filterValue, category: value })
+              }
             />
           </div>
         </div>
@@ -91,7 +83,7 @@ export const FilterMenu = () => {
             <div className="col-span-8">
               <NumberInput
                 sendValue={(value) =>
-                  setFilter({ ...filter, priceMin: Number(value) })
+                  setFilterValue({ ...filterValue, priceMin: Number(value) })
                 }
               />
             </div>
@@ -101,7 +93,7 @@ export const FilterMenu = () => {
             <div className="col-span-8">
               <NumberInput
                 sendValue={(value) =>
-                  setFilter({ ...filter, priceMax: Number(value) })
+                  setFilterValue({ ...filterValue, priceMax: Number(value) })
                 }
               />
             </div>
@@ -114,22 +106,22 @@ export const FilterMenu = () => {
           </p>
           <div className="flex items-center justify-between gap-5 ml-[30px]">
             <p className="w-12 text-[#6B7A90] rounded-md border-[1px] border-slate-50 shadow-inner shadow-slate-500 aspect-square flex items-center justify-center bg-white col-span-2 font-poppins text-xs md:text-sm xl:text-base">
-              {Array.isArray(filter.rating) && filter.rating[0]}
+              {Array.isArray(filterValue.rating) && filterValue.rating[0]}
             </p>
             <div className="w-full mr-2 mt-1">
               <RangeSlider
                 sliderValue={(value) =>
-                  setFilter((prevState) => ({
-                    ...prevState,
+                  setFilterValue({
+                    ...filterValue,
                     rating: Array.isArray(value)
                       ? value.map((x) => x / 10)
                       : value,
-                  }))
+                  })
                 }
               />
             </div>
             <p className="w-12 text-[#6B7A90] rounded-md border-[1px] border-slate-50 shadow-inner shadow-slate-500 aspect-square flex items-center justify-center bg-white col-span-2 font-poppins text-xs md:text-sm xl:text-base">
-              {Array.isArray(filter.rating) && filter.rating[1]}
+              {Array.isArray(filterValue.rating) && filterValue.rating[1]}
             </p>
           </div>
         </div>
@@ -141,7 +133,9 @@ export const FilterMenu = () => {
           <div className="pl-[30px] pt-2 w-full">
             <SelectBaseUI
               optionData={promoOptions}
-              optionValue={(value) => setFilter({ ...filter, promo: value })}
+              optionValue={(value) =>
+                setFilterValue({ ...filterValue, promo: value })
+              }
             />
           </div>
         </div>

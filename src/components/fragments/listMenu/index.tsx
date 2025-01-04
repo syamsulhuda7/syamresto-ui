@@ -31,47 +31,58 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
   }, [menuData]);
 
   useEffect(() => {
-    console.log(filterValue);
+    // console.log(filterValue);
     if (!filterValue.apply) return;
     const categoryFilter =
       filterValue.category !== "all" &&
       typeof filterValue.category === "string";
     const priceMinFilter = filterValue.priceMin !== 0;
     const priceMaxFilter = filterValue.priceMax !== 0;
-    const ratingFilter =
-      (Array.isArray(filterValue.rating) && filterValue.rating[0] !== 0) ||
-      (Array.isArray(filterValue.rating) && filterValue.rating[1] !== 0);
-    const promoFilter =
-      filterValue.promo !== "all" && typeof filterValue.promo === "string";
+    // const ratingFilter =
+    //   (Array.isArray(filterValue.rating) && filterValue.rating[0] !== 0) ||
+    //   (Array.isArray(filterValue.rating) && filterValue.rating[1] !== 0);
+    // const promoFilter =
+    //   filterValue.promo !== "all" && typeof filterValue.promo === "string";
 
     if (
       categoryFilter ||
       priceMinFilter ||
-      priceMaxFilter ||
-      ratingFilter ||
-      promoFilter
+      priceMaxFilter
+      // || ratingFilter ||
+      // promoFilter
     ) {
-      // const filteredMenu = allMenu.filter(
-      //   (item) =>
-      //     categoryFilter &&
-      //     item.category.slug === filterValue.category &&
-      //     priceMinFilter &&
-      //     item.price > filterValue.priceMin
-      // );
-      // console.log("masuk sini");
       const filteredMenu = allMenu.filter((item) => {
-        return item.category.slug === filterValue.category;
+        const categoryMatch = categoryFilter
+          ? item.category.slug === filterValue.category
+          : true;
+        const priceMinMatch = priceMinFilter
+          ? item.price > filterValue.priceMin
+          : true;
+        const priceMaxMatch = priceMaxFilter
+          ? item.price < filterValue.priceMax
+          : true;
+        // const ratingMatch = ratingFilter
+        //   ? item.rating >= filterValue.rating[0] && item.rating <= filterValue.rating[1]
+        //   : true;
+        // const promoMatch = promoFilter ? item.promo === filterValue.promo : true;
+        return categoryMatch && priceMinMatch && priceMaxMatch;
       });
       if (filteredMenu.length > 0) {
         setShowMenu(filteredMenu);
         setCurrentPage(1);
-        console.log({ filteredMenu });
+        setFilterValue({ ...filterValue, apply: false });
+        return;
+      } else {
+        setShowMenu([]);
+        setCurrentPage(1);
+        setFilterValue({ ...filterValue, apply: false });
         return;
       }
     }
     setFilterValue({ ...filterValue, apply: false });
     setShowMenu(allMenu);
-  }, [filterValue.apply]);
+    setCurrentPage(1);
+  }, [filterValue, allMenu, setFilterValue]);
 
   useEffect(() => {
     setCookie("loadedListMenuImages", JSON.stringify([]), 1);
@@ -114,18 +125,25 @@ export const ListMenu = ({ menuData }: ListMenuProps) => {
         </div>
         {/* MENU */}
         <div className="pt-[30px] pb-[50px] flex flex-wrap gap-10 justify-center">
+          {showMenu?.length === 0 && (
+            <p className="text-center font-albertSans font-bold text-2xl md:text-3xl xl:text-[35px] text-org">
+              Menu Not Found
+            </p>
+          )}
           <CardMenu
             menuData={currentItems || []}
             handleImageLoad={handleImageLoad}
             loadedImages={loadedImages}
           />
         </div>
-        <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalPages={totalPages}
-          onTop={onTop}
-        />
+        {showMenu?.length !== 0 && (
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPages={totalPages}
+            onTop={onTop}
+          />
+        )}
       </div>
     </div>
   );
