@@ -7,7 +7,7 @@ import { searchMenuStorage } from "../../../utils/zustand/searchMenu";
 import { menuDataStorage } from "../../../utils/zustand/menuData";
 
 export const ListMenu = () => {
-  const itemsPerPage = 10;
+  const itemsPerPage = 15;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
   const [allMenu, setAllMenu] = useState<MenuData[]>([]);
@@ -66,10 +66,10 @@ export const ListMenu = () => {
           ? item.category.slug === filterValue.category
           : true;
         const priceMinMatch = priceMinFilter
-          ? item.price > filterValue.priceMin
+          ? item.price >= filterValue.priceMin
           : true;
         const priceMaxMatch = priceMaxFilter
-          ? item.price < filterValue.priceMax
+          ? item.price <= filterValue.priceMax
           : true;
         // const ratingMatch = ratingFilter
         //   ? item.rating >= filterValue.rating[0] && item.rating <= filterValue.rating[1]
@@ -136,7 +136,7 @@ export const ListMenu = () => {
           </p>
         </div>
         {/* MENU */}
-        <div className="pt-[30px] pb-[50px] flex flex-wrap gap-10 justify-center">
+        <div className="pt-[30px] pb-[50px] flex flex-wrap gap-5 md:gap-7 xl:gap-10 justify-center">
           {showMenu?.length === 0 && (
             <p className="text-center font-albertSans font-bold text-2xl md:text-3xl xl:text-[35px] text-org">
               Menu Not Found

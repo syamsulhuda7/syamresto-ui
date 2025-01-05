@@ -119,3 +119,7 @@ img.loaded {
   width: 100%;
   height: auto;
 }
+
+.scroll-none {
+  scrollbar-width: none;
+}

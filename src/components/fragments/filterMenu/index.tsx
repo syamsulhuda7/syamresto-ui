@@ -42,26 +42,26 @@ export const FilterMenu = () => {
   }, []);
 
   return (
-    <div className="sticky top-10 w-full md:w-[30%] h-full min-h-screen bg-org">
-      <div className="w-full flex flex-col gap-[30px] px-[30px] md:pl-[50px] xl:pl-[130px] md:pr-[50px] py-[50px]">
+    <div className="w-full md:w-[30%] h-full bg-org">
+      <div className="w-full h-full flex flex-col gap-[30px] px-[30px] md:pl-[50px] xl:pl-[130px] md:pr-[50px] py-[50px]">
         <div className="w-full h-fit flex justify-between border-b border-drk pb-[15px]">
-          <p className="py-1 font-albertSans font-bold text-2xl md:text-3xl xl:text-[35px] text-drk">
+          <p className="py-1 font-albertSans font-bold text-2xl xl:text-[35px] text-drk">
             Filter
           </p>
           <button
             onClick={() => {
               setFilterValue({ ...filterValue, apply: true });
             }}
-            className="px-[15px] py-1 bg-drk rounded-md font-poppins font-semibold text-[16px] md:text-[18px] xl:text-[20px] text-white"
+            className="px-[15px] md:px-3 xl:px-4 py-1 bg-drk rounded-md font-poppins font-semibold text-[16px] xl:text-[20px] text-white"
           >
             Apply
           </button>
         </div>
         <div className="w-full h-fit">
-          <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
+          <p className="font-poppins font-semibold text-2xl xl:text-[26px] text-drk">
             Category
           </p>
-          <div className="pl-[30px] pt-2 w-full">
+          <div className="pl-[30px] md:pl-[10px] xl:pl-[30px] pt-2 w-full">
             <SelectBaseUI
               title="category"
               optionData={category.map((data) => {
@@ -75,38 +75,42 @@ export const FilterMenu = () => {
         </div>
         {/* Price */}
         <div className="w-full h-fit flex flex-col gap-[5px]">
-          <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
+          <p className="font-poppins font-semibold text-2xl xl:text-[26px] text-drk">
             Price
           </p>
-          <div className="grid grid-cols-12 gap-2 ml-[30px]">
-            <p className="col-span-4 font-poppins text-2xl md:text-3xl xl:text-[20px] text-drk">
+          <div className="grid grid-cols-12 md:flex md:flex-col xl:grid xl:grid-cols-12 gap-2 ml-[30px] md:ml-[10px] xl:ml-[30px]">
+            <p className="col-span-4 font-poppins text-2xl md:text-xl xl:text-[20px] text-drk">
               Min
             </p>
             <div className="col-span-8">
               <NumberInput
+                label={{ title: "Rp", position: "left" }}
                 sendValue={(value) =>
                   setFilterValue({ ...filterValue, priceMin: Number(value) })
                 }
+                defaultVal={0}
               />
             </div>
-            <p className="col-span-4 font-poppins text-2xl md:text-3xl xl:text-[20px] text-drk">
+            <p className="col-span-4 font-poppins text-2xl md:text-xl xl:text-[20px] text-drk">
               Max
             </p>
             <div className="col-span-8">
               <NumberInput
+                label={{ title: "Rp", position: "left" }}
                 sendValue={(value) =>
                   setFilterValue({ ...filterValue, priceMax: Number(value) })
                 }
+                defaultVal={0}
               />
             </div>
           </div>
         </div>
         {/* rating */}
         <div className="w-full h-fit flex flex-col gap-[5px]">
-          <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
+          <p className="font-poppins font-semibold text-2xl xl:text-[26px] text-drk">
             Rating
           </p>
-          <div className="flex items-center justify-between gap-5 ml-[30px]">
+          <div className="flex items-center justify-between gap-5 ml-[30px] md:ml-[10px] xl:ml-[30px]">
             <p className="w-12 text-[#6B7A90] rounded-md border-[1px] border-slate-50 shadow-inner shadow-slate-500 aspect-square flex items-center justify-center bg-white col-span-2 font-poppins text-xs md:text-sm xl:text-base">
               {Array.isArray(filterValue.rating) && filterValue.rating[0]}
             </p>
@@ -129,10 +133,10 @@ export const FilterMenu = () => {
         </div>
         {/* Promo */}
         <div className="w-full h-fit flex flex-col gap-[5px]">
-          <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
+          <p className="font-poppins font-semibold text-2xl xl:text-[26px] text-drk">
             Promo
           </p>
-          <div className="pl-[30px] pt-2 w-full">
+          <div className="pl-[30px] md:pl-[10px] xl:pl-[30px] pt-2 w-full">
             <SelectBaseUI
               title="promo"
               optionData={promoOptions}
@@ -144,10 +148,10 @@ export const FilterMenu = () => {
         </div>
         {/* Top Menu */}
         <div className="w-full h-fit flex flex-col gap-[5px]">
-          <p className="font-poppins font-semibold text-2xl md:text-3xl xl:text-[26px] text-drk">
+          <p className="font-poppins font-semibold text-2xl xl:text-[26px] text-drk">
             Top Menu
           </p>
-          <div className="pl-[30px] pt-2 w-full">
+          <div className="pl-[30px] md:pl-[10px] xl:pl-[30px] pt-2 w-full">
             <SelectBaseUI
               title="topMenu"
               optionData={topMenuOptions}

@@ -10,7 +10,7 @@ interface InputProps {
   };
   id: string;
   type: string;
-  value: string;
+  value: number;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   startAdornment?: React.ReactNode;
 }
@@ -42,18 +42,31 @@ const Input = React.forwardRef(function CustomInput(
 // };
 
 interface NumberInputProps {
-  sendValue: (value: string) => void;
+  sendValue: (value: number) => void;
+  defaultVal: number;
+  label: {
+    title: string;
+    position: string;
+  };
 }
-export default function NumberInput({ sendValue }: NumberInputProps) {
-  const [values, setValues] = React.useState({
-    amount: "",
+
+interface ValuesType {
+  amount: number;
+}
+export default function NumberInput({
+  defaultVal,
+  sendValue,
+  label,
+}: NumberInputProps) {
+  const [values, setValues] = React.useState<ValuesType>({
+    amount: defaultVal,
   });
 
   const handleChange =
     (prop: keyof typeof values) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
-      sendValue(event.target.value);
+      setValues({ ...values, [prop]: Number(event.target.value) });
+      sendValue(Number(event.target.value));
     };
 
   // React.useEffect(() => {
@@ -72,9 +85,10 @@ export default function NumberInput({ sendValue }: NumberInputProps) {
       <Input
         id="outlined-start-adornment"
         type="number"
+        // defaultValue={default}
         value={values.amount}
         onChange={handleChange("amount")}
-        startAdornment={<InputAdornment>Rp</InputAdornment>}
+        startAdornment={<InputAdornment>{label.title}</InputAdornment>}
       />
     </Box>
   );
@@ -99,6 +113,7 @@ const InputRoot = styled("div")(
   font-weight: 400;
   border-radius: 8px;
   width: 100%;
+  height: auto;
   color: #9DA8B7;
   background: #fff;
   border: 1px solid #f1f1f1;
@@ -130,13 +145,14 @@ const InputElement = styled("input")(
   color: ${grey[600]};
   border: none;
   border-radius: inherit;
-  padding: 8px 12px;
+  padding: 4px 8px;
   outline: 0;
 `
 );
 
 const InputAdornment = styled("div")`
   margin: 8px;
+  font-size: 14px;
   font-family: inherit;
   display: inline-flex;
   align-items: center;

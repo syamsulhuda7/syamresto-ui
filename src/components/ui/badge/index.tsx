@@ -2,6 +2,7 @@ import * as React from "react";
 import clsx from "clsx";
 import { Badge as BaseBadge, BadgeProps } from "@mui/base/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { cartItemsStorage } from "../../../utils/zustand/cartItems";
 
 export default function BadgeComponent() {
   const [position, setPosition] = React.useState({ x: 30, y: 100 }); // Default posisi dengan jarak 30px
@@ -89,6 +90,8 @@ export default function BadgeComponent() {
     };
   }, [isDragging]);
 
+  const cartItemsValue = cartItemsStorage((state) => state.cartItems);
+
   return (
     <div>
       <div
@@ -111,20 +114,19 @@ export default function BadgeComponent() {
 
       {isPopupVisible && (
         <div
+          className="fixed z-[101] w-[200px] h-fit min-h-20 max-h-[400px] overflow-auto scroll-none p-3 bg-white rounded-md shadow-md flex flex-col items-start justify-start"
           style={{
-            position: "fixed", // Popup dengan posisi fixed
             top: popupPosition.y,
             left: popupPosition.x,
-            zIndex: 101, // Popup harus lebih tinggi dari badge
-            width: "200px",
-            height: "150px",
-            backgroundColor: "white",
-            borderRadius: "8px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-            padding: "10px",
           }}
         >
-          <p>Popup Content</p>
+          {cartItemsValue.map((item) => (
+            <div key={item.id}>
+              <p>
+                {item.name} ({item.quantity})
+              </p>
+            </div>
+          ))}
         </div>
       )}
     </div>

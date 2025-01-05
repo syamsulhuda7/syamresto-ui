@@ -20,7 +20,6 @@ export const Menu = () => {
   return (
     <FramePage>
       <BadgeComponent />
-
       <div className="relative w-full aspect-[2/1] md:aspect-[4/1]">
         <img
           src="https://apisyamresto.syamdev.my.id/storage/product-images/01JG30241PTGJEEP9KP62GCM4V.jpg"
@@ -34,7 +33,7 @@ export const Menu = () => {
         </div>
         <span id="view-target" className="absolute bottom-10" />
       </div>
-      <div className="w-full h-full flex flex-col md:flex-row items-start justify-center">
+      <div className="w-full h-fit bg-org flex flex-col md:flex-row items-start justify-center">
         <FilterMenu />
         <ListMenu />
       </div>
