@@ -12,13 +12,23 @@ export default function BadgeComponent() {
   const [popupPosition, setPopupPosition] = React.useState({ x: 0, y: 0 }); // Posisi popup
   const margin = 15; // Jarak margin untuk badge
   const popupMargin = 20; // Margin tambahan untuk popup dari sisi layar
+  const cartItemsValue = cartItemsStorage((state) => state.cartItems);
 
+  // Fungsi untuk memulai drag (Mouse)
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
-    setDragStart({ x: e.clientX, y: e.clientY }); // Catat posisi awal drag
+    setDragStart({ x: e.clientX, y: e.clientY });
     document.body.style.userSelect = "none"; // Nonaktifkan seleksi teks
   };
 
+  // Fungsi untuk memulai drag (Touch)
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const touch = e.touches[0];
+    setIsDragging(true);
+    setDragStart({ x: touch.clientX, y: touch.clientY });
+  };
+
+  // Fungsi untuk memindahkan posisi (Mouse)
   const handleMouseMove = (e: MouseEvent) => {
     if (isDragging) {
       setPosition((prev) => ({
@@ -29,10 +39,35 @@ export default function BadgeComponent() {
     }
   };
 
+  // Fungsi untuk memindahkan posisi (Touch)
+  const handleTouchMove = (e: TouchEvent) => {
+    if (isDragging) {
+      const touch = e.touches[0];
+      setPosition((prev) => ({
+        x: prev.x + (touch.clientX - dragStart.x),
+        y: prev.y + (touch.clientY - dragStart.y),
+      }));
+      setDragStart({ x: touch.clientX, y: touch.clientY });
+      setIsPopupVisible(false); // Tutup popup saat badge digeser
+    }
+  };
+
+  // Fungsi untuk menyelesaikan drag (Mouse)
   const handleMouseUp = (e: MouseEvent) => {
+    finishDrag(e.clientX, e.clientY);
+  };
+
+  // Fungsi untuk menyelesaikan drag (Touch)
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    document.body.style.userSelect = ""; // Aktifkan kembali seleksi teks
+  };
+
+  // Logika menyelesaikan drag
+  const finishDrag = (clientX: number, clientY: number) => {
     const dragDistance = Math.hypot(
-      e.clientX - dragStart.x,
-      e.clientY - dragStart.y
+      clientX - dragStart.x,
+      clientY - dragStart.y
     );
 
     setIsDragging(false);
@@ -80,32 +115,37 @@ export default function BadgeComponent() {
     if (isDragging) {
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("touchmove", handleTouchMove);
+      window.addEventListener("touchend", handleTouchEnd);
     } else {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
     }
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [isDragging]);
-
-  const cartItemsValue = cartItemsStorage((state) => state.cartItems);
 
   return (
     <div>
       <div
         style={{
-          position: "fixed", // Ubah menjadi fixed
+          position: "fixed",
           top: position.y,
           left: position.x,
-          zIndex: 100, // Z-index tertinggi
+          zIndex: 100,
           cursor: isDragging ? "grabbing" : "grab",
-          transition: isDragging ? "none" : "all 0.2s ease", // Animasi saat menempel
+          transition: isDragging ? "none" : "all 0.2s ease",
         }}
         onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart} // Tambahkan event touch
       >
-        <Badge badgeContent={5}>
+        <Badge badgeContent={cartItemsValue.length}>
           <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-org shadow-sm shadow-black/50">
             <ShoppingCartIcon className="text-drk" />
           </div>
@@ -114,12 +154,19 @@ export default function BadgeComponent() {
 
       {isPopupVisible && (
         <div
-          className="fixed z-[101] w-[200px] h-fit min-h-20 max-h-[400px] overflow-auto scroll-none p-3 bg-white rounded-md shadow-md flex flex-col items-start justify-start"
+          className="fixed z-[101] w-[200px] h-[150px] overflow-auto scroll-none p-3 bg-white rounded-md shadow-md flex flex-col items-start justify-start"
           style={{
             top: popupPosition.y,
             left: popupPosition.x,
           }}
         >
+          {cartItemsValue.length === 0 && (
+            <div className="w-full h-full flex items-center justify-center">
+              <p className="text-center font-semibold text-org">
+                No items in cart
+              </p>
+            </div>
+          )}
           {cartItemsValue.map((item) => (
             <div key={item.id}>
               <p>

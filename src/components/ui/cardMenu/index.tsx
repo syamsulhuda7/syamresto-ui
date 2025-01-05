@@ -14,7 +14,7 @@ export const CardMenu = ({
   handleImageLoad,
   loadedImages,
 }: CardMenuProps) => {
-  // const cartItemsValue = cartItemsStorage((state) => state.cartItems);
+  // const cartItemsValue = cartItemsStorage((state) => state.cartItems);gi
   const addCartItems = cartItemsStorage((state) => state.addCartItems);
 
   const handleAddToCart = (item: MenuData) => {
