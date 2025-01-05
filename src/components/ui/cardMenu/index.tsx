@@ -1,7 +1,6 @@
 import StarIcon from "@mui/icons-material/Star";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Modal from "../../fragments/modal";
-import { getCookie } from "../../../utils/cookies/instance";
 import { cartItemsStorage } from "../../../utils/zustand/cartItems";
 
 interface CardMenuProps {

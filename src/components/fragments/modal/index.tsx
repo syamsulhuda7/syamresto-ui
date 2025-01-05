@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import NumberInput from "../../ui/inputNumber";
 
@@ -11,6 +11,10 @@ export default function Modal({ item }: ModalProps) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    console.log(countItem);
+  }, []);
 
   return (
     <div>

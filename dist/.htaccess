@@ -1,2 +1,7 @@
-RewriteEngine On RewriteBase / RewriteCond %{REQUEST_FILENAME} !-f RewriteCond
-%{REQUEST_FILENAME} !-d RewriteRule ^ index.html [QSA,L]
+# Mengaktifkan URL rewriting
+RewriteEngine On
+
+# Mengarahkan semua permintaan ke index.html kecuali file atau direktori yang ada
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
