@@ -43,18 +43,24 @@ export default function BadgeComponent() {
       const deltaX = touch.clientX - dragStart.x;
       const deltaY = touch.clientY - dragStart.y;
 
+      // Perbarui posisi iklan berdasarkan posisi jari
       setPosition((prev) => {
         const newX = prev.x + deltaX;
         const newY = prev.y + deltaY;
         setDragStart({ x: touch.clientX, y: touch.clientY });
 
-        // Menjaga agar posisi tetap berada dalam batas layar
-        return {
-          x: Math.max(margin, Math.min(newX, window.innerWidth - 50 - margin)),
-          y: Math.max(margin, Math.min(newY, window.innerHeight - 50 - margin)),
-        };
+        // Pastikan posisi iklan tidak keluar dari layar
+        const newPositionX = Math.max(
+          margin,
+          Math.min(newX, window.innerWidth - 50 - margin)
+        );
+        const newPositionY = Math.max(
+          margin,
+          Math.min(newY, window.innerHeight - 50 - margin)
+        );
+
+        return { x: newPositionX, y: newPositionY };
       });
-      setIsPopupVisible(false);
     }
   };
 
@@ -63,8 +69,7 @@ export default function BadgeComponent() {
   };
 
   const handleTouchEnd = () => {
-    setIsDragging(false);
-    document.body.style.userSelect = "";
+    finishDrag(0, 0); // Akan dihitung berdasarkan posisi touch akhir
   };
 
   const finishDrag = (clientX: number, clientY: number) => {
@@ -72,11 +77,6 @@ export default function BadgeComponent() {
       clientX - dragStart.x,
       clientY - dragStart.y
     );
-
-    setIsDragging(false);
-    document.body.style.userSelect = "";
-
-    // Menentukan apakah harus menempel di sisi tertentu (kiri, kanan, atas, bawah)
     if (dragDistance < 5) {
       setIsPopupVisible(!isPopupVisible);
       setPopupPosition({
@@ -85,20 +85,21 @@ export default function BadgeComponent() {
       });
     }
 
+    // Tentukan sisi terdekat dan tempelkan iklan ke sisi itu
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    // Menempelkan icon ke sisi kiri, kanan, atas, atau bawah
     setPosition((prev) => {
       const closestHorizontal =
         prev.x < viewportWidth / 2 ? margin : viewportWidth - 50 - margin;
       const closestVertical =
         prev.y < viewportHeight / 2 ? margin : viewportHeight - 50 - margin;
 
+      // Tentukan posisi berdasarkan jarak terdekat ke tepi layar
       const distanceToHorizontal = Math.min(prev.x, viewportWidth - prev.x);
       const distanceToVertical = Math.min(prev.y, viewportHeight - prev.y);
 
-      // Tentukan posisi berdasarkan jarak terdekat
+      // Jika jarak horizontal lebih kecil, tempelkan iklan di sisi kiri atau kanan
       if (distanceToHorizontal < distanceToVertical) {
         return {
           x: closestHorizontal,
@@ -111,6 +112,9 @@ export default function BadgeComponent() {
         };
       }
     });
+
+    setIsDragging(false);
+    document.body.style.userSelect = "";
   };
 
   React.useEffect(() => {
