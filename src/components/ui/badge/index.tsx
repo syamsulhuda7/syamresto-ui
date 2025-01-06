@@ -49,7 +49,7 @@ export default function BadgeComponent() {
       setPosition((prev) => {
         const newX = (prev.x + deltaX) / 2;
         const newY = (prev.y + deltaY) / 2;
-        setDragStart({ x: touch.clientX * 2, y: touch.clientY * 2 });
+        setDragStart({ x: touch.clientX / 2, y: touch.clientY / 2 });
 
         // Pastikan posisi iklan tidak keluar dari layar
         const newPositionX = Math.max(
