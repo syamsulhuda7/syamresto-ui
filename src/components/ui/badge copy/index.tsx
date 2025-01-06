@@ -54,18 +54,18 @@ export default function BadgeComponentCopy({
   const handleTouchMove = (e: TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
-      const deltaX = touch.clientX / 8 - dragStart.x / 8;
-      const deltaY = touch.clientY / 8 - dragStart.y / 8;
+      const deltaX = touch.clientX / 2 - dragStart.x / 2;
+      const deltaY = touch.clientY / 2 - dragStart.y / 2;
 
       e.preventDefault();
 
       // Perbarui posisi badge dengan cara mengambil rata-rata antara posisi sebelumnya dan delta pergerakan
       setPosition((prev) => {
-        const newX = prev.x + deltaX; // Ambil rata-rata antara posisi sebelumnya dan delta
-        const newY = prev.y + deltaY; // Ambil rata-rata antara posisi sebelumnya dan delta
-        setDragStart({ x: touch.clientX / 8, y: touch.clientY / 8 });
+        const newX = prev.x / 2 + deltaX; // Ambil rata-rata antara posisi sebelumnya dan delta
+        const newY = prev.y / 2 + deltaY; // Ambil rata-rata antara posisi sebelumnya dan delta
+        setDragStart({ x: touch.clientX / 2, y: touch.clientY / 2 });
 
-        dragValue({ x: touch.clientX / 8, y: touch.clientY / 8 });
+        dragValue({ x: touch.clientX / 2, y: touch.clientY / 2 });
 
         // Pastikan posisi badge tidak keluar dari layar
         const newPositionX = Math.max(
@@ -77,9 +77,9 @@ export default function BadgeComponentCopy({
           Math.min(newY, window.innerHeight - 50 - margin)
         );
 
-        positionValue({ x: newPositionX, y: newPositionY });
+        positionValue({ x: newPositionX / 2, y: newPositionY / 2 });
 
-        return { x: newPositionX, y: newPositionY };
+        return { x: newPositionX / 2, y: newPositionY / 2 };
       });
     }
   };
