@@ -43,13 +43,12 @@ export default function BadgeComponent() {
       const deltaX = touch.clientX - dragStart.x;
       const deltaY = touch.clientY - dragStart.y;
 
-      // e.preventDefault();
+      e.preventDefault();
 
       // Perbarui posisi iklan berdasarkan posisi jari
       setPosition((prev) => {
         const newX = (prev.x + deltaX) / 2;
         const newY = (prev.y + deltaY) / 2;
-        setDragStart({ x: touch.clientX, y: touch.clientY });
 
         // Pastikan posisi iklan tidak keluar dari layar
         const newPositionX = Math.max(
@@ -61,6 +60,7 @@ export default function BadgeComponent() {
           Math.min(newY, window.innerHeight - 50 - margin)
         );
 
+        setDragStart({ x: newPositionX, y: newPositionY });
         return { x: newPositionX, y: newPositionY };
       });
     }
