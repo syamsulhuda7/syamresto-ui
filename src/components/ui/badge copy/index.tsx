@@ -54,8 +54,8 @@ export default function BadgeComponentCopy({
   const handleTouchMove = (e: TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
-      const deltaX = touch.clientX / 2 - dragStart.x / 2;
-      const deltaY = touch.clientY / 2 - dragStart.y / 2;
+      const deltaX = touch.clientX / 8 - dragStart.x / 8;
+      const deltaY = touch.clientY / 8 - dragStart.y / 8;
 
       e.preventDefault();
 
@@ -63,9 +63,9 @@ export default function BadgeComponentCopy({
       setPosition((prev) => {
         const newX = prev.x + deltaX; // Ambil rata-rata antara posisi sebelumnya dan delta
         const newY = prev.y + deltaY; // Ambil rata-rata antara posisi sebelumnya dan delta
-        setDragStart({ x: touch.clientX / 2, y: touch.clientY / 2 });
+        setDragStart({ x: touch.clientX / 8, y: touch.clientY / 8 });
 
-        dragValue({ x: touch.clientX / 2, y: touch.clientY / 2 });
+        dragValue({ x: touch.clientX / 8, y: touch.clientY / 8 });
 
         // Pastikan posisi badge tidak keluar dari layar
         const newPositionX = Math.max(
