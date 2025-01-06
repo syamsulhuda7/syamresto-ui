@@ -59,14 +59,15 @@ export default function BadgeComponentCopy({
 
       e.preventDefault();
 
-      // Perbarui posisi iklan berdasarkan posisi jari
+      // Perbarui posisi badge dengan cara mengambil rata-rata antara posisi sebelumnya dan delta pergerakan
       setPosition((prev) => {
-        const newX = (prev.x + deltaX) / 2;
-        const newY = (prev.y + deltaY) / 2;
+        const newX = (prev.x + deltaX) / 2; // Ambil rata-rata antara posisi sebelumnya dan delta
+        const newY = (prev.y + deltaY) / 2; // Ambil rata-rata antara posisi sebelumnya dan delta
         setDragStart({ x: touch.clientX, y: touch.clientY });
+
         dragValue({ x: touch.clientX, y: touch.clientY });
-        console.log(touch.clientX, touch.clientY);
-        // Pastikan posisi iklan tidak keluar dari layar
+
+        // Pastikan posisi badge tidak keluar dari layar
         const newPositionX = Math.max(
           margin,
           Math.min(newX, window.innerWidth - 50 - margin)
@@ -76,8 +77,8 @@ export default function BadgeComponentCopy({
           Math.min(newY, window.innerHeight - 50 - margin)
         );
 
-        console.log({ newPositionX, newPositionY });
         positionValue({ x: newPositionX, y: newPositionY });
+
         return { x: newPositionX, y: newPositionY };
       });
     }
@@ -104,7 +105,7 @@ export default function BadgeComponentCopy({
       });
     }
 
-    // Tentukan sisi terdekat dan tempelkan iklan ke sisi itu
+    // Tentukan sisi terdekat dan tempelkan badge ke sisi itu
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
@@ -118,7 +119,7 @@ export default function BadgeComponentCopy({
       const distanceToHorizontal = Math.min(prev.x, viewportWidth - prev.x);
       const distanceToVertical = Math.min(prev.y, viewportHeight - prev.y);
 
-      // Jika jarak horizontal lebih kecil, tempelkan iklan di sisi kiri atau kanan
+      // Jika jarak horizontal lebih kecil, tempelkan badge di sisi kiri atau kanan
       if (distanceToHorizontal < distanceToVertical) {
         return {
           x: closestHorizontal,
