@@ -47,9 +47,9 @@ export default function BadgeComponent() {
 
       // Perbarui posisi iklan berdasarkan posisi jari
       setPosition((prev) => {
-        const newX = prev.x + deltaX;
-        const newY = prev.y + deltaY;
-        setDragStart({ x: touch.clientX, y: touch.clientY });
+        const newX = (prev.x + deltaX) / 2;
+        const newY = (prev.y + deltaY) / 2;
+        setDragStart({ x: touch.clientX + deltaX, y: touch.clientY + deltaY });
 
         // Pastikan posisi iklan tidak keluar dari layar
         const newPositionX = Math.max(
