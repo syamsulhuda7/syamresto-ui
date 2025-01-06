@@ -40,15 +40,15 @@ export default function BadgeComponent() {
   const handleTouchMove = (e: TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
-      const deltaX = (touch.clientX - dragStart.x) * 2;
-      const deltaY = (touch.clientY - dragStart.y) * 2;
+      const deltaX = touch.clientX - dragStart.x;
+      const deltaY = touch.clientY - dragStart.y;
 
       e.preventDefault();
 
       // Perbarui posisi iklan berdasarkan posisi jari
       setPosition((prev) => {
-        const newX = prev.x + deltaX;
-        const newY = prev.y + deltaY;
+        const newX = (prev.x + deltaX) / 2;
+        const newY = (prev.y + deltaY) / 2;
         setDragStart({ x: touch.clientX, y: touch.clientY });
 
         // Pastikan posisi iklan tidak keluar dari layar
