@@ -1,10 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from "react";
 import clsx from "clsx";
 import { Badge as BaseBadge, BadgeProps } from "@mui/base/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { cartItemsStorage } from "../../../utils/zustand/cartItems";
 
-export default function BadgeComponent() {
+// interface BadgeComponentProps {
+//   positionValue: { x: number; y: number };
+//   dragValue: { x: number; y: number };
+// }
+
+interface BadgeComponentProps {
+  positionValue: (value: { x: number; y: number }) => void;
+  dragValue: (value: { x: number; y: number }) => void;
+}
+
+export default function BadgeComponent({
+  positionValue,
+  dragValue,
+}: BadgeComponentProps) {
   const [position, setPosition] = React.useState({ x: 30, y: 100 });
   const [isDragging, setIsDragging] = React.useState(false);
   const [dragStart, setDragStart] = React.useState({ x: 0, y: 0 });
@@ -40,17 +54,18 @@ export default function BadgeComponent() {
   const handleTouchMove = (e: TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
-      const deltaX = touch.clientX / 2 - dragStart.x / 2;
-      const deltaY = touch.clientY / 2 - dragStart.y / 2;
+      const deltaX = touch.clientX - dragStart.x;
+      const deltaY = touch.clientY - dragStart.y;
 
       e.preventDefault();
 
       // Perbarui posisi iklan berdasarkan posisi jari
       setPosition((prev) => {
-        const newX = prev.x / 2 + deltaX;
-        const newY = prev.y / 2 + deltaY;
-        setDragStart({ x: touch.clientX / 2, y: touch.clientY / 2 });
-
+        const newX = prev.x + deltaX;
+        const newY = prev.y + deltaY;
+        setDragStart({ x: touch.clientX, y: touch.clientY });
+        dragValue({ x: touch.clientX, y: touch.clientY });
+        console.log(touch.clientX, touch.clientY);
         // Pastikan posisi iklan tidak keluar dari layar
         const newPositionX = Math.max(
           margin,
@@ -61,6 +76,8 @@ export default function BadgeComponent() {
           Math.min(newY, window.innerHeight - 50 - margin)
         );
 
+        console.log({ newPositionX, newPositionY });
+        positionValue({ x: newPositionX, y: newPositionY });
         return { x: newPositionX, y: newPositionY };
       });
     }

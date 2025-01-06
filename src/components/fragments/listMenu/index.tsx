@@ -40,8 +40,8 @@ export const ListMenu = () => {
   }, [searchMenuValue]);
 
   useEffect(() => {
-    console.log({ allMenu, showMenu, menuDataValue });
-    console.log(filterValue);
+    // console.log({ allMenu, showMenu, menuDataValue });
+    // console.log(filterValue);
     if (!filterValue.apply) return;
     const categoryFilter =
       filterValue.category !== "all" &&
@@ -78,13 +78,13 @@ export const ListMenu = () => {
         return categoryMatch && priceMinMatch && priceMaxMatch;
       });
       if (filteredMenu.length > 0) {
-        console.log(filteredMenu);
+        // console.log(filteredMenu);
         setShowMenu(filteredMenu);
         setCurrentPage(1);
         setFilterValue({ ...filterValue, apply: false });
         return;
       } else {
-        console.log(filteredMenu);
+        // console.log(filteredMenu);
         setShowMenu([]);
         setCurrentPage(1);
         setFilterValue({ ...filterValue, apply: false });

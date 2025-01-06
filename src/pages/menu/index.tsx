@@ -8,6 +8,8 @@ import BadgeComponent from "../../components/ui/badge";
 
 export const Menu = () => {
   const [menuData, setMenuData] = useState<MenuData[]>();
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [drag, setDrag] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +21,11 @@ export const Menu = () => {
 
   return (
     <FramePage>
-      <BadgeComponent />
+      <div className="h-fit w-fit px-5 py-3 bg-white">
+        <p>position: {JSON.stringify(position)}</p>
+        <p>drag: {JSON.stringify(drag)}</p>
+      </div>
+      <BadgeComponent positionValue={setPosition} dragValue={setDrag} />
       <div className="relative w-full aspect-[2/1] md:aspect-[4/1]">
         <img
           src="https://apisyamresto.syamdev.my.id/storage/product-images/01JG30241PTGJEEP9KP62GCM4V.jpg"
