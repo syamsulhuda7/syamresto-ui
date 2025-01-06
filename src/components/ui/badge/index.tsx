@@ -7,7 +7,10 @@ import { cartItemsStorage } from "../../../utils/zustand/cartItems";
 export default function BadgeComponent() {
   const [position, setPosition] = React.useState({ x: 30, y: 100 });
   const [isDragging, setIsDragging] = React.useState(false);
-  const [dragStart, setDragStart] = React.useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = React.useState({
+    x: position.x,
+    y: position.y,
+  });
   const [isPopupVisible, setIsPopupVisible] = React.useState(false);
   const [popupPosition, setPopupPosition] = React.useState({ x: 0, y: 0 });
   const margin = 15;
@@ -60,7 +63,7 @@ export default function BadgeComponent() {
           Math.min(newY, window.innerHeight - 50 - margin)
         );
 
-        setDragStart({ x: newPositionX, y: newPositionY });
+        // setDragStart({ x: newPositionX, y: newPositionY });
         return { x: newPositionX, y: newPositionY };
       });
     }
