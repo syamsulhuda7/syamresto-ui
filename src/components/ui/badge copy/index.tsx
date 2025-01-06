@@ -54,15 +54,15 @@ export default function BadgeComponentCopy({
   const handleTouchMove = (e: TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
-      const deltaX = touch.clientX - dragStart.x;
-      const deltaY = touch.clientY - dragStart.y;
+      const deltaX = touch.clientX;
+      const deltaY = touch.clientY;
 
       e.preventDefault();
 
       // Perbarui posisi badge dengan cara mengambil rata-rata antara posisi sebelumnya dan delta pergerakan
       setPosition((prev) => {
-        const newX = (prev.x + deltaX) / 2; // Ambil rata-rata antara posisi sebelumnya dan delta
-        const newY = (prev.y + deltaY) / 2; // Ambil rata-rata antara posisi sebelumnya dan delta
+        const newX = prev.x + deltaX; // Ambil rata-rata antara posisi sebelumnya dan delta
+        const newY = prev.y + deltaY; // Ambil rata-rata antara posisi sebelumnya dan delta
         // setDragStart({ x: touch.clientX, y: touch.clientY });
 
         dragValue({ x: touch.clientX, y: touch.clientY });
@@ -79,6 +79,7 @@ export default function BadgeComponentCopy({
 
         positionValue({ x: newPositionX, y: newPositionY });
 
+        setIsPopupVisible(false);
         return { x: newPositionX, y: newPositionY };
       });
     }
