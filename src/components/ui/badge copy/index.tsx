@@ -63,7 +63,7 @@ export default function BadgeComponentCopy({
       setPosition((prev) => {
         const newX = prev.x + deltaX; // Ambil rata-rata antara posisi sebelumnya dan delta
         const newY = prev.y + deltaY; // Ambil rata-rata antara posisi sebelumnya dan delta
-        // setDragStart({ x: touch.clientX, y: touch.clientY });
+        setDragStart({ x: touch.clientX, y: touch.clientY });
 
         dragValue({ x: touch.clientX, y: touch.clientY });
 
