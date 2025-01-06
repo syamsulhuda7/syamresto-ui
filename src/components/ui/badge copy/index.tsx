@@ -19,7 +19,7 @@ export default function BadgeComponentCopy({
   positionValue,
   dragValue,
 }: BadgeComponentProps) {
-  const [position, setPosition] = React.useState({ x: 30, y: 100 });
+  const [position, setPosition] = React.useState({ x: 15, y: 500 });
   const [isDragging, setIsDragging] = React.useState(false);
   const [dragStart, setDragStart] = React.useState({ x: 0, y: 0 });
   const [isPopupVisible, setIsPopupVisible] = React.useState(false);
