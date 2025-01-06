@@ -5,11 +5,14 @@ import { FilterMenu } from "../../components/fragments/filterMenu";
 import { ListMenu } from "../../components/fragments/listMenu";
 import { productsData } from "../../utils/api";
 import BadgeComponent from "../../components/ui/badge";
+import BadgeComponentCopy from "../../components/ui/badge copy";
 
 export const Menu = () => {
   const [menuData, setMenuData] = useState<MenuData[]>();
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [drag, setDrag] = useState({ x: 0, y: 0 });
+  const [positionCopy, setPositionCopy] = useState({ x: 0, y: 0 });
+  const [dragCopy, setDragCopy] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,9 +25,20 @@ export const Menu = () => {
   return (
     <FramePage>
       <div className="h-fit w-fit px-5 py-3 bg-white">
+        <p>ORANGE</p>
         <p>position: {JSON.stringify(position)}</p>
         <p>drag: {JSON.stringify(drag)}</p>
+        <br />
+        <hr />
+        <br />
+        <p>GREEN</p>
+        <p>position: {JSON.stringify(positionCopy)}</p>
+        <p>drag: {JSON.stringify(dragCopy)}</p>
       </div>
+      <BadgeComponentCopy
+        positionValue={setPositionCopy}
+        dragValue={setDragCopy}
+      />
       <BadgeComponent positionValue={setPosition} dragValue={setDrag} />
       <div className="relative w-full aspect-[2/1] md:aspect-[4/1]">
         <img
