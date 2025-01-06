@@ -26,6 +26,7 @@ export default function BadgeComponent() {
     const touch = e.touches[0];
     setIsDragging(true);
     setDragStart({ x: touch.clientX, y: touch.clientY });
+    e.preventDefault(); // Mencegah scroll saat menyentuh
   };
 
   // Fungsi untuk memindahkan posisi (Mouse)
@@ -49,6 +50,7 @@ export default function BadgeComponent() {
       }));
       setDragStart({ x: touch.clientX, y: touch.clientY });
       setIsPopupVisible(false); // Tutup popup saat badge digeser
+      e.preventDefault(); // Mencegah scroll saat menggeser
     }
   };
 
@@ -115,7 +117,7 @@ export default function BadgeComponent() {
     if (isDragging) {
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", handleMouseUp);
-      window.addEventListener("touchmove", handleTouchMove);
+      window.addEventListener("touchmove", handleTouchMove, { passive: false }); // Tambahkan passive: false untuk menangani event touch
       window.addEventListener("touchend", handleTouchEnd);
     } else {
       window.removeEventListener("mousemove", handleMouseMove);
