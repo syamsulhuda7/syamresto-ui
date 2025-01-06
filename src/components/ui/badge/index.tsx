@@ -1,6 +1,6 @@
 import * as React from "react";
-// import clsx from "clsx";
-import { Badge } from "@mui/base/Badge";
+import clsx from "clsx";
+import { Badge as BaseBadge, BadgeProps } from "@mui/base/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { cartItemsStorage } from "../../../utils/zustand/cartItems";
 
@@ -48,6 +48,7 @@ export default function BadgeComponent() {
         const newY = prev.y + deltaY;
         setDragStart({ x: touch.clientX, y: touch.clientY });
 
+        // Menjaga agar posisi tetap berada dalam batas layar
         return {
           x: Math.max(margin, Math.min(newX, window.innerWidth - 50 - margin)),
           y: Math.max(margin, Math.min(newY, window.innerHeight - 50 - margin)),
@@ -75,6 +76,7 @@ export default function BadgeComponent() {
     setIsDragging(false);
     document.body.style.userSelect = "";
 
+    // Menentukan apakah harus menempel di sisi tertentu (kiri, kanan, atas, bawah)
     if (dragDistance < 5) {
       setIsPopupVisible(!isPopupVisible);
       setPopupPosition({
@@ -85,6 +87,8 @@ export default function BadgeComponent() {
 
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
+
+    // Menempelkan icon ke sisi kiri, kanan, atas, atau bawah
     setPosition((prev) => {
       const closestHorizontal =
         prev.x < viewportWidth / 2 ? margin : viewportWidth - 50 - margin;
@@ -94,6 +98,7 @@ export default function BadgeComponent() {
       const distanceToHorizontal = Math.min(prev.x, viewportWidth - prev.x);
       const distanceToVertical = Math.min(prev.y, viewportHeight - prev.y);
 
+      // Tentukan posisi berdasarkan jarak terdekat
       if (distanceToHorizontal < distanceToVertical) {
         return {
           x: closestHorizontal,
@@ -177,3 +182,44 @@ export default function BadgeComponent() {
     </div>
   );
 }
+
+const resolveSlotProps = (fn: any, args: any) =>
+  typeof fn === "function" ? fn(args) : fn;
+
+const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>((props, ref) => {
+  return (
+    <BaseBadge
+      ref={ref}
+      {...props}
+      slotProps={{
+        ...props.slotProps,
+        root: (ownerState) => {
+          const resolvedSlotProps = resolveSlotProps(
+            props.slotProps?.root,
+            ownerState
+          );
+          return {
+            ...resolvedSlotProps,
+            className: clsx(
+              "box-border m-0 p-0 text-xs font-sans list-none relative inline-block leading-none",
+              resolvedSlotProps?.className
+            ),
+          };
+        },
+        badge: (ownerState) => {
+          const resolvedSlotProps = resolveSlotProps(
+            props.slotProps?.badge,
+            ownerState
+          );
+          return {
+            ...resolvedSlotProps,
+            className: clsx(
+              "w-5 h-5 flex items-center justify-center z-auto absolute top-0 right-0 min-w-badge min-h-badge font-sans p-0 text-white font-semibold font-xs rounded-xl bg-drk leading-5.5 whitespace-nowrap text-center translate-x-1/2 -translate-y-1/2 drop-shadow-lg origin-right",
+              resolvedSlotProps?.className
+            ),
+          };
+        },
+      }}
+    />
+  );
+});
