@@ -54,8 +54,8 @@ export default function BadgeComponentCopy({
   const handleTouchMove = (e: TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
-      const deltaX = touch.clientX;
-      const deltaY = touch.clientY;
+      const deltaX = touch.clientX - dragStart.x;
+      const deltaY = touch.clientY - dragStart.y;
 
       e.preventDefault();
 
