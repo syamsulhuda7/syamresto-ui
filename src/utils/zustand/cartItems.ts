@@ -1,14 +1,6 @@
 import { create } from "zustand";
 import { getCookie, setCookie } from "../cookies/instance";
 
-interface CartItem {
-  id: number;
-  name: string;
-  image_url: string;
-  price: number;
-  quantity: number;
-}
-
 interface Set {
   cartItems: CartItem[] | [];
 }

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { MiniMenu } from "../../ui/miniMenu";
 import { navigationStore } from "../../../utils/zustand/navigation";
 import { useEffect } from "react";
+import CartItem from "../CartItem";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -41,8 +42,15 @@ export const Navbar = () => {
           >
             Login
           </div>
+          {navigationValue === "menu" && (
+            <>
+              <span className="w-0.5 h-6 bg-gry" />
+              <CartItem />
+            </>
+          )}
         </TabsList>
-        <span className="md:hidden">
+        <span className="md:hidden flex">
+          {navigationValue === "menu" && <CartItem />}
           <MiniMenu />
         </span>
       </Tabs>

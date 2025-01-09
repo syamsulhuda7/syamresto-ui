@@ -18,7 +18,6 @@ export const CardMenu = ({
   const addCartItems = cartItemsStorage((state) => state.addCartItems);
 
   const handleAddToCart = (item: MenuData) => {
-    console.log("first");
     addCartItems({ ...item, quantity: 1 });
   };
 

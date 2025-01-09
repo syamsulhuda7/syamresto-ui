@@ -24,6 +24,14 @@ declare global {
     };
   }
 
+  interface CartItem {
+    id: number;
+    name: string;
+    image_url: string;
+    price: number;
+    quantity: number;
+  }
+
   interface ImageProfileType {
     id: number;
     title: string;
