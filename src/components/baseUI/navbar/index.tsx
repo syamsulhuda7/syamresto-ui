@@ -5,7 +5,6 @@ import { useNavigate } from "react-router";
 import { MiniMenu } from "../../ui/miniMenu";
 import { navigationStore } from "../../../utils/zustand/navigation";
 import { useEffect } from "react";
-import CartItem from "../CartItem";
 
 export const Navbar = () => {
   const navigate = useNavigate();
