@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
-import NumberInput from "../../ui/inputNumber";
+import NumberInput from "../../baseUI/inputNumber";
+import { cartItemsStorage } from "../../../utils/zustand/cartItems";
+import { snackbarStorage } from "../../../utils/zustand/snackbar";
 
 interface ModalProps {
   item: MenuData;
@@ -12,9 +14,23 @@ export default function Modal({ item }: ModalProps) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  useEffect(() => {
-    console.log(countItem);
-  }, []);
+  const setCartItems = cartItemsStorage((state) => state.addCartItems);
+  const setSnackbar = snackbarStorage((state) => state.setSnackbar);
+
+  // useEffect(() => {
+  //   console.log(countItem);
+  // }, []);
+
+  const handleAddMenu = (item: MenuData) => {
+    const { id, name, image_url, price } = item;
+    setCartItems({ id, name, image_url, price, quantity: countItem });
+    setOpen(false);
+    setSnackbar({
+      open: true,
+      mainText: "Cart Updated!",
+      subText: `${countItem} ${name} added to cart`,
+    });
+  };
 
   return (
     <div>
@@ -109,7 +125,10 @@ export default function Modal({ item }: ModalProps) {
                     defaultVal={1}
                   />
                 </div>
-                <button className="px-4 py-2 font-semibold text-white bg-drk rounded-lg shadow-sm">
+                <button
+                  onClick={() => handleAddMenu(item)}
+                  className="px-4 py-2 font-semibold text-white bg-drk rounded-lg shadow-sm"
+                >
                   Add
                 </button>
               </div>

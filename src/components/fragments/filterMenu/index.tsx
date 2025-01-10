@@ -2,10 +2,10 @@
 import { useEffect, useState } from "react";
 import { categoriesState } from "../../../utils/zustand/categoriesState";
 import { categoriesData } from "../../../utils/api";
-import SelectBaseUI from "../../ui/select";
+import SelectBaseUI from "../../baseUI/select";
 import { filterStorage } from "../../../utils/zustand/filterMenu";
-import NumberInput from "../../ui/inputNumber";
-import RangeSlider from "../../ui/slider";
+import NumberInput from "../../baseUI/inputNumber";
+import RangeSlider from "../../baseUI/slider";
 
 const promoOptions = [
   { name: "Promo", value: "true" },

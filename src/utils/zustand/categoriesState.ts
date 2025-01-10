@@ -8,12 +8,7 @@ interface Actions {
   setCategories: (categories: CategoryData[]) => void;
 }
 
-export const categoriesState = create<Set & Actions>(
-  (set) => (
-    console.log("from categoriesState"),
-    {
-      categories: [],
-      setCategories: (categories) => set(() => ({ categories })),
-    }
-  )
-);
+export const categoriesState = create<Set & Actions>((set) => ({
+  categories: [],
+  setCategories: (categories) => set(() => ({ categories })),
+}));

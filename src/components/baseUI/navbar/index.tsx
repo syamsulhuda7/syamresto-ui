@@ -1,6 +1,6 @@
 import { Tabs } from "@mui/base/Tabs";
 import { TabsList } from "@mui/base/TabsList";
-import { TabNav } from "../../ui/tabNav";
+import { TabNav } from "../tabNav";
 import { useNavigate } from "react-router";
 import { MiniMenu } from "../../ui/miniMenu";
 import { navigationStore } from "../../../utils/zustand/navigation";
@@ -42,15 +42,15 @@ export const Navbar = () => {
           >
             Login
           </div>
-          {navigationValue === "menu" && (
+          {/* {navigationValue === "menu" && (
             <>
               <span className="w-0.5 h-6 bg-gry" />
               <CartItem />
             </>
-          )}
+          )} */}
         </TabsList>
         <span className="md:hidden flex">
-          {navigationValue === "menu" && <CartItem />}
+          {/* {navigationValue === "menu" && <CartItem />} */}
           <MiniMenu />
         </span>
       </Tabs>

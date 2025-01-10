@@ -2,6 +2,7 @@ import StarIcon from "@mui/icons-material/Star";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Modal from "../../fragments/modal";
 import { cartItemsStorage } from "../../../utils/zustand/cartItems";
+import { snackbarStorage } from "../../../utils/zustand/snackbar";
 
 interface CardMenuProps {
   menuData: MenuData[];
@@ -14,11 +15,20 @@ export const CardMenu = ({
   handleImageLoad,
   loadedImages,
 }: CardMenuProps) => {
+  // const [openSnackbar, setOpenSnackbar] = useState(false);
+  // const [itemName, setItemName] = useState("");
   // const cartItemsValue = cartItemsStorage((state) => state.cartItems);gi
   const addCartItems = cartItemsStorage((state) => state.addCartItems);
+  const setSnackbar = snackbarStorage((state) => state.setSnackbar);
 
   const handleAddToCart = (item: MenuData) => {
-    addCartItems({ ...item, quantity: 1 });
+    const { id, name, image_url, price } = item;
+    addCartItems({ id, name, image_url, price, quantity: 1 });
+    setSnackbar({
+      open: true,
+      mainText: "Cart Updated!",
+      subText: `1 ${name} added to cart`,
+    });
   };
 
   return (

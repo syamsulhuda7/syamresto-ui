@@ -1,5 +1,5 @@
 import { FrameFragment } from "../../layouts/frameFragment";
-import ProfileCards from "../../ui/profileCards";
+import ProfileCards from "../../swiperjs/profileCards";
 
 export const Profile = () => {
   return (

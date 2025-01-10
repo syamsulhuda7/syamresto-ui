@@ -1,6 +1,6 @@
 import { FrameFragment } from "../../layouts/frameFragment";
 import { Button } from "../../ui/button";
-import BasicFormControl from "../../ui/input";
+import BasicFormControl from "../../baseUI/input";
 
 export const Booking = () => {
   return (

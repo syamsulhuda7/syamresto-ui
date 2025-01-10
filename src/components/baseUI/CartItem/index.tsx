@@ -11,6 +11,9 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { cartItemsStorage } from "../../../utils/zustand/cartItems";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import { checkoutItemsStorage } from "../../../utils/zustand/checkoutItem";
+import { useNavigate } from "react-router";
+import { navigationStore } from "../../../utils/zustand/navigation";
 
 interface MenuProps {
   children: React.ReactNode;
@@ -28,7 +31,7 @@ const Menu = React.forwardRef(function Menu(
   });
 
   return (
-    <Popper className="z-[51]" open={open} anchorEl={triggerElement}>
+    <Popper open={open} anchorEl={triggerElement}>
       <ul className="menu-root" {...other} {...getListboxProps()}>
         <MenuProvider value={contextValue}>{children}</MenuProvider>
       </ul>
@@ -100,7 +103,12 @@ export default function CartItem() {
   const cartItemsValue = cartItemsStorage((state) => state.cartItems);
   const addCartItems = cartItemsStorage((state) => state.addCartItems);
   const reduceCartItems = cartItemsStorage((state) => state.reduceCartItems);
-  console.log(cartItemsValue);
+  const setCheckoutItem = checkoutItemsStorage(
+    (state) => state.setCheckoutItem
+  );
+  const setNavigation = navigationStore((state) => state.setNavigation);
+  const navigation = useNavigate();
+  // console.log(cartItemsValue);
   //   const createHandleMenuClick = (menuItem) => {
   //     return () => {
   //       console.log(`Clicked on ${menuItem}`);
@@ -119,8 +127,8 @@ export default function CartItem() {
       <DropdownContext.Provider value={dropdownContextValue}>
         <MenuButton>
           <div className="relative">
-            <ShoppingCartIcon className="text-org" />
-            <div className="w-4 h-4 text-[11px] font-semibold flex items-center justify-center bg-gry rounded-full absolute -right-1 -top-1 border border-drk">
+            <ShoppingCartIcon className="text-org scale-[1.2]" />
+            <div className="w-[18px] h-[18px] text-[10px] font-semibold flex items-center justify-center bg-drk text-white rounded-full absolute -right-[8px] -top-[8px] outline outline-white">
               {cartItemsValue.length}
             </div>
           </div>
@@ -166,8 +174,17 @@ export default function CartItem() {
               </div>
             ))}
           </MenuItem>
-          <div className="sticky bottom-0 w-full h-10 bg-org flex flex-col items-center justify-center text-white font-poppins font-medium rounded-[4px] mt-2 cursor-pointer">
-            Checkout
+          <div
+            onClick={() => {
+              setCheckoutItem(cartItemsValue);
+              setNavigation("my-order");
+              navigation("/my-order");
+            }}
+            className="sticky -bottom-[1px] w-[calc(100%+10px)] -m-[5px] p-5 h-[50px] bg-white flex flex-col items-center justify-center text-white font-poppins font-medium rounded-b-[4px] mt-2 cursor-pointer"
+          >
+            <div className="absolute w-[95%] h-[80%] flex items-center justify-center bg-org">
+              Checkout
+            </div>
           </div>
         </Menu>
       </DropdownContext.Provider>
@@ -216,7 +233,9 @@ function Styles() {
       font-family: 'IBM Plex Sans', sans-serif;
       font-size: 0.875rem;
       box-sizing: border-box;
-      padding: 5px;
+      padding-left: 5px;
+      padding-right: 5px;
+      padding-top: 5px;
       margin: 10px 0;
       min-width: 200px;
       max-height: 400px;

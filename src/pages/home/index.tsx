@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Booking } from "../../components/fragments/booking";
-import Carousel from "../../components/fragments/carousel";
+import Carousel from "../../components/swiperjs/carousel";
 import { ExploreCategory } from "../../components/fragments/exploreCategory";
 import { Footer } from "../../components/fragments/footer";
-import { Navbar } from "../../components/fragments/navbar";
+import { Navbar } from "../../components/baseUI/navbar";
 import { Performance } from "../../components/fragments/performance";
 import { Profile } from "../../components/fragments/profile";
 import { Promo } from "../../components/fragments/promo";

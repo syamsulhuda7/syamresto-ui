@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Navbar } from "../../fragments/navbar";
+import { Navbar } from "../../baseUI/navbar";
 import { Footer } from "../../fragments/footer";
 
 export const FramePage = ({ children }: { children: ReactNode }) => {

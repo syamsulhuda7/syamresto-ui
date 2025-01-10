@@ -5,6 +5,7 @@ import { getCookie, setCookie } from "../../../utils/cookies/instance";
 import { filterStorage } from "../../../utils/zustand/filterMenu";
 import { searchMenuStorage } from "../../../utils/zustand/searchMenu";
 import { menuDataStorage } from "../../../utils/zustand/menuData";
+import CartItem from "../../baseUI/CartItem";
 
 export const ListMenu = () => {
   const itemsPerPage = 15;
@@ -130,10 +131,14 @@ export const ListMenu = () => {
           <p className="py-1 font-albertSans font-bold text-2xl md:text-3xl xl:text-[35px] text-drk">
             Menu
           </p>
-          <p className="py-1 font-albertSans font-bold text-2xl md:text-3xl xl:text-[30px] text-gry">
-            <span className="text-org">{currentItems?.length}</span> /{" "}
-            {showMenu?.length}
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="py-1 font-albertSans font-bold text-2xl md:text-3xl xl:text-[30px] text-gry">
+              <span className="text-org">{currentItems?.length}</span> /{" "}
+              {showMenu?.length}
+            </p>
+            <span className="block w-[3.5px] h-[30px] bg-drk rounded-sm"></span>
+            <CartItem />
+          </div>
         </div>
         {/* MENU */}
         <div className="pt-[30px] pb-[50px] flex flex-wrap gap-5 md:gap-7 xl:gap-10 justify-center">

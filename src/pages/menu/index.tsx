@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { FramePage } from "../../components/layouts/framePage";
-import UseAutocomplete from "../../components/ui/searchMenu";
+import UseAutocomplete from "../../components/baseUI/searchMenu";
 import { FilterMenu } from "../../components/fragments/filterMenu";
 import { ListMenu } from "../../components/fragments/listMenu";
 import { productsData } from "../../utils/api";
+import SnackbarBaseUi from "../../components/baseUI/snackBar";
 
 export const Menu = () => {
   const [menuData, setMenuData] = useState<MenuData[]>();
@@ -35,6 +36,7 @@ export const Menu = () => {
         <FilterMenu />
         <ListMenu />
       </div>
+      <SnackbarBaseUi />
     </FramePage>
   );
 };
