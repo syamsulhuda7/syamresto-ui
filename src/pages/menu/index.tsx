@@ -23,7 +23,7 @@ export const Menu = () => {
         <img
           src="https://apisyamresto.syamdev.my.id/storage/product-images/01JG30241PTGJEEP9KP62GCM4V.jpg"
           className="w-full aspect-[2/1] md:aspect-[4/1] object-cover"
-          alt=""
+          alt="search-background"
         />
         <div className="absolute top-0 left-0 w-full h-full bg-black/60 backdrop-blur-sm flex items-center justify-center">
           <UseAutocomplete

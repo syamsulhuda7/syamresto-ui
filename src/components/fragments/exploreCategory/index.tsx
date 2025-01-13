@@ -75,6 +75,7 @@ export const ExploreCategory = () => {
                   loadedImages[index] ? "w-full h-full object-cover" : "loading"
                 }`}
                 src={data.icon}
+                alt={data.name}
               />
             </div>
             <p className="font-albertSans font-semibold text-sm md:text-[20px] text-white text-center pt-3">
