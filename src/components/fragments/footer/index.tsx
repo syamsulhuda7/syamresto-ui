@@ -45,37 +45,37 @@ export const Footer = () => {
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/gopay.svg"
-            alt=""
+            alt="gopay"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/bca.svg"
-            alt=""
+            alt="bca"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/bri.svg"
-            alt=""
+            alt="bri"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/mandiri.svg"
-            alt=""
+            alt="mandiri"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/ovo.svg"
-            alt=""
+            alt="ovo"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/qris.svg"
-            alt=""
+            alt="qris"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/spay.png"
-            alt=""
+            alt="spay"
           />
         </div>
       </div>

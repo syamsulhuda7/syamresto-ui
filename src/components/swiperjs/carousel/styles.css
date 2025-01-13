@@ -1,6 +1,5 @@
 .carousel-swiper {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
   overflow: hidden;
   background-color: black;
 }
@@ -9,7 +8,7 @@
   position: relative;
   background-position: center;
   overflow: hidden;
-  width: 1440px;
+  /* width: 1440px; */
   object-fit: cover;
 }
 
@@ -33,6 +32,7 @@
 .carousel-swiper-slide img {
   display: block;
   width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -55,6 +55,9 @@
 }
 
 @media (min-width: 0px) {
+  .carousel-swiper {
+    aspect-ratio: 16 / 9;
+  }
   .swiper-pagination {
     margin-bottom: 0px;
     scale: 0.6;
@@ -68,6 +71,9 @@
 }
 /* md */
 @media (min-width: 768px) {
+  .carousel-swiper {
+    aspect-ratio: 11 / 5;
+  }
   .swiper-pagination {
     margin-bottom: 7px;
   }
