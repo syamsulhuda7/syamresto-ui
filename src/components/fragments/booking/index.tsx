@@ -1,6 +1,7 @@
 import { FrameFragment } from "../../layouts/frameFragment";
 import { Button } from "../../ui/button";
-import BasicFormControl from "../../baseUI/input";
+// import BasicFormControl from "../../baseUI/input";
+import { Input } from "../../ui/input";
 
 export const Booking = () => {
   return (
@@ -20,22 +21,25 @@ export const Booking = () => {
           </div>
         </div>
         <div className="w-fit md:w-full flex flex-col items-start justify-center gap-2 md:pl-[50px] pt-5 md:py-2 border-t-[4px] md:border-t-0 md:border-l-[4px] border-gry">
-          <BasicFormControl
+          <Input
             title="Full Name"
             required={true}
             placeholder="fullname"
             type="text"
+            onChange={(e) => console.log(e.target.value)}
           />
-          <BasicFormControl
+          <Input
             title="Date"
             required={true}
             type="datetime-local"
+            onChange={(e) => console.log(e.target.value)}
           />
-          <BasicFormControl
+          <Input
             title="Person"
             required={true}
             placeholder="0"
             type="number"
+            onChange={(e) => console.log(e.target.value)}
           />
           <Button
             type="submit"

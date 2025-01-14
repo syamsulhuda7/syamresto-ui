@@ -71,9 +71,6 @@
 }
 /* md */
 @media (min-width: 768px) {
-  .carousel-swiper {
-    aspect-ratio: 11 / 5;
-  }
   .swiper-pagination {
     margin-bottom: 7px;
   }
@@ -86,6 +83,9 @@
 }
 /* xl */
 @media (min-width: 1280px) {
+  .carousel-swiper {
+    aspect-ratio: 11 / 5;
+  }
   .swiper-pagination {
     margin-bottom: 20px;
   }
