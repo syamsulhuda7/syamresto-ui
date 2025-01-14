@@ -24,11 +24,26 @@ export default function Carousel() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const preloadImage = (src: string) => {
+          const preloadLink = document.createElement("link");
+          preloadLink.rel = "preload";
+          preloadLink.href = src;
+          preloadLink.as = "image";
+          document.head.appendChild(preloadLink);
+        };
+
         const response: ResponseType = await api.get("/carousels");
         response.data.data.forEach((item: ImageCarouselType) => {
           item.image_url = `https://apisyamresto.syamdev.my.id/storage/${item.image_url}`;
           return item;
         });
+
+        response.data.data.forEach((item: ImageCarouselType) => {
+          preloadImage(item.image_url);
+        });
+
+        // Menambahkan preload link untuk gambar yang akan muncul
+
         setImages(response?.data?.data);
         // const loadedFromCookies = JSON.parse(
         //   getCookie("loadedCarouselImages") || "[]"
