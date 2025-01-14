@@ -9,7 +9,7 @@ import {
 } from "swiper/modules";
 import { useEffect, useState } from "react";
 import api from "../../../utils/axios/instance";
-import { getCookie, setCookie } from "../../../utils/cookies/instance";
+// import { getCookie, setCookie } from "../../../utils/cookies/instance";
 
 interface ResponseType {
   data: {
@@ -19,7 +19,7 @@ interface ResponseType {
 
 export default function Carousel() {
   const [images, setImages] = useState<ImageCarouselType[]>([]);
-  const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
+  // const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,10 +30,10 @@ export default function Carousel() {
           return item;
         });
         setImages(response?.data?.data);
-        const loadedFromCookies = JSON.parse(
-          getCookie("loadedCarouselImages") || "[]"
-        );
-        setLoadedImages(loadedFromCookies);
+        // const loadedFromCookies = JSON.parse(
+        //   getCookie("loadedCarouselImages") || "[]"
+        // );
+        // setLoadedImages(loadedFromCookies);
       } catch (error) {
         console.error(error);
       }
@@ -42,14 +42,14 @@ export default function Carousel() {
     fetchData();
   }, []);
 
-  const handleImageLoad = (index: number) => {
-    setLoadedImages((prevLoadedImages) => {
-      const newLoadedImages = [...prevLoadedImages];
-      newLoadedImages[index] = true;
-      setCookie("loadedCarouselImages", JSON.stringify(newLoadedImages), 1);
-      return newLoadedImages;
-    });
-  };
+  // const handleImageLoad = (index: number) => {
+  //   setLoadedImages((prevLoadedImages) => {
+  //     const newLoadedImages = [...prevLoadedImages];
+  //     newLoadedImages[index] = true;
+  //     setCookie("loadedCarouselImages", JSON.stringify(newLoadedImages), 1);
+  //     return newLoadedImages;
+  //   });
+  // };
 
   return (
     <div className="w-full aspect-[20/9] relative flex items-center justify-center">
@@ -80,11 +80,12 @@ export default function Carousel() {
         {images.map((image, index) => (
           <SwiperSlide className="carousel-swiper-slide" key={index}>
             <div className="image-container">
-              {!loadedImages[index] && <div className="placeholder"></div>}
+              {/* {!loadedImages[index] && <div className="placeholder"></div>} */}
               <img
                 src={image.image_url}
-                onLoad={() => handleImageLoad(index)}
-                className={loadedImages[index] ? "loaded" : "loading"}
+                // onLoad={() => handleImageLoad(index)}
+                // className={loadedImages[index] ? "loaded" : "loading"}
+                className={"loaded"}
                 alt={image.title}
               />
             </div>
