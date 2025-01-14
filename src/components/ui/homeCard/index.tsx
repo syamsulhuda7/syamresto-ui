@@ -7,9 +7,9 @@ interface HomeCardProps {
   titleStyle?: string;
   categoryStyle?: string;
   discount?: string;
-  index: number;
-  handleImageLoad: (index: number) => void;
-  loadedImages: boolean[];
+  // index: number;
+  // handleImageLoad?: (index: number) => void;
+  // loadedImages?: boolean[];
 }
 export const HomeCard = ({
   category,
@@ -20,23 +20,24 @@ export const HomeCard = ({
   titleStyle,
   categoryStyle,
   discount,
-  index,
-  handleImageLoad,
-  loadedImages,
-}: HomeCardProps) => {
+}: // index,
+// handleImageLoad,
+// loadedImages,
+HomeCardProps) => {
   return (
     <div
       className={`font-adlamDisplay relative overflow-hidden shadow-md shadow-black ${className}`}
     >
       <div className="w-full h-full">
-        {!loadedImages[index] && <div className="placeholder"></div>}
+        {/* {!loadedImages[index] && <div className="placeholder"></div>} */}
         <img
-          onLoad={() => handleImageLoad(index)}
+          // onLoad={() => handleImageLoad(index)}
           src={src}
           alt={src}
-          className={`${
-            loadedImages[index] ? "w-full h-full object-cover" : "loading"
-          }`}
+          className={`w-full h-full object-cover`}
+          // className={`${
+          //   loadedImages[index] ? "w-full h-full object-cover" : "loading"
+          // }`}
         />
       </div>
       {discount && (
