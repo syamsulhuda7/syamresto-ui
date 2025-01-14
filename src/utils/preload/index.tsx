@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-// import api from "../axios/instance";
 import {
   carouselData,
   categoriesData,
@@ -18,35 +17,28 @@ export const PreloadImages = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const carousels = await carouselData();
-      const products = await productsData();
-      const categories = await categoriesData();
-      const profiles = await profileData();
-      const imageCarousel = carousels.map((item: ImageCarouselType) => {
-        return { image: item.image_url };
-      });
-      const promo = products.slice(0, 3).map((item: MenuData) => {
-        return { image: item.image_url };
-      });
-      const topMenu = products.slice(-5).map((item: MenuData) => {
-        return { image: item.image_url };
-      });
-      const category = categories.map((item: CategoryData) => {
-        return { image: item.icon };
-      });
-      const profile = profiles.map((item: ImageProfileType) => {
-        return { image: item.image_url };
-      });
-      const allData = [
-        ...imageCarousel,
-        ...promo,
-        ...topMenu,
-        ...category,
-        ...profile,
+      const [carousels, products, categories, profiles] = await Promise.all([
+        carouselData(),
+        productsData(),
+        categoriesData(),
+        profileData(),
+      ]);
+
+      // Gabungkan semua gambar dalam satu array
+      const allImages = [
+        ...carousels.map((item: { image_url: string }) => item.image_url),
+        ...products
+          .slice(0, 3)
+          .map((item: { image_url: string }) => item.image_url),
+        ...products
+          .slice(-5)
+          .map((item: { image_url: string }) => item.image_url),
+        ...categories.map((item: { icon: string }) => item.icon),
+        ...profiles.map((item: { image_url: string }) => item.image_url),
       ];
-      allData.forEach((imageUrl: { image: string }) => {
-        preloadImage(imageUrl.image);
-      });
+
+      // Preload gambar
+      allImages.forEach(preloadImage);
     };
 
     fetchImages();
