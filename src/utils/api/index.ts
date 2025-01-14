@@ -9,13 +9,16 @@ interface ResponseType {
 export const productsData = async () => {
   try {
     const response: ResponseType = await api.get("/products");
-    response.data.data.forEach((item: MenuData) => {
-      item.image_url = `https://apisyamresto.syamdev.my.id/storage/${item.image_url}`;
-      return item;
+    const updatedProducts = response.data.data.map((item: MenuData) => {
+      return {
+        ...item,
+        image_url: `https://apisyamresto.syamdev.my.id/storage/${item.image_url}`,
+      };
     });
-    return response.data.data;
+    return updatedProducts;
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
@@ -31,6 +34,40 @@ export const categoriesData = async () => {
     return updatedCategories;
   } catch (error) {
     console.log(error);
+    return [];
+  }
+};
+
+export const carouselData = async () => {
+  try {
+    const response = await api.get("/carousels");
+    const updatedCarousels = response.data.data.map(
+      (item: ImageCarouselType) => {
+        return {
+          ...item,
+          image_url: `https://apisyamresto.syamdev.my.id/storage/${item.image_url}`,
+        };
+      }
+    );
+    return updatedCarousels;
+  } catch (error) {
+    console.error("Error fetching images:", error);
+    return [];
+  }
+};
+
+export const profileData = async () => {
+  try {
+    const response = await api.get("/profiles");
+    const updatedProfiles = response.data.data.map((item: ImageProfileType) => {
+      return {
+        ...item,
+        image_url: `https://apisyamresto.syamdev.my.id/storage/${item.image_url}`,
+      };
+    });
+    return updatedProfiles;
+  } catch (error) {
+    console.error("Error fetching images:", error);
     return [];
   }
 };
