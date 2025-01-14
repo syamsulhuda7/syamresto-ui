@@ -9,6 +9,23 @@ body {
   box-sizing: border-box;
 }
 
+.font-poppins {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-adlamDisplay {
+  font-family: "ADLaM Display", serif;
+  font-style: normal;
+}
+
+.font-albertSans {
+  font-family: "Albert Sans", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 /* 3d timer start */
 .parent-card {
   @apply font-adlamDisplay relative w-12 flex flex-col gap-[2px] items-center rounded-md overflow-hidden shadow-sm shadow-black;
