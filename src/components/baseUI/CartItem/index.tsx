@@ -319,6 +319,5 @@ function Styles() {
     }
   `;
 
-  // eslint-disable-next-line react/no-danger
   return <style dangerouslySetInnerHTML={{ __html: styles }} />;
 }

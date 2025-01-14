@@ -1,4 +1,4 @@
-import CountUp from "react-countup";
+import AnimatedNumbers from "react-animated-numbers";
 import { FrameFragment } from "../../layouts/frameFragment";
 
 export const Performance = () => {
@@ -20,6 +20,7 @@ export const Performance = () => {
       title: "Partners",
     },
   ];
+
   return (
     <FrameFragment className="bg-org">
       <div className="w-full h-fit flex flex-wrap items-center justify-center gap-5">
@@ -30,14 +31,16 @@ export const Performance = () => {
               className="w-[40%] md:w-[20%] font-adlamDisplay font-bold text-[20px] md:text-[28px] xl:text-[40px] text-drk flex flex-col items-center justify-center"
             >
               <div className="text-[50px] md:text-[70px] xl:text-[96px] w-full flex items-center justify-center">
-                <CountUp
-                  scrollSpyOnce={true}
-                  enableScrollSpy
-                  start={0}
-                  end={item.end}
-                  duration={6}
-                  suffix="+"
+                <AnimatedNumbers
+                  animateToNumber={item.end}
+                  fontStyle={{ fontSize: "inherit" }}
+                  transitions={(index) => ({
+                    type: "smooth",
+                    duration: 3 + index, // Menambah durasi berdasarkan indeks
+                    timingFunction: "ease-in-out", // Animasi melambat di akhir
+                  })}
                 />
+                <span>+</span>
               </div>
               <p>{item.title}</p>
             </div>

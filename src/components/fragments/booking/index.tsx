@@ -39,7 +39,7 @@ export const Booking = () => {
           />
           <Button
             type="submit"
-            className="bg-org text-white font-bold font-albertSans mt-2 hover:bg-org/80"
+            className="bg-org text-drk font-bold font-albertSans mt-2 hover:bg-org/80"
           >
             Book Now
           </Button>

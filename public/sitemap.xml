@@ -16,11 +16,4 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Halaman Kontak
-  <url>
-    <loc>https://syamresto.syamdev.my.id/contact</loc>
-    <lastmod>2025-01-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url> -->
 </urlset>
