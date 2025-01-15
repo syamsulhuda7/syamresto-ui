@@ -26,18 +26,20 @@ export const PreloadImages = () => {
 
       // Gabungkan semua gambar dalam satu array
       const allImages = [
-        ...carousels.map((item: { image_url: string }) => item.image_url),
+        ...carousels
+          .slice(0, 5)
+          .map((item: { image_url: string }) => item.image_url),
         ...products
           .slice(0, 3)
           .map((item: { image_url: string }) => item.image_url),
-        ...products
-          .slice(-5)
-          .map((item: { image_url: string }) => item.image_url),
+        // ...products
+        //   .slice(-5)
+        //   .map((item: { image_url: string }) => item.image_url),
         // ...categories.map((item: { icon: string }) => item.icon),
         // ...profiles.map((item: { image_url: string }) => item.image_url),
       ];
 
-      console.log(allImages);
+      // console.log(allImages);
       // Preload gambar
       allImages.forEach(preloadImage);
     };
