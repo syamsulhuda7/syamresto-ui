@@ -8,11 +8,11 @@ export default {
         drk: "#1E1E1E",
         gry: "#CECECE",
       },
-      // fontFamily: {
-      //   adlamDisplay: ["ADLaM Display", "sans-serif"],
-      //   albertSans: ["Albert Sans", "sans-serif"],
-      //   poppins: ["Poppins", "sans-serif"],
-      // },
+      fontFamily: {
+        adlamDisplay: ["ADLaM Display", "sans-serif"],
+        albertSans: ["Albert Sans", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+      },
     },
   },
   plugins: [],

@@ -9,7 +9,7 @@ body {
   box-sizing: border-box;
 }
 
-.font-poppins {
+/* .font-poppins {
   font-family: "Poppins", serif;
   font-weight: 400;
   font-style: normal;
@@ -24,7 +24,7 @@ body {
   font-family: "Albert Sans", serif;
   font-optical-sizing: auto;
   font-style: normal;
-}
+} */
 
 /* 3d timer start */
 .parent-card {

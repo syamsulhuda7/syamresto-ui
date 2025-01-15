@@ -46,36 +46,43 @@ export const Footer = () => {
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/gopay.svg"
             alt="gopay"
+            loading="lazy"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/bca.svg"
             alt="bca"
+            loading="lazy"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/bri.svg"
             alt="bri"
+            loading="lazy"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/mandiri.svg"
             alt="mandiri"
+            loading="lazy"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/ovo.svg"
             alt="ovo"
+            loading="lazy"
           />
           <img
             className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
             src="/assets/qris.svg"
             alt="qris"
+            loading="lazy"
           />
           <img
             className="h-[30px] w-fit bg-white px-[6px] py-[0px] rounded-md"
             src="/assets/spay.svg"
             alt="spay"
+            loading="lazy"
           />
         </div>
       </div>
