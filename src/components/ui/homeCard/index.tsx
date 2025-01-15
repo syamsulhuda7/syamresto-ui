@@ -8,6 +8,7 @@ interface HomeCardProps {
   categoryStyle?: string;
   discount?: string;
   loading?: "eager" | "lazy" | undefined;
+  priority?: "high" | "low" | undefined;
   // index: number;
   // handleImageLoad?: (index: number) => void;
   // loadedImages?: boolean[];
@@ -22,6 +23,7 @@ export const HomeCard = ({
   categoryStyle,
   discount,
   loading,
+  priority,
 }: // index,
 // handleImageLoad,
 // loadedImages,
@@ -38,6 +40,7 @@ HomeCardProps) => {
           alt={src}
           className={`w-full h-full object-cover`}
           loading={loading}
+          fetchPriority={priority}
           // className={`${
           //   loadedImages[index] ? "w-full h-full object-cover" : "loading"
           // }`}

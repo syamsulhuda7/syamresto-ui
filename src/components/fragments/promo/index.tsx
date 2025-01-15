@@ -51,6 +51,7 @@ export const Promo = ({ menuData }: PromoProps) => {
             container="px-3 py-3 md:px-5 md:py-5 xl:px-6 xl:py-6"
             className="w-[150px] md:w-[220px] xl:w-[310px] aspect-[9/7] rounded-xl"
             src={data.image_url}
+            priority="high"
             // index={index}
             // handleImageLoad={handleImageLoad}
             // loadedImages={loadedImages}

@@ -70,6 +70,8 @@ export default function Carousel() {
                 // className={loadedImages[index] ? "loaded" : "loading"}
                 className={"loaded"}
                 alt={image.title}
+                fetchPriority={index <= 5 ? "high" : "low"}
+                loading={`${index <= 5 ? "eager" : "lazy"}`}
               />
             </div>
           </SwiperSlide>
