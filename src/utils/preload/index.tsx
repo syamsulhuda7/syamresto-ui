@@ -37,6 +37,7 @@ export const PreloadImages = () => {
         ...profiles.map((item: { image_url: string }) => item.image_url),
       ];
 
+      console.log(allImages);
       // Preload gambar
       allImages.forEach(preloadImage);
     };
