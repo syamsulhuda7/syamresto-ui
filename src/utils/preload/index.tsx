@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import {
   carouselData,
-  categoriesData,
+  // categoriesData,
   productsData,
-  profileData,
+  // profileData,
 } from "../api";
 
 export const PreloadImages = () => {
@@ -17,11 +17,11 @@ export const PreloadImages = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      const [carousels, products, categories, profiles] = await Promise.all([
+      const [carousels, products] = await Promise.all([
         carouselData(),
         productsData(),
-        categoriesData(),
-        profileData(),
+        // categoriesData(),
+        // profileData(),
       ]);
 
       // Gabungkan semua gambar dalam satu array
@@ -33,8 +33,8 @@ export const PreloadImages = () => {
         ...products
           .slice(-5)
           .map((item: { image_url: string }) => item.image_url),
-        ...categories.map((item: { icon: string }) => item.icon),
-        ...profiles.map((item: { image_url: string }) => item.image_url),
+        // ...categories.map((item: { icon: string }) => item.icon),
+        // ...profiles.map((item: { image_url: string }) => item.image_url),
       ];
 
       console.log(allImages);

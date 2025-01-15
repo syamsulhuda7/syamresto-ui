@@ -58,6 +58,7 @@ export default function ProfileCards() {
               // }`}
               src={image.image_url}
               alt={image.title}
+              loading="lazy"
             />
           </div>
         </SwiperSlide>

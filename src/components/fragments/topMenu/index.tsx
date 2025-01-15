@@ -48,6 +48,7 @@ export const TopMenu = ({ menuData }: TopMenuProps) => {
             container="px-2 py-2 md:px-5 md:py-5 xl:px-6 xl:py-6"
             className="w-[100px] md:w-[170px] xl:w-[180px] aspect-[6/9] rounded-none"
             src={data.image_url}
+            loading="lazy"
             // loadedImages={loadedImages}
             // handleImageLoad={handleImageLoad}
           />

@@ -76,6 +76,7 @@ export const ExploreCategory = () => {
                 // style={{ filter: loadedImages[index] ? "none" : "blur(5px)" }}
                 src={data.icon}
                 alt={data.name}
+                loading="lazy"
               />
             </div>
             <p className="font-albertSans font-semibold text-sm md:text-[20px] text-white text-center pt-3">

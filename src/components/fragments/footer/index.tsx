@@ -73,8 +73,8 @@ export const Footer = () => {
             alt="qris"
           />
           <img
-            className="h-[30px] w-fit bg-white px-3 py-2 rounded-md"
-            src="/assets/spay.png"
+            className="h-[30px] w-fit bg-white px-[6px] py-[0px] rounded-md"
+            src="/assets/spay.svg"
             alt="spay"
           />
         </div>
