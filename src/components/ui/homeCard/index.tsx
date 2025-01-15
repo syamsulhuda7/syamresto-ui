@@ -33,7 +33,9 @@ export const HomeCard = ({
       className={`font-adlamDisplay relative overflow-hidden shadow-md shadow-black ${className}`}
     >
       <div className="w-full h-full">
-        {!loadedImages[index] && <div className="placeholder"></div>}
+        {loadedImages.length > 0 && !loadedImages[index] && (
+          <div className="placeholder"></div>
+        )}
         <img
           onLoad={() => handleImageLoad(index)}
           src={src}
@@ -42,7 +44,9 @@ export const HomeCard = ({
           loading={loading}
           fetchPriority={priority}
           className={`${
-            loadedImages[index] ? "w-full h-full object-cover" : "loading"
+            loadedImages.length > 0 && !loadedImages[index]
+              ? "loading"
+              : "w-full h-full object-cover"
           }`}
         />
       </div>
