@@ -24,23 +24,32 @@ export const MyOrder = () => {
   return (
     <FramePage>
       <div className="min-h-screen w-full flex flex-col items-center justify-center gap-5">
-        <div className="px-5 py-3 bg-org rounded-md mx-10 mb-10">
-          <h1 className="text-[24px] text-center font-albertSans font-bold">
-            Show This QR Code To The Cashier:
+        {checkoutItemValue.length === 0 && (
+          <h1 className="border-2 border-org px-5 py-3 rounded-md mx-10 mb-10 text-[24px] text-center font-albertSans font-bold">
+            Add Items To Your Cart and Checkout Your Order First !
           </h1>
-        </div>
-        <div className="relative w-full h-fit flex flex-col items-center justify-center px-10 pb-10">
-          {!openQr && (
-            <div className="absolute z-10 backdrop-blur-md w-[105%] h-[105%] flex items-center justify-center">
-              <div className="animate-spin animation-duration-1000 w-10 h-10 border-4 border-org border-t-drk rounded-full"></div>
+        )}
+        {checkoutItemValue.length !== 0 && (
+          <>
+            <div className="px-5 py-3 bg-org rounded-md mx-10 mb-10">
+              <h1 className="text-[24px] text-center font-albertSans font-bold">
+                Show This QR Code To The Cashier:
+              </h1>
             </div>
-          )}
-          <QRCodeSVG
-            className="w-full md:w-fit h-full md:h-[450px]"
-            value={qrData}
-            size={512}
-          />
-        </div>
+            <div className="relative w-full h-fit flex flex-col items-center justify-center px-10 pb-10">
+              {!openQr && (
+                <div className="absolute z-10 backdrop-blur-md w-[105%] h-[105%] flex items-center justify-center">
+                  <div className="animate-spin animation-duration-1000 w-10 h-10 border-4 border-org border-t-drk rounded-full"></div>
+                </div>
+              )}
+              <QRCodeSVG
+                className="w-full md:w-fit h-full md:h-[450px]"
+                value={qrData}
+                size={512}
+              />
+            </div>
+          </>
+        )}
       </div>
     </FramePage>
   );

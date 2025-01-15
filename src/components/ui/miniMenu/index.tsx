@@ -15,7 +15,11 @@ export const MiniMenu = () => {
   };
   return (
     <div>
-      <Button onClick={handleOpen} className="text-white hover:text-org">
+      <Button
+        type="button"
+        onClick={handleOpen}
+        className="text-white hover:text-org"
+      >
         <DragIndicatorIcon />
       </Button>
       {open && (

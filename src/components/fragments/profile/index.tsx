@@ -7,33 +7,31 @@ export const Profile = () => {
       className="bg-white"
       innerClass="pt-[100px] pb-[50px] flex flex-col xl:flex-row items-center justify-center"
     >
-      <p className="xl:hidden w-full text-left font-albertSans font-bold text-2xl md:text-3xl xl:text-[40px] text-drk">
+      <p className="xl:hidden pb-5 w-full text-left font-albertSans font-bold text-2xl md:text-3xl xl:text-[40px] text-drk">
         ABOUT SYAMRESTO
       </p>
-      <div className="w-full h-fit flex items-center justify-center pb-[30px] xl:pb-0">
+      <div className="w-full h-[320px] md:h-[400px] xl:h-[530px] flex items-center justify-center pb-[30px] xl:pb-0">
         <ProfileCards />
       </div>
       <div className="w-full h-fit xl:pl-5">
         <p className="hidden xl:block font-albertSans font-bold text-2xl md:text-3xl xl:text-[40px] text-drk pb-[30px]">
           ABOUT SYAMRESTO
         </p>
-        <p className="text-justify text-xl font-albertSans indent-16">
-          SYAMRESTO adalah restoran modern yang menawarkan pengalaman kuliner
-          yang lengkap dan memikat. Dengan beragam menu yang tersedia, kami
-          menghadirkan kelezatan dari berbagai kategori, mulai dari appetizer
-          yang menggugah selera, main course dengan cita rasa autentik, hingga
-          dessert yang manis dan memanjakan lidah. Tidak ketinggalan, pilihan
-          beverage yang segar serta side dish yang inovatif turut melengkapi
-          setiap hidangan, menjadikan SYAMRESTO tempat yang sempurna untuk
-          setiap momen spesial Anda.
+        <p className="text-justify text-sm md:text-xl font-albertSans indent-16">
+          SYAMRESTO is a modern restaurant that offers culinary experiences
+          which is complete and alluring. With a variety of menus available, we
+          Bringing deliciousness from various categories, ranging from
+          appetizers appetizing, main course with authentic taste, to dessert
+          that is sweet and pampers the tongue. Not to be missed, choice Fresh
+          beverages and innovative side dishes complement the every meal, making
+          SYAMRESTO the perfect place to every moment of your special.
         </p>
-        <p className="text-justify text-xl font-albertSans indent-16">
-          Mengusung konsep ramah keluarga dan suasana yang hangat, SYAMRESTO
-          tidak hanya menjadi tempat untuk makan, tetapi juga untuk bersantai
-          dan menikmati waktu bersama orang-orang tercinta. Didukung oleh tim
-          koki berpengalaman dan bahan-bahan pilihan, kami terus berinovasi
-          dalam menyajikan menu yang sesuai dengan selera pelanggan dari
-          berbagai kalangan.
+        <p className="text-justify text-sm md:text-xl font-albertSans indent-16">
+          Carrying the concept of family friendliness and a warm atmosphere,
+          SYAMRESTO not only a place to eat, but also to relax and enjoy time
+          with loved ones. Supported by the team Experienced chefs and selected
+          ingredients, we are constantly innovating in serving menus that suit
+          the tastes of customers from various circles.
         </p>
       </div>
     </FrameFragment>

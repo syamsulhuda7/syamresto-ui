@@ -144,10 +144,10 @@ export default function CartItem() {
               <div
                 onClick={(e) => e.stopPropagation()}
                 key={item.id}
-                className="mb-1 w-full h-12 overflow-hidden bg-white shadow-sm shadow-gry flex items-center justify-start text-drk rounded-[4px] border border-slate-100"
+                className="mb-1 w-full h-[56px] overflow-hidden bg-white shadow-sm shadow-gry flex items-center justify-start text-drk rounded-[4px] border border-slate-100"
               >
                 <img
-                  className="h-full aspect-square"
+                  className="h-full aspect-square object-cover"
                   src={item.image_url}
                   alt={item.name}
                 />

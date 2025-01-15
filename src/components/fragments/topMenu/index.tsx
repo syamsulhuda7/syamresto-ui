@@ -38,14 +38,15 @@ export const TopMenu = ({ menuData }: TopMenuProps) => {
           <KeyboardDoubleArrowRightSharpIcon className="scale-[.75] md:scale-[.9] xl:scale-[1.15]" />
         </p>
       </div>
-      <div className="w-full h-fit flex flex-wrap items-center justify-center gap-5">
+      <div className="w-full h-fit flex flex-wrap items-center justify-center gap-2 md:gap-5">
         {menuData.map((data) => (
           <HomeCard
             // index={index}
             key={data.id}
             category={data.category.name}
             title={data.name}
-            className="w-[150px] md:w-[170px] xl:w-[200px] aspect-[6/9] rounded-none"
+            container="px-2 py-2 md:px-5 md:py-5 xl:px-6 xl:py-6"
+            className="w-[100px] md:w-[170px] xl:w-[180px] aspect-[6/9] rounded-none"
             src={data.image_url}
             // loadedImages={loadedImages}
             // handleImageLoad={handleImageLoad}

@@ -32,6 +32,7 @@ export const Performance = () => {
             >
               <div className="text-[50px] md:text-[70px] xl:text-[96px] w-full flex items-center justify-center">
                 <AnimatedNumbers
+                  className="w-[65px] md:w-[90px] xl:w-[120px] flex items-center justify-center"
                   animateToNumber={item.end}
                   fontStyle={{ fontSize: "inherit" }}
                   transitions={(index) => ({

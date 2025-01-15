@@ -137,7 +137,7 @@ const Listbox = styled("ul")(
   border-radius: 12px;
   overflow: auto;
   outline: 0;
-  max-height: 300px;
+  max-height: 200px;
   z-index: 100;
   position: absolute;
   background: #fff;

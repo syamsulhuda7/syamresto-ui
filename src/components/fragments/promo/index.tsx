@@ -2,6 +2,7 @@
 
 // import { useEffect, useState } from "react";
 import { FrameFragment } from "../../layouts/frameFragment";
+import { Button } from "../../ui/button";
 import { HomeCard } from "../../ui/homeCard";
 import Timer from "../timer-3d";
 import ArrowRightSharpIcon from "@mui/icons-material/ArrowRightSharp";
@@ -40,14 +41,15 @@ export const Promo = ({ menuData }: PromoProps) => {
           <Timer initialSeconds={36010} />
         </div>
       </div>
-      <div className="w-full h-fit flex flex-wrap items-center justify-center gap-5 xl:gap-10">
+      <div className="w-full h-fit flex flex-wrap items-center justify-center gap-3 xl:gap-10">
         {menuData.map((data) => (
           <HomeCard
             key={data.id}
             category={data.category.name}
             title={data.name}
-            discount="57%"
-            className="w-[300px] xl:w-[350px] aspect-[9/7] rounded-xl"
+            discount="32%"
+            container="px-3 py-3 md:px-5 md:py-5 xl:px-6 xl:py-6"
+            className="w-[150px] md:w-[220px] xl:w-[310px] aspect-[9/7] rounded-xl"
             src={data.image_url}
             // index={index}
             // handleImageLoad={handleImageLoad}
@@ -56,9 +58,9 @@ export const Promo = ({ menuData }: PromoProps) => {
         ))}
       </div>
       <div className="w-full h-fit flex items-center justify-center pt-[30px]">
-        <button className="px-4 py-2 font-semibold text-white bg-drk rounded-lg">
+        <Button className="text-sm md:text-base font-semibold text-white bg-drk">
           Check All Promo <ArrowRightSharpIcon className="scale-150" />
-        </button>
+        </Button>
       </div>
     </FrameFragment>
   );

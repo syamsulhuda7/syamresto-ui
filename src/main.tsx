@@ -3,12 +3,12 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { App } from "./App.tsx";
 import { BrowserRouter } from "react-router";
-import { PreloadImages } from "./utils/preload/index.tsx";
+// import { PreloadImages } from "./utils/preload/index.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <PreloadImages />
+      {/* <PreloadImages /> */}
       <App />
     </BrowserRouter>
   </StrictMode>

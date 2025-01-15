@@ -6,11 +6,11 @@ import { categoriesState } from "../../../utils/zustand/categoriesState";
 import { filterStorage } from "../../../utils/zustand/filterMenu";
 import { useNavigate } from "react-router";
 import { navigationStore } from "../../../utils/zustand/navigation";
-import { setCookie } from "../../../utils/cookies/instance";
+// import { setCookie } from "../../../utils/cookies/instance";
 
 export const ExploreCategory = () => {
   const [category, setCategory] = useState<CategoryData[]>([]);
-  const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
+  // const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
   const setCategoryState = categoriesState((state) => state.setCategories);
   const categoryState = categoriesState((state) => state.categories);
   const setNavigation = navigationStore((state) => state.setNavigation);
@@ -41,14 +41,14 @@ export const ExploreCategory = () => {
     fetchCategory();
   }, [categoryState, setCategoryState]);
 
-  const handleImageLoad = (index: number) => {
-    setLoadedImages((prevLoadedImages) => {
-      const newLoadedImages = [...prevLoadedImages];
-      newLoadedImages[index] = true;
-      setCookie("loadedImages", JSON.stringify(newLoadedImages), 1);
-      return newLoadedImages;
-    });
-  };
+  // const handleImageLoad = (index: number) => {
+  //   setLoadedImages((prevLoadedImages) => {
+  //     const newLoadedImages = [...prevLoadedImages];
+  //     newLoadedImages[index] = true;
+  //     setCookie("loadedImages", JSON.stringify(newLoadedImages), 1);
+  //     return newLoadedImages;
+  //   });
+  // };
 
   const handleCategoryFilter = (slug: string) => () => {
     navigate("/menu");
@@ -71,9 +71,9 @@ export const ExploreCategory = () => {
             <div className="w-[70px] md:w-[100px] xl:w-[150px] overflow-hidden aspect-[1/1] rounded-full">
               {/* {!loadedImages[index] && <div className="placeholder"></div>} */}
               <img
-                onLoad={() => handleImageLoad(index)}
+                // onLoad={() => handleImageLoad(index)}
                 className={`w-full h-full object-cover`}
-                style={{ filter: loadedImages[index] ? "none" : "blur(5px)" }}
+                // style={{ filter: loadedImages[index] ? "none" : "blur(5px)" }}
                 src={data.icon}
                 alt={data.name}
               />

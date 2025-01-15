@@ -34,14 +34,14 @@ export default function ProfileCards() {
       grabCursor={true}
       centeredSlides={true}
       slidesPerView={"auto"}
-      autoplay={{ delay: 3000, disableOnInteraction: false }}
+      autoplay={{ delay: 5000, disableOnInteraction: false }}
       coverflowEffect={{
         stretch: 0,
         depth: 100,
         modifier: 1,
         slideShadows: true,
       }}
-      speed={700}
+      speed={1200}
       pagination={true}
       modules={[EffectCoverflow, Pagination, Autoplay]}
       className="container-coverflow-swiper"

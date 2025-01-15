@@ -3,6 +3,7 @@ import StarIcon from "@mui/icons-material/Star";
 import NumberInput from "../../baseUI/inputNumber";
 import { cartItemsStorage } from "../../../utils/zustand/cartItems";
 import { snackbarStorage } from "../../../utils/zustand/snackbar";
+import { Button } from "../../ui/button";
 
 interface ModalProps {
   item: MenuData;
@@ -42,15 +43,6 @@ export default function Modal({ item }: ModalProps) {
       >
         Detail
       </button>
-      {/* <button
-        type="button"
-        onClick={handleOpen}
-        className="px-4 py-2 font-semibold text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-blue-200"
-      >
-        Open modal
-      </button> */}
-
-      {/* Modal */}
       {open && (
         <div
           className="fixed p-5 inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-50"
@@ -125,12 +117,12 @@ export default function Modal({ item }: ModalProps) {
                     defaultVal={1}
                   />
                 </div>
-                <button
+                <Button
                   onClick={() => handleAddMenu(item)}
-                  className="px-4 py-2 font-semibold text-white bg-drk rounded-lg shadow-sm"
+                  className="font-semibold text-white bg-drk shadow-sm"
                 >
                   Add
-                </button>
+                </Button>
               </div>
             </div>
           </div>

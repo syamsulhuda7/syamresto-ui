@@ -41,7 +41,7 @@ HomeCardProps) => {
         />
       </div>
       {discount && (
-        <div className="absolute top-0 right-5 font-bold text-xl text-white px-3 py-2 flex items-center justify-center bg-drk/80">
+        <div className="absolute top-0 right-2 md:right-5 font-bold text-xs md:text-sm xl:text-xl text-white px-2 md:px-3 py-1 md:py-2 flex items-center justify-center bg-drk/80">
           {discount}
         </div>
       )}
@@ -54,7 +54,7 @@ HomeCardProps) => {
           {category}
         </h3>
         <h3
-          className={`text-white text-sm md:text-base xl:text-xl font-semibold ${titleStyle}`}
+          className={`text-white text-xs md:text-base xl:text-xl font-semibold ${titleStyle}`}
         >
           {title}
         </h3>
