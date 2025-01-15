@@ -9,9 +9,9 @@ interface HomeCardProps {
   discount?: string;
   loading?: "eager" | "lazy" | undefined;
   priority?: "high" | "low" | undefined;
-  // index: number;
-  // handleImageLoad?: (index: number) => void;
-  // loadedImages?: boolean[];
+  index: number;
+  handleImageLoad: (index: number) => void;
+  loadedImages: boolean[];
 }
 export const HomeCard = ({
   category,
@@ -24,26 +24,26 @@ export const HomeCard = ({
   discount,
   loading,
   priority,
-}: // index,
-// handleImageLoad,
-// loadedImages,
-HomeCardProps) => {
+  index,
+  handleImageLoad,
+  loadedImages,
+}: HomeCardProps) => {
   return (
     <div
       className={`font-adlamDisplay relative overflow-hidden shadow-md shadow-black ${className}`}
     >
       <div className="w-full h-full">
-        {/* {!loadedImages[index] && <div className="placeholder"></div>} */}
+        {!loadedImages[index] && <div className="placeholder"></div>}
         <img
-          // onLoad={() => handleImageLoad(index)}
+          onLoad={() => handleImageLoad(index)}
           src={src}
           alt={src}
-          className={`w-full h-full object-cover`}
+          // className={`w-full h-full object-cover`}
           loading={loading}
           fetchPriority={priority}
-          // className={`${
-          //   loadedImages[index] ? "w-full h-full object-cover" : "loading"
-          // }`}
+          className={`${
+            loadedImages[index] ? "w-full h-full object-cover" : "loading"
+          }`}
         />
       </div>
       {discount && (

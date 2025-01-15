@@ -1,31 +1,31 @@
 import KeyboardDoubleArrowRightSharpIcon from "@mui/icons-material/KeyboardDoubleArrowRightSharp";
 import { HomeCard } from "../../ui/homeCard";
 import { FrameFragment } from "../../layouts/frameFragment";
-// import { getCookie, setCookie } from "../../../utils/cookies/instance";
-// import { useEffect, useState } from "react";
+import { getCookie, setCookie } from "../../../utils/cookies/instance";
+import { useEffect, useState } from "react";
 
 interface TopMenuProps {
   menuData: MenuData[];
 }
 
 export const TopMenu = ({ menuData }: TopMenuProps) => {
-  // const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
+  const [loadedImages, setLoadedImages] = useState<boolean[]>([]);
 
-  // useEffect(() => {
-  //   const loadedFromCookies = JSON.parse(
-  //     getCookie("loadedTopMenuImages") || "[]"
-  //   );
-  //   setLoadedImages(loadedFromCookies);
-  // }, []);
+  useEffect(() => {
+    const loadedFromCookies = JSON.parse(
+      getCookie("loadedTopMenuImages") || "[]"
+    );
+    setLoadedImages(loadedFromCookies);
+  }, []);
 
-  // const handleImageLoad = (index: number) => {
-  //   setLoadedImages((prevLoadedImages) => {
-  //     const newLoadedImages = [...prevLoadedImages];
-  //     newLoadedImages[index] = true;
-  //     setCookie("loadedTopMenuImages", JSON.stringify(newLoadedImages), 1);
-  //     return newLoadedImages;
-  //   });
-  // };
+  const handleImageLoad = (index: number) => {
+    setLoadedImages((prevLoadedImages) => {
+      const newLoadedImages = [...prevLoadedImages];
+      newLoadedImages[index] = true;
+      setCookie("loadedTopMenuImages", JSON.stringify(newLoadedImages), 1);
+      return newLoadedImages;
+    });
+  };
 
   return (
     <FrameFragment className="bg-drk" innerClass="pt-[100px]">
@@ -39,18 +39,18 @@ export const TopMenu = ({ menuData }: TopMenuProps) => {
         </p>
       </div>
       <div className="w-full h-fit flex flex-wrap items-center justify-center gap-2 md:gap-5">
-        {menuData.map((data) => (
+        {menuData.map((data, index) => (
           <HomeCard
-            // index={index}
+            index={index}
             key={data.id}
             category={data.category.name}
             title={data.name}
             container="px-2 py-2 md:px-5 md:py-5 xl:px-6 xl:py-6"
             className="w-[100px] md:w-[170px] xl:w-[180px] aspect-[6/9] rounded-none"
             src={data.image_url}
-            loading="lazy"
-            // loadedImages={loadedImages}
-            // handleImageLoad={handleImageLoad}
+            // loading="lazy"
+            loadedImages={loadedImages}
+            handleImageLoad={handleImageLoad}
           />
         ))}
       </div>

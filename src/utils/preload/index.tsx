@@ -27,7 +27,7 @@ export const PreloadImages = () => {
       // Gabungkan semua gambar dalam satu array
       const allImages = [
         ...carousels
-          .slice(0, 5)
+          .slice(0, 2)
           .map((item: { image_url: string }) => item.image_url),
         ...products
           .slice(0, 3)
