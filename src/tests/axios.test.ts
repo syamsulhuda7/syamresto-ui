@@ -1,75 +1,79 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+// import axios from "axios";
 import api from "../utils/axios/instance";
+import MockAdapter from "axios-mock-adapter";
 
-// Mock axios.create
-// vi.mock("axios", () => ({
-//   create: vi.fn().mockReturnValue({
-//     interceptors: {
-//       request: { use: vi.fn() },
-//       response: { use: vi.fn() },
-//     },
-//     get: vi.fn(),
-//   }),
-// }));
+describe("axios instance configuration and interceptors", () => {
+  let mock: MockAdapter;
 
-describe("api.ts", () => {
-  it("should set baseURL and timeout for axios instance", () => {
-    const axiosInstance = api; // Menggunakan instance yang sudah dimock
+  beforeEach(() => {
+    mock = new MockAdapter(api);
+  });
 
-    // Verifikasi konfigurasi dasar axios instance
-    expect(axiosInstance.defaults.baseURL).toBe(
-      "https://apisyamresto.syamdev.my.id/api"
+  afterEach(() => {
+    mock.restore();
+  });
+
+  it("should have the correct baseURL and timeout", () => {
+    expect(api.defaults.baseURL).toBe("https://apisyamresto.syamdev.my.id/api");
+    expect(api.defaults.timeout).toBe(5000);
+  });
+
+  it("should invoke the request interceptor", async () => {
+    const requestInterceptor = vi.fn((config) => config);
+    api.interceptors.request.use(requestInterceptor); // Attach spy
+
+    mock.onGet("/test").reply(200, { message: "success" });
+
+    await api.get("/test");
+
+    expect(requestInterceptor).toHaveBeenCalledOnce();
+  });
+
+  it("should invoke the response interceptor on success", async () => {
+    const responseInterceptor = vi.fn((response) => response);
+    api.interceptors.response.use(responseInterceptor); // Attach spy
+
+    mock.onGet("/carousels").reply(200, { data: "mocked response" });
+
+    const response = await api.get("/carousels");
+
+    expect(responseInterceptor).toHaveBeenCalledOnce();
+    expect(response.data).toEqual({ data: "mocked response" });
+  });
+
+  // it("should invoke the response interceptor on error", async () => {
+  //   const errorInterceptor = vi.fn((error) => Promise.reject(error));
+  //   api.interceptors.response.use(null, errorInterceptor); // Attach spy
+
+  //   mock.onGet("/error").reply(500);
+
+  //   try {
+  //     await api.get("/error");
+  //   } catch (error) {
+  //     expect(errorInterceptor).toHaveBeenCalledOnce();
+  //     expect(error).toBeInstanceOf(Error);
+  //   }
+  // });
+
+  it("should invoke the response interceptor on error", async () => {
+    const errorInterceptorSpy = vi.fn((error) => Promise.reject(error));
+
+    // Replace the default error interceptor with a spy
+    const interceptorId = api.interceptors.response.use(
+      undefined,
+      errorInterceptorSpy
     );
-    expect(axiosInstance.defaults.timeout).toBe(5000);
-  });
 
-  //   it("should call request interceptor", async () => {
-  //     const mockRequest = vi.fn();
-  //     api.interceptors.request.use(mockRequest);
+    mock.onGet("/error").reply(500); // Simulate server error
 
-  //     // Simulasikan request
-  //     const config = { headers: {} };
-  //     await api(config);
-
-  //     expect(mockRequest).toHaveBeenCalled(); // Memastikan interceptor request dipanggil
-  //   });
-
-  it("should handle response interceptor", async () => {
-    const mockResponse = vi.fn().mockResolvedValue({ data: "response" });
-    api.interceptors.response.use(mockResponse);
-
-    // Simulasikan response
-    await api.get("/carousels");
-
-    expect(mockResponse).toHaveBeenCalled(); // Memastikan interceptor response dipanggil
-  });
-
-  it("should handle errors properly in response interceptor", async () => {
-    const mockError = vi.fn().mockRejectedValue(new Error("error"));
-    api.interceptors.response.use(null, mockError);
-
-    // Simulasikan error response
     try {
-      await api.get("/some-endpoint");
+      await api.get("/error");
     } catch (error) {
-      expect(mockError).toHaveBeenCalled(); // Memastikan error interceptor dipanggil
+      expect(errorInterceptorSpy).toHaveBeenCalledOnce();
       expect(error).toBeInstanceOf(Error);
-      expect((error as Error).message).toBe("error");
+    } finally {
+      api.interceptors.response.eject(interceptorId); // Cleanup
     }
-  });
-
-  it("should reject error in request interceptor", async () => {
-    // Membuat mock untuk error pada request interceptor
-    const mockError = vi.fn().mockRejectedValue(new Error("Request Error"));
-    api.interceptors.request.use(null, mockError);
-
-    // Simulasikan error request
-    const config = { headers: {} };
-
-    // Menggunakan await dan menangkap rejection promise
-    await expect(api(config)).rejects.toThrow("Request Error");
-
-    // Verifikasi bahwa interceptor error telah dipanggil
-    expect(mockError).toHaveBeenCalled();
   });
 });

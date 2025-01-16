@@ -1,41 +1,33 @@
-import { Tabs } from "@mui/base/Tabs";
-import { TabsList } from "@mui/base/TabsList";
-import { TabNav } from "../tabNav";
-import { useNavigate } from "react-router";
 import { MiniMenu } from "../../ui/miniMenu";
-import { navigationStore } from "../../../utils/zustand/navigation";
 import { useEffect } from "react";
+import { TabNav } from "../tabNav";
+import { navigationStore } from "../../../utils/zustand/navigation";
+import { useNavigate } from "react-router";
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  // const location = useLocation();
-  const navigationValue = navigationStore((state) => state.navigation);
   const setNavigation = navigationStore((state) => state.setNavigation);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [navigationValue]);
+  }, []);
 
   return (
     <div className="w-full h-fit flex items-center justify-center bg-drk sticky top-0 z-50">
-      <Tabs
-        className="font-albertSans max-w-[1440px] w-full h-fit flex items-center justify-between px-[30px] md:px-[50px] xl:px-[130px] py-3"
-        defaultValue={navigationValue}
-        onChange={(_, value) => navigate(`/${value}`)}
-      >
+      <div className="font-albertSans max-w-[1440px] w-full h-fit flex items-center justify-between px-[30px] md:px-[50px] xl:px-[130px] py-3">
         <p
           onClick={() => {
             navigate("/");
-            setNavigation("home");
+            setNavigation("/");
           }}
           className="cursor-pointer text-white text-[20px] md:text-[26px] xl:text-[32px] font-adlamDisplay font-bold"
         >
           SYAM<span className="text-org">STORE</span>
         </p>
-        <TabsList className="hidden md:flex w-fit items-center justify-center content-between gap-4 min-w-tabs-list">
-          <TabNav sendNavigation={setNavigation} title="Home" separator />
-          <TabNav sendNavigation={setNavigation} title="Menu" separator />
-          <TabNav sendNavigation={setNavigation} title="My Order" separator />
+        <div className="hidden md:flex w-fit items-center justify-center content-between gap-4 min-w-tabs-list">
+          <TabNav setNavigation={setNavigation} title="Home" separator />
+          <TabNav setNavigation={setNavigation} title="Menu" separator />
+          <TabNav setNavigation={setNavigation} title="My Order" separator />
           <div
             className={`text-sm md:text-base text-org border-2 border-org font-bold w-fit px-4 py-1 rounded-lg flex justify-center cursor-pointer hover:text-org/70 hover:border-org/70`}
           >
@@ -47,12 +39,12 @@ export const Navbar = () => {
               <CartItem />
             </>
           )} */}
-        </TabsList>
+        </div>
         <span className="md:hidden flex">
           {/* {navigationValue === "menu" && <CartItem />} */}
           <MiniMenu />
         </span>
-      </Tabs>
+      </div>
     </div>
   );
 };

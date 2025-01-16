@@ -51,7 +51,7 @@ export const carouselData = async () => {
     );
     return updatedCarousels;
   } catch (error) {
-    console.error("Error fetching images:", error);
+    console.log(error);
     return [];
   }
 };
@@ -67,7 +67,7 @@ export const profileData = async () => {
     });
     return updatedProfiles;
   } catch (error) {
-    console.error("Error fetching images:", error);
+    console.log(error);
     return [];
   }
 };

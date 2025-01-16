@@ -23,14 +23,12 @@ export const cartItemsStorage = create<Set & Actions>((set) => ({
         setCookie("cartItems", JSON.stringify(updatedCartItems), 1);
         return { cartItems: updatedCartItems };
       } else {
-        setCookie(
-          "cartItems",
-          JSON.stringify([...state.cartItems, cartItem]),
-          1
-        );
-        return { cartItems: [...state.cartItems, cartItem] };
+        const newCartItems = [...state.cartItems, cartItem];
+        setCookie("cartItems", JSON.stringify(newCartItems), 1);
+        return { cartItems: newCartItems };
       }
     }),
+
   reduceCartItems: (id: number) =>
     set((state) => {
       const indexItem = state.cartItems.findIndex((item) => item.id === id);

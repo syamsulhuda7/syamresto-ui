@@ -9,9 +9,9 @@ interface Actions {
   setNavigation: (navigation: string) => void;
 }
 
-const pathname = window.location.pathname.split("/")[1];
+// const pathname = window.location.pathname.split("/")[1];
 // Create Zustand store
 export const navigationStore = create<Set & Actions>((set) => ({
-  navigation: pathname ? pathname : "home", // Set the initial navigation value
+  navigation: "/", // Set the initial navigation value
   setNavigation: (navigation) => set(() => ({ navigation })), // Update the navigation value
 }));

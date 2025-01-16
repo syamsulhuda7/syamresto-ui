@@ -19,22 +19,18 @@ export const ExploreCategory = () => {
 
   useEffect(() => {
     const fetchCategory = async () => {
-      try {
-        if (categoryState.length > 0) {
-          setCategory(categoryState);
-          return;
-        }
-        const data: CategoryData[] = await categoriesData();
-        if (data.length > 0) {
-          setCategory(data);
-          setCategoryState(data);
-          const loadedFromCookies = JSON.parse(
-            getCookie("categoryImages") || "[]"
-          );
-          setLoadedImages(loadedFromCookies);
-        }
-      } catch (error) {
-        console.log("Error fetching categories:", error);
+      if (categoryState.length > 0) {
+        setCategory(categoryState);
+        return;
+      }
+      const data: CategoryData[] = await categoriesData();
+      if (data.length > 0) {
+        setCategory(data);
+        setCategoryState(data);
+        const loadedFromCookies = JSON.parse(
+          getCookie("categoryImages") || "[]"
+        );
+        setLoadedImages(loadedFromCookies);
       }
     };
     fetchCategory();

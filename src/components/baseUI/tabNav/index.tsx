@@ -1,37 +1,35 @@
-import { Tab } from "@mui/base/Tab";
+import { useLocation, useNavigate } from "react-router";
 
 interface TabNavProps {
   title: string;
   separator?: boolean;
-  sendNavigation: (slug: string) => void;
+  setNavigation: (value: string) => void;
 }
 
-export const TabNav = ({ title, separator, sendNavigation }: TabNavProps) => {
-  const slug = title.toLowerCase().replace(" ", "-") || "";
+export const TabNav = ({ title, separator, setNavigation }: TabNavProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  let slug = "/" + title.toLowerCase().replace(" ", "-");
+  if (title === "Home") {
+    slug = "/";
+  }
 
   return (
     <>
-      <Tab
-        slotProps={{
-          root: ({ selected, disabled }) => ({
-            className: `${
-              selected
-                ? "text-org border-b-2 border-org"
-                : "text-white bg-transparent focus:text-white hover:text-org"
-            } ${
-              disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-            } text-sm md:text-lg font-medium w-fit py-1 border-0 flex justify-center`,
-            onClick: () => {
-              if (!disabled) {
-                sendNavigation(slug); // Pastikan slug diakses dengan benar
-              }
-            },
-          }),
+      <div
+        className={`${
+          slug === location.pathname
+            ? "text-org border-b-2 border-org"
+            : "text-white bg-transparent focus:text-white hover:text-org"
+        } text-sm md:text-lg font-medium w-fit py-1 border-0 flex justify-center cursor-pointer`}
+        onClick={() => {
+          setNavigation(slug); // Pastikan slug diakses dengan benar
+          navigate(slug);
         }}
-        value={slug}
       >
         {title}
-      </Tab>
+      </div>
       {separator && <span className="w-0.5 h-6 bg-gry" />}
     </>
   );

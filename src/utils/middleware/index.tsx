@@ -13,7 +13,7 @@ const useMiddleware = () => {
     };
 
     if (menuDataValue.length === 0) fetchData();
-  }, []);
+  }, [menuDataValue, setMenuData]);
 };
 
 export default useMiddleware;
