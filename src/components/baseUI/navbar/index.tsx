@@ -22,7 +22,7 @@ export const Navbar = () => {
           }}
           className="cursor-pointer text-white text-[20px] md:text-[26px] xl:text-[32px] font-adlamDisplay font-bold"
         >
-          SYAM<span className="text-org">STORE</span>
+          SYAM<span className="text-org">RESTO</span>
         </p>
         <div className="hidden md:flex w-fit items-center justify-center content-between gap-4 min-w-tabs-list">
           <TabNav setNavigation={setNavigation} title="Home" separator />
